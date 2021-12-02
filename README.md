@@ -21,15 +21,32 @@ The project will also include:
 * Dice rolling (not pictured) in the center of the board between decks
 * Card decks and player's hand in the center
 * List of players on the left, generated with JS
-* Properties, game history, and "chat window" (_placeholder if multiplayer is not added_)
+* Properties, game history, and "chat window" (_you'll be talking to robots if I don't add multiplayer_)
 
 # Technologies, Libraries, APIs
 
 Arcanopoly will be implemented with the following (_tentative_) technologies:
 * Webpack and NPM for project bundling and running.
-* Matter.js for object physics simulation
-* (_BONUS GOAL_) Colyseus.io for multiplayer game hosting with Node.js.
+* [Matter.js](https://brm.io/matter-js/) for object physics simulation.
+* (_BONUS FEATURE_) [Howler.js](https://howlerjs.com/) for any and all music and sounds.
+* (_BONUS FEATURE_) Colyseus.io for multiplayer game hosting with Node.js.
 
 # Implementation Timeline
 
+* **Thursday(PM):** Finish final proposal.
+* **Thursday(PM) - Friday:** Create project base files/directories. create static html and css framework for empty board with suitable tags for JS manipulation.
+* **Saturday - Sunday:** Create overall game logic in JS with no frills. Allow players to roll dice, move to square, buy square, etc.
+* **Sunday - Monday:** Implement card and equipment logic into the vanilla Monopoly game. Start with extremely basic cards (_effectively community chest/chance to start_). Finalize any remaining vanilla Monopoly logic.
+* **Tuesday - Wednesday:** CSS! JS! Visuals!!! Add animations, transitions, JS tooltips. Make UI/UX decent enough to show to peers. Start easier bonus goals if able.
+* **Wednesday - Thursday(AM):** Add bonus goals if possible based on the "Bonus features" table below. Deploy to github if no backend, heroku if backend. Make production README.
+
 # Bonus features
+
+* Add bonus features according to difficulty (easiest first):
+
+| Feature Name | Difficulty | Description |
+| ------------ | ---------- | ----------- |
+| Music/Sounds | Easy-ish | Use [Howler.js](https://howlerjs.com/) to add ambient music and sound effects to player actions. |
+| Less terrible AI | Medium | Instead of random decisions, make computer players somewhat intelligent about properties, cards, and other players.|
+| Add Cards/Equipment | Medium-Hard | Add additional, more complex cards and equipment. OOP FTW! |
+| Online Multiplayer | Very Hard | Add support for actual human players via Colyseus.io's server setup process. Deploy on Heroku. |
