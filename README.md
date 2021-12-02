@@ -34,7 +34,7 @@ Arcanopoly will be implemented with the following (_tentative_) technologies:
 # Implementation Timeline
 
 * **Thursday(PM):** Finish final proposal.
-* **Thursday(PM) - Friday:** Create project base files/directories. create static html and css framework for empty board with suitable tags for JS manipulation.
+* **Thursday(PM) - Friday:** Create project base files/directories. Create static html and css framework for empty board with suitable tags for JS manipulation.
 * **Saturday - Sunday:** Create overall game logic in JS with no frills. Allow players to roll dice, move to square, buy square, etc.
 * **Sunday - Monday:** Implement card and equipment logic into the vanilla Monopoly game. Start with extremely basic cards (_effectively community chest/chance to start_). Finalize any remaining vanilla Monopoly logic.
 * **Tuesday - Wednesday:** CSS! JS! Visuals!!! Add animations, transitions, JS tooltips. Make UI/UX decent enough to show to peers. Start easier bonus goals if able.
