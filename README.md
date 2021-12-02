@@ -12,7 +12,7 @@ In a game of Arcanopoly, users will be able to:
 
 The project will also include:
 * An instructions tab that details the rules and interactions players can perform.
-* A production README (_...eventually..._)
+* A production README
 
 # Mockup
 ![arcanopoly mockup image](https://i.imgur.com/N1lNQD8.png)
@@ -28,8 +28,8 @@ The project will also include:
 Arcanopoly will be implemented with the following (_tentative_) technologies:
 * Webpack and NPM for project JS bundling and management.
 * [Matter.js](https://brm.io/matter-js/) for object physics simulation.
-* (_BONUS FEATURE_) [Howler.js](https://howlerjs.com/) for any and all music and sounds.
-* (_BONUS FEATURE_) Colyseus.io for multiplayer game hosting with Node.js.
+* <span style="color:purple">(_BONUS FEATURE_)</span> [Howler.js](https://howlerjs.com/) for any and all music and sounds.
+* <span style="color:purple">(_BONUS FEATURE_)</span> Colyseus.io for multiplayer game hosting with Node.js.
 
 # Implementation Timeline
 
@@ -46,7 +46,7 @@ Arcanopoly will be implemented with the following (_tentative_) technologies:
 
 | Feature Name | Difficulty | Description |
 | ------------ | ---------- | ----------- |
-| Music/Sounds | Easy-ish | Use [Howler.js](https://howlerjs.com/) to add ambient music and sound effects to player actions. |
-| Less terrible AI | Medium | Instead of random decisions, make computer players somewhat intelligent about properties, cards, and other players.|
-| Add Cards/Equipment | Medium-Hard | Add additional, more complex cards and equipment. OOP FTW! |
-| Online Multiplayer | Very Hard | Add support for actual human players via Colyseus.io's server setup process. Deploy on Heroku. |
+| Music/Sounds | <span style="color:green">**Easy-ish** </span>| Use [Howler.js](https://howlerjs.com/) to add ambient music and sound effects to player actions. |
+| Less terrible AI | <span style="color:yellow">**Medium** </span> | Instead of random decisions, make computer players somewhat intelligent about properties, cards, and other players.|
+| Add Cards/Equipment | <span style="color:orange">**Medium-hard** </span> | Add additional, more complex cards and equipment. OOP FTW! |
+| Online Multiplayer | <span style="color:red">**Very Hard** </span> | Add support for actual human players via Colyseus.io's server setup process. Deploy on Heroku. |
