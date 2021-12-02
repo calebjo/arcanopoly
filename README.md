@@ -49,4 +49,5 @@ Arcanopoly will be implemented with the following (_tentative_) technologies:
 | Music/Sounds | <span style="color:green">**Easy-ish** </span>| Use [Howler.js](https://howlerjs.com/) to add ambient music and sound effects to player actions. |
 | Less terrible AI | <span style="color:yellow">**Medium** </span> | Instead of random decisions, make computer players somewhat intelligent about properties, cards, and other players.|
 | Add Cards/Equipment | <span style="color:orange">**Medium-hard** </span> | Add additional, more complex cards and equipment. OOP FTW! |
-| Online Multiplayer | <span style="color:red">**Very Hard** </span> | Add support for actual human players via Colyseus.io's server setup process. Deploy on Heroku. |
+| Add Options | <span style="color:orange">**Medium-hard** </span> | Add game options to the start of any game (this might actually be fairly easy, just low priority).
+| Online Multiplayer | <span style="color:red">**Very Hard** </span> | Add support for actual human players via [Colyseus.io's](https://www.colyseus.io/) server setup process. Deploy on Heroku. |
