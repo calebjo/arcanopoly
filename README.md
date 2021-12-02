@@ -26,7 +26,7 @@ The project will also include:
 # Technologies, Libraries, APIs
 
 Arcanopoly will be implemented with the following (_tentative_) technologies:
-* Webpack and NPM for project bundling and running.
+* Webpack and NPM for project JS bundling and management.
 * [Matter.js](https://brm.io/matter-js/) for object physics simulation.
 * (_BONUS FEATURE_) [Howler.js](https://howlerjs.com/) for any and all music and sounds.
 * (_BONUS FEATURE_) Colyseus.io for multiplayer game hosting with Node.js.
