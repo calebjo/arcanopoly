@@ -1,0 +1,37 @@
+{
+  "name": "arcanopoly",
+  "version": "1.0.0",
+  "description": "Arcanopoly is a variation on the classic friendship-testing board game Monopoly that adds \"Roguelike\" elements! The game is fantasy-themed and players traverse a board filled with fantasy location names. Players can pick up cards and equipment that drastically alter the normal Monopoly game. Now you can ruin the family get-together even more than before!",
+  "main": "index.js",
+  "browserslist": [
+    "defaults"
+  ],
+  "scripts": {
+    "watch": "webpack --watch --mode=development",
+    "build": "webpack --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/calebjo/arcanopoly.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/calebjo/arcanopoly/issues"
+  },
+  "homepage": "https://github.com/calebjo/arcanopoly#readme",
+  "dependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "babel-loader": "^8.2.3",
+    "core-js": "^3.19.2",
+    "css-loader": "^6.5.1",
+    "mini-css-extract-plugin": "^2.4.5",
+    "regenerator-runtime": "^0.13.9",
+    "sass": "^1.44.0",
+    "sass-loader": "^12.3.0",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1"
+  }
+}
