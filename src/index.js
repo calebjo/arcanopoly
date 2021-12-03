@@ -1,15 +1,3 @@
-
-// game.js
-// board.js
-
-// player.js
-// square.js
-// property.js extends square
-// moveTile.js extends square
-// deck.js
-// card.js
-
-
 document.addEventListener("DOMContentLoaded", () => {
     const tavernSquare = document.getElementById('sq-0');
     const tavernText = tavernSquare.getElementsByTagName('p');
