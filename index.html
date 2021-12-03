@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <title>Document</title>
+    <script src="./main.js"></script>
+</head>
+<body>
+    <div class="outer-wrapper">
+        <div class="social-links">
+            
+        </div>
+        <div class="game-panel">
+            <div class="left-panel">
+                <div class="player-turns">
+                    <!-- GENERATE BASED ON PLAYERS IN GAME -->
+                    <div class="player selected" id="p1">
+                        <p>Player 1</p>
+                        <div class="player-info">
+                            <div class="player-cards">
+                                <div class="p-card"></div>
+                                <div class="p-card"></div>
+                                <div class="p-card"></div>
+                                <div class="p-card"></div>
+                                <div class="p-card"></div>
+                                <div class="p-card"></div>
+                                <div class="p-card"></div>
+                                <div class="p-card"></div>
+                            </div>
+                            <div class="p-divider"></div>
+                            <div class="player-equipment">
+                                <div class="p-equip"></div>
+                                <div class="p-equip"></div>
+                                <div class="p-equip"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="player" id="p2">
+                        <p>Player 2</p>
+                        <div class="player-info">
+                            <div class="player-cards">
+                                <div class="p-card"></div>
+                                <div class="p-card"></div>
+                                <div class="p-card"></div>
+                            </div>
+                            <div class="p-divider"></div>
+                            <div class="player-equipment">
+                                <div class="p-equip"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="board">
+                <div class="boxes">
+                    <div class="upper-row">
+                        <div class="corner-square">
+                            <div class="tl-corner-square" id="sq-0">
+                                <p>Tavern</p>
+                                <embed src="./assets/images/mug-icon.svg">
+                            </div>
+                        </div>
+                        <div class="row-horizontal">
+                            <div class="property" id="sq-1">
+                                <embed src="./assets/images/Human.svg">
+                            </div>
+                            <div class="sun-square" id="sq-2">
+                                <embed src="./assets/images/sun-icon.svg">
+                            </div>
+                            <div class="property" id="sq-3">
+                                <embed src="./assets/images/Human.svg">
+                            </div>
+                            <div class="property" id="sq-4">
+                                <!-- <embed src="./assets/images/coins-icon.svg"> -->
+                            </div>
+                            <div class="shop" id="sq-5">
+                                <embed src="./assets/images/coins-icon.svg">
+                            </div>
+                            <div class="property" id="sq-6">
+                                <embed src="./assets/images/Goblin.svg">
+                            </div>
+                            <div class="moon-square" id="sq-7">
+                                <embed src="./assets/images/moon-icon.svg">
+                            </div>
+                            <div class="property" id="sq-8">
+                                <embed src="./assets/images/Goblin.svg">
+                            </div>
+                            <div class="property" id="sq-9">
+                                <embed src="./assets/images/Goblin.svg">
+                            </div>
+                        </div>
+                        <div class="corner-square">
+                            <div class="tr-corner-square" id="sq-10">
+                                <p>Dungeon</p>
+                                <embed src="./assets/images/gate-icon.svg">
+                            </div>
+                        </div>
+                    </div>              
+                    <div class="middle-row">
+                        <div class="row-vertical" id="col-1">
+                            <div class="property" id="sq-39">
+                                <embed src="./assets/images/Demon.svg">
+                            </div>
+                            <div class="property" id="sq-38">
+                                <!-- <embed src="./assets/images/Demon.svg"> -->
+                            </div>
+                            <div class="property" id="sq-37">
+                                <embed src="./assets/images/Demon.svg">
+                            </div>
+                            <div class="moon-square" id="sq-36">
+                                <embed src="./assets/images/moon-icon.svg">
+                            </div>
+                            <div class="shop" id="sq-35">
+                                <embed src="./assets/images/coins-icon.svg">
+                            </div>
+                            <div class="property" id="sq-34">
+                                <embed src="./assets/images/Gnome.svg">
+                            </div>
+                            <div class="sun-square" id="sq-33">
+                                <embed src="./assets/images/sun-icon.svg">
+                            </div>
+                            <div class="property" id="sq-32">
+                                <embed src="./assets/images/Gnome.svg">
+                            </div>
+                            <div class="property" id="sq-31">
+                                <embed src="./assets/images/Gnome.svg">
+                            </div>
+                        </div>
+                        <div class="middle-content">
+
+                        </div>
+                        <div class="row-vertical" id="col-2">
+                            <div class="property" id="sq-11">
+                                <embed src="./assets/images/Orc.svg">
+                            </div>
+                            <div class="property" id="sq-12">
+                                <!-- <embed src="./assets/images/Demon.svg"> -->
+                            </div>
+                            <div class="property" id="sq-13">
+                                <embed src="./assets/images/Orc.svg">
+                            </div>
+                            <div class="property" id="sq-14">
+                                <embed src="./assets/images/Orc.svg">
+                            </div>
+                            <div class="shop" id="sq-15">
+                                <embed src="./assets/images/coins-icon.svg">
+                            </div>
+                            <div class="property" id="sq-16">
+                                <embed src="./assets/images/Fishman.svg">
+                            </div>
+                            <div class="sun-square" id="sq-17">
+                                <embed src="./assets/images/sun-icon.svg">
+                            </div>
+                            <div class="property" id="sq-18">
+                                <embed src="./assets/images/Fishman.svg">
+                            </div>
+                            <div class="property" id="sq-19">
+                                <embed src="./assets/images/Fishman.svg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lower-row">
+                        <div class="corner-square">
+                            <div class="bl-corner-square" id="sq-30">
+                                <p>Go to Dungeon</p>
+                                <embed src="./assets/images/skull-icon.svg">
+                            </div>
+                        </div>
+                        <div class="row-horizontal">
+                            <div class="property" id="sq-29">
+                                <embed src="./assets/images/Undead.svg">
+                            </div>
+                            <div class="property" id="sq-28">
+                                <!-- <embed src="./assets/images/Demon.svg"> -->
+                            </div>
+                            <div class="property" id="sq-27">
+                                <embed src="./assets/images/Undead.svg">
+                            </div>
+                            <div class="property" id="sq-26">
+                                <embed src="./assets/images/Undead.svg">
+                            </div>
+                            <div class="shop" id="sq-25">
+                                <embed src="./assets/images/coins-icon.svg">
+                            </div>
+                            <div class="property" id="sq-24">
+                                <embed src="./assets/images/Dwarf.svg">
+                            </div>
+                            <div class="property" id="sq-23">
+                                <embed src="./assets/images/Dwarf.svg">
+                            </div>
+                            <div class="moon-square" id="sq-22">
+                                <embed src="./assets/images/moon-icon.svg">
+                            </div>
+                            <div class="property" id="sq-21">
+                                <embed src="./assets/images/Dwarf.svg">
+                            </div>
+                        </div>
+                        <div class="corner-square">
+                            <div class="br-corner-square" id="sq-20">
+                                <p>Tome</p>
+                                <embed src="./assets/images/tome-icon.svg">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right-panel">
+                <div class="properties">
+
+                </div>
+                <div class="history">
+    
+                </div>
+                <div class="chat-box">
+    
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

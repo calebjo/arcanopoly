@@ -1,0 +1,307 @@
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #0c0d19;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+@font-face {
+    font-family: beleren;
+    src: url(./assets/Beleren2016-Bold.ttf);
+}
+
+/* OUTER STYLING -------------------------------------------------- */
+
+.social-links {
+    background:rgb(43, 45, 65);
+}
+
+.outer-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-panel {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 90%;
+    background-color: #1b1c27;
+    box-shadow: 0px 10px 15px rgba(5, 5, 15), 0px -10px 15px rgba(5, 5, 15);
+}
+
+/* OVERALL LEFT PANEL -------------------------------------------- */
+.left-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 16%;
+    margin-top: 24px;
+    margin-right: 24px;
+}
+
+/* PlAYER TURN BOXES ---------------------------------------------- */
+.player-turns {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 11%;
+    background: #2b2d40;
+    font-family: beleren;
+    font-size: 22px;
+    margin-bottom: 24px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.player.selected {
+    background: #676883;
+}
+
+.player p {
+    margin: 5px;
+}
+
+/* Inner player data */
+.player-info {
+    display: flex;
+    width: 80%;
+    height: 50%;
+}
+
+.player-cards, .player-equipment {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 50%;
+}
+
+.p-card {
+    display: flex;
+    width: 12px;
+    height: 22px;
+    margin: 2px;
+    background: #10131c;
+    border-radius: 2px;
+}
+
+.p-divider {
+    display: flex;
+    background: #1c2130;
+    width: 2px;
+    margin-left: 6px;
+    margin-right: 6px;
+}
+
+.p-equip {
+    display: flex;
+    width: 24px;
+    height: 24px;
+    margin: 2px;
+    background: #232734;
+    border-radius: 5px;
+}
+
+/* BOARD STYLING -------------------------------------------------- */
+
+/* Overall board */
+.board {
+    z-index: 6;
+    display: flex;
+    aspect-ratio: 1 / 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background:rgb(34, 32, 37)
+}
+
+/* Box container */
+.boxes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+/* Row containers */
+.middle-row {
+    display: flex;
+    justify-content: center;
+}
+
+.row-horizontal {
+    display: flex;
+}
+
+
+/* both rows, both columns */
+.upper-row, .lower-row {
+    display: flex;
+}
+
+/* North Row*/
+.upper-row {
+    display: flex;    
+    align-items: flex-end;
+}
+
+/* South Row */
+.lower-row {
+    display: flex;
+}
+
+/* West Column */
+#col-1 {
+    display: flex;
+    flex-direction: column;
+}
+
+/* East Column */
+#col-2 {
+    display: flex;   
+    flex-direction: column; 
+}
+
+/* Middle Content --------------------------------------------------*/
+
+.middle-content {
+    z-index: 4;
+    aspect-ratio: 1 / 1;
+    outline-offset: 4px;
+    outline: 8px solid rgb(236, 208, 128);
+    border: 2px solid rgb(236, 208, 128);
+}
+
+/* Individual square styles ----------------------------------------*/
+
+.boxes div div div {
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #323a4c;
+    box-shadow: 1px 1px 2px rgba(24, 24, 31, 0.6);
+}
+
+.row-horizontal div {
+    width: 4rem;
+    height: 6rem;
+    margin: 0.125rem;
+    border-radius: 6px;
+}
+
+.row-vertical div {
+    width: 6rem;
+    height: 4rem;
+    margin: 0.125rem;
+    border-radius: 6px;
+}
+
+.corner-square div{
+    width: 8rem;
+    height: 8rem;
+    margin: 0.125rem;
+    border-radius: 12px;
+}
+
+.corner-square p {
+    z-index: 5;
+    text-align: center;
+    position: relative;
+    left: 45%;
+    color:rgb(236, 208, 128);
+    font-family: beleren;
+    font-size: 24px;
+}
+
+/* Image styling */
+.corner-square embed {
+    position: relative;
+    right: 2.5rem;
+    width: 85%;
+    height: 85%;
+    opacity: 65%;
+}
+
+/* Svg sizing */
+.row-horizontal embed, .row-vertical embed {
+    width: 75%;
+    height: 75%;
+}
+
+/* Svg positions for each row */
+.upper-row .row-horizontal .property embed{
+    position: relative;
+    top: -50px;
+}
+
+.lower-row .row-horizontal .property embed{
+    position: relative;
+    bottom: -50px;
+}
+
+#col-1 .property embed {
+    position: relative;
+    left: -50px;
+}
+
+#col-2 .property embed {
+    position: relative;
+    right: -50px;
+}
+
+
+/* Begin right panel styles --------------------------------------- */
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin-top: 24px;
+    margin-left: 24px;
+}
+
+.right-panel div {
+    display: flex;
+    margin-bottom: 24px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    background: #2b2d40;
+}
+
+/* PROPERTY LIST STYLING ------------------------------------------ */
+
+.properties {
+    width: 100%;
+    height: 25%;
+}
+
+/* HISTORY STYLING ------------------------------------------------ */
+
+.history {
+    height: 20%;
+}
+
+/* CHAT BOX STYLING ----------------------------------------------- */
+
+.chat-box {
+    height: 55%;
+}
