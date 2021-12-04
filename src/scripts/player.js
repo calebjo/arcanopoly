@@ -36,6 +36,7 @@ export class Player {
         this.sprite = sprite;
         this.currentSquare = 0; // Start at the tavern;
         this.diceNum = 2;
+        this.diceMax = 6;
         this.ownedProperties = [];
         this.hand = [];
         this.equipment = [];

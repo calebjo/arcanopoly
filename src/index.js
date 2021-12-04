@@ -3,7 +3,7 @@ import {Player} from './scripts/player.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     
-    // when the plus symbol is clicked, a new player is created
+    // the main button starts by saying "Start"
     const mainButton = document.getElementById('main-button');
     mainButton.children[0].innerText = 'Start';
 
@@ -13,27 +13,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // if the "+" button is clicked on, a player will be created and added to the game
     const addPlayerButton = document.getElementById('add-player');
-
     // add the new player
-    addPlayerButton.addEventListener('click', () => {
+    addPlayerButton.addEventListener("click", addPlayer);
+    function addPlayer(){
         const player = new Player(startingGold, allPlayers.length, 'IpsumGal', 'placeholder');
         allPlayers.push(player);
-
-        // TEST LOG
-        console.log(allPlayers);
-    });
-
+    }
     
     // wait for the first player to press "Start", then create game and start game loop
-    mainButton.addEventListener('click', () => {
-        // create the game with given parameters
+    mainButton.addEventListener("click", makeGame);
+    // create and run the game with given parameters
+    function makeGame(){
+        mainButton.removeEventListener("click", makeGame);
+        addPlayerButton.removeEventListener("click", addPlayer);
+        addPlayerButton.remove();
+
         const thisGame = new Game(allPlayers, startingGold);
-        
-        // until game is won, loop through each player and playTurn 
-        // while (!thisGame.isWon()) { 
-        //     console.log('About to play!')
-        //     thisGame.playTurn();
-        // }
-        thisGame.playTurn() // SINGLE CALL FOR DEBUGGING
-    });
+        thisGame.onGameStart();
+    }
 });
