@@ -30,9 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const thisGame = new Game(allPlayers, startingGold);
         
         // until game is won, loop through each player and playTurn 
-        while (!thisGame.isWon()) { 
-            console.log('About to play!')
-            thisGame.playTurn();
-        }
+        // while (!thisGame.isWon()) { 
+        //     console.log('About to play!')
+        //     thisGame.playTurn();
+        // }
+        thisGame.playTurn() // SINGLE CALL FOR DEBUGGING
     });
 });
