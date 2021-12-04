@@ -390,6 +390,7 @@ html, body {
 }
 
 .boxes div div div .player-token {
+  z-index: 20;
   position: fixed;
   background: none;
   width: 3rem;

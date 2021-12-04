@@ -19,12 +19,14 @@ export class Game {
         this.currentPlayer = players[0];
         this.mainButton = document.getElementById('main-button');
         this.diceRoll = 0;
+        // this.board = new Board()
     }
 
     onGameStart(){
         // when Start is pressed, place the player tokens in the tavern
 
         const playerTokens = document.getElementById('player-tokens')
+        // Add a token for each player and place it in the tavern
         for (let i = 0; i < this.players.length; i++){
             let player = document.createElement('div')
             player.classList.add('player-token')
@@ -77,6 +79,7 @@ export class Game {
 
 
         // check which square the player landed in
+        handleNewPlayerPos();
         // if property, check if owned. 
         // if owned by non-current player, charge current and give gold to owner
         // otherwise, prompt player to purchase unowned property
@@ -112,7 +115,18 @@ export class Game {
     // -------------------------------------------------------------------------------
     // Game logic outside of loop
 
-    movePlayer(playerEle, target){
+    handleNewPlayerPos() {
+        const newPos = this.currentPlayer.currentSquare
+        const newSquare = this.currentPlayer.sdasdsadasdsad
+
+        // check what kind of square the player landed on
+        switch (newPos){
+            case 0:
+            case 0:
+        }
+    }
+
+    movePlayer(playerEle, target) {
         // takes in a player element (div with token inside) and a target square element
         // moves the player's token to the target position
 

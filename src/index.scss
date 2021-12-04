@@ -379,9 +379,9 @@ html, body {
     right: -50px;
 }
 
-// player position overrides
-
+// player position overrides/transitions
 .boxes div div div .player-token {
+    z-index: 20;
     position: fixed;
     background: none;
     width: 3rem;

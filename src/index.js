@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // add the new player
     addPlayerButton.addEventListener("click", addPlayer);
     function addPlayer(){
-        const player = new Player(startingGold, allPlayers.length, 'IpsumGal', './assets/images/player-blue.png');
+        const player = new Player(startingGold, allPlayers.length, 'IpsumGal', './assets/images/player-green.png');
         allPlayers.push(player);
     }
     
