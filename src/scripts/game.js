@@ -33,13 +33,11 @@ export class Game {
             // Create a new token element based on the given player's sprite
             playerIcon.setAttribute('src', `${this.players[i].sprite}`)
 
+            playerTokens.appendChild(player)
+            player.appendChild(playerIcon)
+
             // Set each player token position to the tavern (sq-0)
             this.movePlayer(player, 'sq-0')
-
-            // attach token to the DOM
-            player.appendChild(playerIcon)
-            // playerTokens.appendChild(player)
-            document.getElementById('sq-0').appendChild(player)
         }
         
         // remove bouncing animation for start turn button
@@ -70,18 +68,21 @@ export class Game {
 
     postRollTurn(){
         // move the current player based on the dice roll
-        let target = this.currentPlayer.currentSquare + this.diceRoll;
-        console.log(target)
-        console.log(`${this.currentPlayer.name} will move to the ${target}th square.`)
+        let targetNum = (this.currentPlayer.currentSquare + this.diceRoll) % 40;
+        console.log(`${this.currentPlayer.name} will move to the ${targetNum}th square.`)
+
+        // get the current player and move their token to the target square
+        let currentPlayerEle = document.getElementById(`player-${this.currentPlayer.turnId}`)
+        this.movePlayer(currentPlayerEle, `sq-${targetNum}`)
 
 
-        this.currentPlayer.movePlayer(target);
         // check which square the player landed in
         // if property, check if owned. 
         // if owned by non-current player, charge current and give gold to owner
         // otherwise, prompt player to purchase unowned property
 
         // then, allow players to "End Turn" with a button (not immediately invoked)
+
 
 
         // Switch to the next player and end the turn logic
@@ -111,14 +112,25 @@ export class Game {
     // -------------------------------------------------------------------------------
     // Game logic outside of loop
 
-    movePlayer(playerSprite, target){
+    movePlayer(playerEle, target){
         // takes in a player element (div with token inside) and a target square element
         // moves the player's token to the target position
-        const playerObject = this.players.find(player => player.sprite === playerSprite)
-        console.log(playerSprite)
-        console.log(playerObject)
-        // const tavernPos = document.getElementById('sq-0').getBoundingClientRect()
-        // console.log(tavernPos) // DEBUG
+
+        const playerObject = this.currentPlayer
+        // parses the target square id (e.g. 'sq-32') into a position number
+        console.log(target)
+        console.log(parseInt(target.split('-')[1]))
+        
+        const targetPos = parseInt(target.split('-')[1])
+        const targetSquare = document.getElementById(`sq-${targetPos}`)
+        // remove playerEle (the token) from old parent square, add to new parent square
+        console.log(playerEle)
+        console.log(playerEle.parentElement) //UNDEFINED
+
+        playerEle.parentElement.removeChild(playerEle)
+        targetSquare.appendChild(playerEle)
+
+        playerObject.currentSquare = targetPos
     }
 
     handleDiceRoll(){

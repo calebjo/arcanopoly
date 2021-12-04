@@ -92,8 +92,4 @@ export class Player {
         let cardIdx = this.hand.indexOf(card);
         this.hand.splice(cardIdx, 1);
     }
-
-    movePlayer(targetSquare){
-        this.currentSquare = targetSquare;
-    }
 }
