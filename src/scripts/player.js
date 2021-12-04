@@ -28,7 +28,7 @@
 // loseCard(card)
 // movePlayer(targetSquare)
 
-class Player {
+export class Player {
     constructor(startingGold, turnId, name, sprite){
         this.gold = startingGold;
         this.turnId = turnId;
@@ -39,6 +39,35 @@ class Player {
         this.ownedProperties = [];
         this.hand = [];
         this.equipment = [];
+        this.buildPlayerEle(startingGold, turnId, name, sprite);
+    }
+
+    buildPlayerEle(startingGold, turnId, name, sprite) {
+        // builds a Player instance with the given arguments and attaches it to the DOM
+        // add a player with PLACEHOLDER parameters
+        
+        // build new player
+        const newPlayer = document.createElement('div');
+        newPlayer.classList.add('player');
+        newPlayer.setAttribute('id', 'p1');
+
+        const playerP = document.createElement('p')
+        playerP.innerText = name
+        newPlayer.appendChild(playerP)
+
+        const playerInfo = document.createElement('div')
+        newPlayer.appendChild(playerInfo)
+
+        const playerCards = document.createElement('div')
+        playerInfo.appendChild(playerCards)
+        const pDivider = document.createElement('div')
+        playerInfo.appendChild(pDivider)
+        const playerEquipment = document.createElement('div')
+        playerInfo.appendChild(playerEquipment)
+        
+        // attach the player to the end of the players list
+        const playerTurns = document.getElementsByClassName('player-turns')[0]; 
+        playerTurns.appendChild(newPlayer);
     }
 
     changeGold(number){

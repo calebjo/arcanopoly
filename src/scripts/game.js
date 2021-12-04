@@ -1,6 +1,6 @@
 
 // A game instance should contain all of the logic for running a game of Arcanopoly.
-// The Game will be created in runGame.js and start immediately.
+// The Game will be created in index.js and start immediately.
 // 
 //
 // constructor(players, startingGold)
@@ -11,7 +11,7 @@
 // turnNum        : Integer counter game turn number (start at 0, incremented first)
 // currentPlayer  : Player instance of the player whose turn it is
 
-class Game {
+export class Game {
     constructor(players, startingGold){
         this.players = players;
         this.startingGold = startingGold;
@@ -20,25 +20,28 @@ class Game {
     }
 
     playTurn(){
+        console.log('Beginning of Game.playTurn()')// TEST
         this.turnNum += 1;
         // display Roll Dice button until dice are rolled
         let rollButton = document.getElementsByClassName('roll-dice');
-        rollButton.getElementsByTagName('p').innerText = 'Roll';
+        rollButton[0].innerText = 'Roll';
 
         // when Roll button is clicked, roll the current player's dice
         let playerDiceNum = this.currentPlayer.diceNum;
         let playerMax = this.currentPlayer.diceMax;
         let diceRoll = 0;
 
-        rollButton.addEventListener("click", () => {
+        rollButton[0].addEventListener("click", e => {
+            // roll dice if "Roll" button is clicked
             diceRoll = this.rollDice(playerDiceNum, playerMax);
             // change Roll button to say 'End Turn'
-            rollButton.getElementsByTagName('p').innerText = 'End Turn';
+            rollButton.innerText = 'End Turn';
         });
             
         // move the current player based on the dice roll
-        // let target = this.board[]
+        let target = this.currentPlayer.currentSquare + diceRoll;
         this.currentPlayer.movePlayer(target);
+
 
         // check which square the player landed in
         // if property, check if owned. 
@@ -49,12 +52,13 @@ class Game {
 
 
         // Switch to the next player and end the turn logic
-        let playerCount = players.length;
+        let playerCount = this.players.length;
 
-        let currentPlayerIdx = players.indexOf(this.currentPlayer);
+        let currentPlayerIdx = this.players.indexOf(this.currentPlayer);
         let nextPlayerIdx = (currentPlayerIdx + 1) % playerCount;
 
-        this.currentPlayer = players[nextPlayerIdx];
+        this.currentPlayer = this.players[nextPlayerIdx];
+        console.log('End of Game.playTurn()')// TEST
     }
 
     rollDice(diceNum, max){
@@ -72,12 +76,15 @@ class Game {
 
     isWon(){
         // check if the game has been won by a player (all other players have bankrupted)
-        this.players.array.forEach(player => {
-            if (player.gold !== 0){
+        console.log('In Game.isWon()')// TEST
+
+        for (let i = 0; i < this.players.length; i++){
+            if (this.players[i].gold !== 0){
                 return false;
             }
-        });
+        }
 
+        console.log('Returning true in Game.isWon()')// TEST
         return true;
     }
 

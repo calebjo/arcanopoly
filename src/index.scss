@@ -50,11 +50,17 @@ html, body {
 }
 
 /* PlAYER TURN BOXES ---------------------------------------------- */
-.player-turns {
+.players-panel {
     z-index: 8;
     display: flex;
     flex-direction: column;
+    align-items: center;
     height: 100%;
+}
+
+.player-turns {
+    display: flex;
+    flex-direction: column;
 }
 
 .player {
@@ -62,7 +68,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 11%;
+    height: 5.5rem;
     background: #2b2d40;
     font-family: beleren;
     font-size: 22px;
@@ -118,6 +124,26 @@ html, body {
     margin: 2px;
     background: #232734;
     border-radius: 5px;
+}
+
+.add-player {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6rem;
+    height: 3rem;
+    background: rgb(211, 185, 116);
+    border-radius: 15px;
+    box-shadow: 0 8px 14px rgb(6, 4, 17, 0.5);
+    user-select: none;
+    cursor: pointer;
+}
+
+.add-player p {
+    display: flex;
+    font-family: versatile;
+    font-size: 48px;
+    color:rgb(34, 32, 37);
 }
 
 /* BOARD STYLING -------------------------------------------------- */
@@ -245,12 +271,14 @@ html, body {
     align-items: center;
     justify-content: center;
     height: 20%;
-    animation: bounce 7s infinite linear;
+    animation: bounceShake 4s infinite ease-in-out;
     position: relative;
     background: rgb(16, 16, 26, 0.5); 
     box-shadow: 0 10px 12px rgb(6, 4, 17, 0.55);
     border: 2px solid rgb(250, 214, 116);
     border-radius: 8px;
+    user-select: none;
+    cursor: pointer;
 }
 
 .roll-dice p {
@@ -259,14 +287,14 @@ html, body {
     color:rgb(250, 214, 116);
 }
 
-@keyframes bounce {
-    0%{top:0em}
-    40%{top:0em}
-    43%{top:-0.9em}
-    46%{top:0em}
-    48%{top:-0.4em}
-    50%{top:0em}
-    100%{top:0em;}
+@keyframes bounceShake {
+    0%   {top:0em}
+    37%  {top:0em}
+    45%  {top:-1.2em}
+    47%  {top:0em}
+    48%  {top:-0.3em}
+    52%  {top:0em}
+    100% {top:0em;}
 }
 
 /* Individual square styles ----------------------------------------*/
