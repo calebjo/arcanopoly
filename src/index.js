@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
         // until game is won, loop through each player and playTurn 
         while (!thisGame.isWon()) { 
             console.log('About to play!')
-            setTimeout(console.log('Playing thisGame'), 2000);
             thisGame.playTurn();
         }
     });

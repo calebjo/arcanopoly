@@ -20,28 +20,37 @@ export class Game {
     }
 
     playTurn(){
-        console.log('Beginning of Game.playTurn()')// TEST
-        this.turnNum += 1;
-        // display Roll Dice button until dice are rolled
+        console.log('Beginning of the turn!') // TEST
+        // change center button to 'Roll'
         let rollButton = document.getElementsByClassName('roll-dice');
         rollButton[0].innerText = 'Roll';
 
-        // when Roll button is clicked, roll the current player's dice
-        let playerDiceNum = this.currentPlayer.diceNum;
-        let playerMax = this.currentPlayer.diceMax;
-        let diceRoll = 0;
+        // continue with the rolling section of the turn
+        this.preRollTurn();
+        console.log('End of playTurn()')
+    }
 
-        rollButton[0].addEventListener("click", e => {
-            // roll dice if "Roll" button is clicked
-            diceRoll = this.rollDice(playerDiceNum, playerMax);
-            // change Roll button to say 'End Turn'
-            rollButton.innerText = 'End Turn';
-        });
-            
+    async preRollTurn(){
+        console.log('In preRollTurn()') // TEST
+        this.turnNum += 1;
+        // display Roll Dice button until dice are rolled
+        
+
+        // when Roll button is clicked, roll the player's dice
+        rollButton[0].addEventListener("click", this.handleDiceRoll);
+
+        console.log('Right before promise')
+        // wait for the dice to be rolled, then continue on in the turn
+        let promise = new Promise((resolve) => {this.handleDiceRoll = resolve});
+        await promise.then((result) => {this.postRollTurn()});
+        console.log('After await');
+    }
+
+    async postRollTurn(){
+        console.log('In postRollTurn()')
         // move the current player based on the dice roll
         let target = this.currentPlayer.currentSquare + diceRoll;
         this.currentPlayer.movePlayer(target);
-
 
         // check which square the player landed in
         // if property, check if owned. 
@@ -50,10 +59,8 @@ export class Game {
 
         // then, allow players to "End Turn" with a button (not immediately invoked)
 
-
         // Switch to the next player and end the turn logic
         let playerCount = this.players.length;
-
         let currentPlayerIdx = this.players.indexOf(this.currentPlayer);
         let nextPlayerIdx = (currentPlayerIdx + 1) % playerCount;
 
@@ -61,16 +68,32 @@ export class Game {
         console.log('End of Game.playTurn()')// TEST
     }
 
+    moveCurrentPlayer(){
+
+    }
+
+    handleDiceRoll(){
+        // when Roll button is clicked, calculate dice to roll and roll them
+        let playerDiceNum = this.currentPlayer.diceNum;
+        let playerMax = this.currentPlayer.diceMax;
+        let diceRoll = 0;
+
+        // roll dice
+        diceRoll = this.rollDice(playerDiceNum, playerMax);
+        // change Roll button to say 'End Turn'
+        console.log(`The dice roll was a ${diceRoll}!`);
+        rollButton.innerText = 'End Turn';
+        // this.postRollTurn();
+    }
+
     rollDice(diceNum, max){
         // returns the number of squares the player will move based on the dice roll
         
         let roll = 0;
-
         for (let i = 0; i < diceNum; i++){
             let thisDieRoll = 1 + Math.floor(Math.random() * max)
             roll += thisDieRoll;
         }
-
         return roll;
     }
 
