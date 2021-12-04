@@ -4,3 +4,9 @@
 // constructor that calls createBoard
 
 // createBoard function that maps the DOM elements to Square node objects
+
+class Board {
+    constructor(){
+        createBoard();
+    }
+}

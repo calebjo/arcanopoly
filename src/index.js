@@ -1,18 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const tavernSquare = document.getElementById('sq-0');
-    const tavernText = tavernSquare.getElementsByTagName('p');
+    
+    // when the plus symbol is clicked, a new player is created
+    let startingGold = 1000;
 
-    tavernSquare.onclick = function() {
-        console.log('In tavernSquare onclick')
-        tavernText.innerText = 'Hello!';
+    let player1 = new Player(startingGold, 1, 'Jim', 'placeholder');
+    let player2 = new Player(startingGold, 2, 'Asjdalasdsesfgo', 'placeholder');
+    let player3 = new Player(startingGold, 3, 'Blue Dog', 'placeholder');
+    const players = [player1, player2, player3];
+
+    let thisGame = new Game(players, startingGold);
+
+    // until game is won, loop through each player and playTurn 
+    while (!thisGame.isWon()) {
+        thisGame.playTurn();
     }
-
-    const rect = tavernSquare.getBoundingClientRect();
-    console.log(rect.top, rect.right, rect.bottom, rect.left);
-
-    let playerPos = 0;
-    const player = document.getElementById('sq-3').children[0];
-    console.log(player);
-
-    player.style.transform = 'translate(100px, 200px)';
 });
