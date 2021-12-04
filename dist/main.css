@@ -31,6 +31,10 @@ html, body {
   justify-content: center;
 }
 
+.player-tokens {
+  z-index: 15;
+}
+
 .game-panel {
   display: flex;
   justify-content: space-between;
@@ -383,6 +387,13 @@ html, body {
 #col-2 .property embed {
   position: relative;
   right: -50px;
+}
+
+.boxes div div div .player-token {
+  position: fixed;
+  background: none;
+  width: 3rem;
+  height: 3rem;
 }
 
 /* Begin right panel styles --------------------------------------- */
