@@ -271,7 +271,7 @@ html, body {
     align-items: center;
     justify-content: center;
     height: 20%;
-    animation: bounceShake 4s infinite ease-in-out;
+    animation: bounceShake 5s infinite ease-in-out;
     position: relative;
     background: rgb(16, 16, 26, 0.5); 
     box-shadow: 0 10px 12px rgb(6, 4, 17, 0.55);
@@ -289,11 +289,11 @@ html, body {
 
 @keyframes bounceShake {
     0%   {top:0em}
-    37%  {top:0em}
-    45%  {top:-1.2em}
+    39%  {top:0em}
+    45%  {top:-0.6em}
     47%  {top:0em}
-    48%  {top:-0.3em}
-    52%  {top:0em}
+    48%  {top:-0.2em}
+    50%  {top:0em}
     100% {top:0em;}
 }
 

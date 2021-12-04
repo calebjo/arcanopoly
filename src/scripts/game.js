@@ -23,13 +23,15 @@ export class Game {
 
     onGameStart(){
         // when Start is pressed, place the player tokens in the tavern
-        // then, while the game is not won, play a turn of the game
+
+
+        // then play a turn of the game
+        console.log('The game has started!')
         this.playTurn();
-        console.log('Playing a turn!')
     }
 
     playTurn(){
-        console.log('Beginning of the turn!') // TEST
+        console.log(`${this.currentPlayer.name} is playing a turn!`) // TEST
         this.turnNum += 1;
 
         // change center button to 'Roll'
@@ -37,21 +39,20 @@ export class Game {
 
         // when 'Roll' is clicked, roll the dice
         this.mainButton.addEventListener("click", callRoll);
-
         const that = this;
         function callRoll(){
             that.diceRoll = that.handleDiceRoll.call(that);
             that.mainButton.children[0].innerText  = 'End'
+            that.mainButton.removeEventListener("click", callRoll);
             that.postRollTurn();
         }
     }
 
     postRollTurn(){
-        console.log('In postRollTurn()')
         // move the current player based on the dice roll
         let target = this.currentPlayer.currentSquare + this.diceRoll;
         console.log(target)
-        console.log(`The player will move to the ${target}th square.`)
+        console.log(`${this.currentPlayer.name} will move to the ${target}th square.`)
 
 
         this.currentPlayer.movePlayer(target);
@@ -64,22 +65,32 @@ export class Game {
 
 
         // Switch to the next player and end the turn logic
-        let playerCount = this.players.length;
-        let currentPlayerIdx = this.players.indexOf(this.currentPlayer);
-        let nextPlayerIdx = (currentPlayerIdx + 1) % playerCount;
+        this.mainButton.addEventListener("click", endTurn);
+        const that = this;
+        function endTurn(){
+            that.mainButton.removeEventListener("click", endTurn);
+            // cycle to the next player
+            let playerCount = that.players.length;
+            let currentPlayerIdx = that.players.indexOf(that.currentPlayer);
+            let nextPlayerIdx = (currentPlayerIdx + 1) % playerCount;
 
-        this.currentPlayer = this.players[nextPlayerIdx];
-        console.log('End of Game.playTurn()')// TEST
-    }
+            that.currentPlayer = that.players[nextPlayerIdx];
 
-    moveCurrentPlayer(){
+            console.log(`The next player will be ${that.currentPlayer.name}.`) // DEBUG
+            console.log('End of the turn.')// TEST
 
+            // if the game is not already won, play another turn
+            if (!that.isWon()){ 
+                that.playTurn() 
+            } else {
+                that.gameOver();
+            }
+        }
     }
 
     handleDiceRoll(){
         // when Roll button is clicked, calculate dice to roll and roll them
-        console.log('IN HANDLEDICEROLL')
-        console.log(`currentPlayer in handleDiceRoll is: ${this.currentPlayer.name}`)
+        console.log(`Rolling dice for ${this.currentPlayer.name}!`)
 
         let diceRoll = 0;
 
@@ -119,11 +130,8 @@ export class Game {
         return gameWon;
     }
 
-    winner(){
-        // Everyone else has bankrupted! X player wins!
-    }
-
-    loser(){
-        // X player has bankrupted...
+    gameOver(){
+        // PLACEHOLDER
+        console.log('The game is over!')
     }
 }

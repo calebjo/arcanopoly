@@ -269,7 +269,7 @@ html, body {
   align-items: center;
   justify-content: center;
   height: 20%;
-  animation: bounceShake 4s infinite ease-in-out;
+  animation: bounceShake 5s infinite ease-in-out;
   position: relative;
   background: rgba(16, 16, 26, 0.5);
   box-shadow: 0 10px 12px rgba(6, 4, 17, 0.55);
@@ -289,19 +289,19 @@ html, body {
   0% {
     top: 0em;
   }
-  37% {
+  39% {
     top: 0em;
   }
   45% {
-    top: -1.2em;
+    top: -0.6em;
   }
   47% {
     top: 0em;
   }
   48% {
-    top: -0.3em;
+    top: -0.2em;
   }
-  52% {
+  50% {
     top: 0em;
   }
   100% {
