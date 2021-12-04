@@ -76,16 +76,17 @@ export class Game {
 
     isWon(){
         // check if the game has been won by a player (all other players have bankrupted)
-        console.log('In Game.isWon()')// TEST
+        let gameWon = false;
 
         for (let i = 0; i < this.players.length; i++){
-            if (this.players[i].gold !== 0){
-                return false;
+            let thisPlayer = this.players[i];
+
+            if (thisPlayer.gold !== 0){
+                gameWon = false;
             }
         }
 
-        console.log('Returning true in Game.isWon()')// TEST
-        return true;
+        return gameWon;
     }
 
     winner(){
