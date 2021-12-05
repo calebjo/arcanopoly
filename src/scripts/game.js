@@ -158,13 +158,20 @@ export class Game {
         const playerObject = this.currentPlayer
         // parses the target square id (e.g. 'sq-32') into a position number
         const targetPos = parseInt(target.split('-')[1])
-        const targetSquare = document.getElementById(`sq-${targetPos}`)
+
+        // store elements and objects of previous and target squares
+        const targetSquareEle = document.getElementById(`sq-${targetPos}`)
+        const previousSquareObject = this.board.squares[playerObject.currentSquare]
+        const targetSquareObject = this.board.squares[targetPos]
         // remove playerEle (the token) from old parent square, add to new parent square
-
         playerEle.parentElement.removeChild(playerEle)
-        targetSquare.appendChild(playerEle)
+        targetSquareEle.appendChild(playerEle)
 
+        // lastly, set player's current square to new coord and add player to square's occupants
         playerObject.currentSquare = targetPos
+        // remove the current player from the playersOn of the previous square, add to target playersOn
+        previousSquareObject.playersOn.splice(previousSquareObject.playersOn.indexOf(playerObject), 1)
+        targetSquareObject.playersOn.push(playerObject)
     }
 
     handleDiceRoll(){
