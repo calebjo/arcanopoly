@@ -120,6 +120,11 @@ export function landOnSquare(game, squareType, square){
         // if 'sun' deck type, current player draws 3 cards from the 'sun' deck
         // else if 'moon' deck type, current player draws 2 cards from the 'moon' deck
         console.log('You are in landOnDeck()')
+        if (square.deckType === 'sun'){ // sun deck draw
+            game.decks[0].draw(game.currentPlayer, 3)
+        } else { // moon deck draw
+            game.decks[1].draw(game.currentPlayer, 2)
+        }
     }
 
 }

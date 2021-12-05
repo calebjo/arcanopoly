@@ -32,7 +32,7 @@ export class Board {
         newBoard.push(new PropertySquare(1, sq1, [], 'humansProp1', 30, 5, 'humans', false, null, false))
 
         const sq2 = document.getElementById('sq-2')
-        newBoard.push(new DeckSquare(2, sq2, [], 'sun'))
+        newBoard.push(new DeckSquare(2, sq2, [], 'sun', null))
 
         const sq3 = document.getElementById('sq-3')
         newBoard.push(new PropertySquare(3, sq3, [], 'humansProp2', 30, 5, 'humans', false, null, false))
@@ -47,7 +47,7 @@ export class Board {
         newBoard.push(new PropertySquare(6, sq6, [], 'goblinsProp1', 50, 5, 'goblins', false, null, false))
 
         const sq7 = document.getElementById('sq-7')
-        newBoard.push(new DeckSquare(7, sq7, [], 'moon'))
+        newBoard.push(new DeckSquare(7, sq7, [], 'moon', null))
 
         const sq8 = document.getElementById('sq-8')
         newBoard.push(new PropertySquare(8, sq8, [], 'goblinsProp2', 50, 5, 'goblins', false, null, false))
@@ -77,7 +77,7 @@ export class Board {
         newBoard.push(new PropertySquare(16, sq16, [], 'fishmenProp1', 90, 15, 'fishmen', false, null, false))
 
         const sq17 = document.getElementById('sq-17')
-        newBoard.push(new DeckSquare(17, sq17, [], 'sun'))
+        newBoard.push(new DeckSquare(17, sq17, [], 'sun', null))
 
         const sq18 = document.getElementById('sq-18')
         newBoard.push(new PropertySquare(18, sq18, [], 'fishmenProp2', 90, 15, 'fishmen', false, null, false))
@@ -92,7 +92,7 @@ export class Board {
         newBoard.push(new PropertySquare(21, sq21, [], 'dwarvesProp1', 110, 20, 'dwarves', false, null, false))
 
         const sq22 = document.getElementById('sq-22')
-        newBoard.push(new DeckSquare(22, sq22, [], 'moon'))
+        newBoard.push(new DeckSquare(22, sq22, [], 'moon', null))
 
         const sq23 = document.getElementById('sq-23')
         newBoard.push(new PropertySquare(23, sq23, [], 'dwarvesProp2', 110, 20, 'dwarves', false, null, false))
@@ -125,7 +125,7 @@ export class Board {
         newBoard.push(new PropertySquare(32, sq32, [], 'gnomesProp2', 150, 30, 'gnomes', false, null, false))
 
         const sq33 = document.getElementById('sq-33')
-        newBoard.push(new DeckSquare(33, sq33, [], 'sun'))
+        newBoard.push(new DeckSquare(33, sq33, [], 'sun', null))
 
         const sq34 = document.getElementById('sq-34')
         newBoard.push(new PropertySquare(34, sq34, [], 'gnomesProp3', 160, 35, 'gnomes', false, null, false))
@@ -134,7 +134,7 @@ export class Board {
         newBoard.push(new ShopSquare(35, sq35, []))
 
         const sq36 = document.getElementById('sq-36')
-        newBoard.push(new DeckSquare(36, sq36, [], 'moon'))
+        newBoard.push(new DeckSquare(36, sq36, [], 'moon', null))
 
         const sq37 = document.getElementById('sq-37')
         newBoard.push(new PropertySquare(37, sq37, [], 'demonsProp1', 175, 40, 'demons', false, null, false))

@@ -368,9 +368,30 @@ html, body {
 
 .my-hand {
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     margin: 20px;
     background:rgb(39, 39, 49);
+}
+
+.my-card {
+    // z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform .05s;
+}
+
+.my-card embed{
+    // z-index: 100;
+    width: 8rem;
+    height: 12rem;
+}
+
+.my-card:hover {
+    transform: scale(2);
+    // position: fixed;
 }
 
 /* Individual square styles ----------------------------------------*/
@@ -386,6 +407,7 @@ html, body {
 }
 
 .row-horizontal div {
+    z-index: 5;
     width: 4rem;
     height: 6rem;
     margin: 0.125rem;
@@ -393,6 +415,7 @@ html, body {
 }
 
 .row-vertical div {
+    z-index: 5;
     width: 6rem;
     height: 4rem;
     margin: 0.125rem;
@@ -400,6 +423,7 @@ html, body {
 }
 
 .corner-square div{
+    z-index: 5;
     width: 8rem;
     height: 8rem;
     margin: 0.125rem;

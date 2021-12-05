@@ -79,8 +79,9 @@ export class CastleSquare extends Square {
 }
 
 export class DeckSquare extends Square {
-    constructor(position, domRef, playersOn, deckType){
+    constructor(position, domRef, playersOn, deckType, deckRef){
         super(position, domRef, playersOn)
         this.deckType = deckType
+        this.deckRef = deckRef
     }
 }

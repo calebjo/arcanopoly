@@ -25,6 +25,7 @@ export class Game {
         this.mainButton = document.getElementById('main-button');
         this.diceRoll = 0;
         this.board = new Board();
+        this.decks = [];
     }
 
     onGameStart(){
@@ -59,8 +60,14 @@ export class Game {
         deckBox2.appendChild(moonDeckEle)
 
         // Create Deck objects in Node
-        const sunDeck = new SunDeck(1, sunDeckEle);
-        const moonDeck = new MoonDeck(2, moonDeckEle);
+        const sunDeck = new SunDeck(0, sunDeckEle);
+        // Set all sun decks on the board to reference the new deck
+        // for (let i = 0; i < this.board.squares.length; i++){
+        //     if (this.board.squares[i] === )
+        // }
+        const moonDeck = new MoonDeck(1, moonDeckEle);
+        this.decks.push(sunDeck)
+        this.decks.push(moonDeck)
 
         console.log(sunDeck)
         console.log(moonDeck)

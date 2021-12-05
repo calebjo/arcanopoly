@@ -28,6 +28,9 @@
 // loseCard(card)
 // movePlayer(targetSquare)
 
+import { PropertyCard } from "./card";
+import { PropertySquare, TavernSquare } from "./square";
+
 export class Player {
     constructor(startingGold, turnId, name, sprite){
         this.gold = startingGold;
@@ -129,24 +132,36 @@ export class Player {
 
     // takes in a target card object and a boolean for gaining/losing it
     changeCard(card, gain) {
+        // find myHand DOM element
+        const myHand = document.getElementsByClassName('my-hand')[0]
         if (gain){
             this.hand.push(card);
+            // change DOM using myHand
+            const newCardEle = document.createElement('div')
+            newCardEle.classList.add('my-card')
+            newCardEle.setAttribute('id', `card-${card.id}`)
+            const newCardEmbed = document.createElement('embed')
+            newCardEmbed.setAttribute('src', `${card.img}`)
+            newCardEle.appendChild(newCardEmbed)
+            // append newly created card div
+            myHand.appendChild(newCardEle)
         } else {
             let cardIdx = this.hand.indexOf(card);
             this.hand.splice(cardIdx, 1);
-        }
-        // change DOM
+            // change DOM
+        } 
     }
 
+    // takes in an equipment object and a boolean for gaining/losing it
     changeEquipment(equipment, gain) {
         if (gain){
             this.equipment.push(equipment);
+            // change DOM
         } else {
             let equipIdx = this.equipment.indexOf(equipment);
             this.equipment.splice(equipIdx, 1);
             // change DOM
         }
-        
     }
 
     movePlayer(game, target) {
@@ -172,6 +187,7 @@ export class Player {
         const targetSquareEle = document.getElementById(`sq-${targetPos}`)
         const previousSquareObject = game.board.squares[playerObject.currentSquare]
         const targetSquareObject = game.board.squares[targetPos]
+
         // remove playerTokenEle (the token) from old parent square, add to new parent square
         playerTokenEle.parentElement.removeChild(playerTokenEle)
         targetSquareEle.appendChild(playerTokenEle)
