@@ -81,8 +81,7 @@ export function landOnSquare(game, squareType, square){
                 if (buyProp) {
                     // charge player, then transfer property ownership
                     game.currentPlayer.changeGold(-(square.price))
-                    square.owner = game.currentPlayer
-                    game.currentPlayer.properties.push(square)
+                    game.currentPlayer.changeProperty(square, true)
                     // change property colors on purchase
                     let embedded = square.domRef.children[0]
                     // super ugly, change later to be player's colors

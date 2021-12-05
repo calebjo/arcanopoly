@@ -418,20 +418,44 @@ html, body {
 
 .right-panel div {
   display: flex;
-  flex-direction: column;
   align-items: center;
   font-family: beleren;
   font-size: 20px;
-  margin-bottom: 24px;
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
 }
 
 /* PROPERTY LIST STYLING ------------------------------------------ */
 .properties {
+  flex-direction: column;
   width: 100%;
   height: 25%;
   background: #2b2d40;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  margin-bottom: 24px;
+}
+
+.my-prop-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+}
+
+.my-property {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: 25%;
+  height: 42%;
+  margin: 0;
+  border-radius: 8px;
+  background: #13131d;
+}
+
+.my-prop-image embed {
+  width: 2rem;
+  height: 2rem;
 }
 
 .r-label-text {
@@ -440,15 +464,23 @@ html, body {
 
 /* HISTORY STYLING ------------------------------------------------ */
 .history {
+  flex-direction: column;
   height: 20%;
   background: #2b2d40;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  margin-bottom: 24px;
 }
 
 /* CHAT BOX STYLING ----------------------------------------------- */
 .chat {
   display: flex;
+  flex-direction: column;
   height: 55%;
   background: #2b2d40;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  margin-bottom: 24px;
 }
 
 .chat-box {
@@ -457,6 +489,8 @@ html, body {
   width: 95%;
   height: 85%;
   background: #13131f;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
 }
 
 .user-chat {

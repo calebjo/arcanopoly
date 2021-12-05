@@ -82,17 +82,48 @@ export class Player {
 
     changeGold(number){
         this.gold += number;
+        // change DOM
         const thisPlayerGold = document.getElementById(`p${this.turnId}`)
         thisPlayerGold.children[1].innerText = `${this.gold} gold`
     }
 
     // takes in a target square (Property object) and a boolean for gaining/losing it
     changeProperty(property, gain){
+        const thisPlayerProperties = document.getElementsByClassName('my-prop-list')[0]
         if (gain){
-            this.ownedProperties.push(property);
+            this.properties.push(property);
+            property.owner = this
+            // add to DOM
+            const newProp = document.createElement('div')
+            newProp.classList.add('my-property')
+            const newPropName = document.createElement('div')
+            newPropName.classList.add('my-prop-name')
+            newPropName.innerText = `${property.name}`;
+            newProp.appendChild(newPropName)
+
+            // append children (image and price) to info
+            const newPropInfo = document.createElement('div')
+            newPropInfo.classList.add('my-prop-info')
+            const newPropImage = document.createElement('div')
+            newPropImage.classList.add('my-prop-image')
+            const newPropImageEmbed = document.createElement('embed')
+            const embedSrc = property.domRef.children[0].getAttribute('src')
+            newPropImageEmbed.setAttribute('src', `${embedSrc}`)
+            newPropImage.appendChild(newPropImageEmbed)
+            
+            newPropInfo.appendChild(newPropImage)
+            const newPropPrice = document.createElement('div')
+            newPropPrice.classList.add('my-prop-price')
+            newPropPrice.innerText = `${property.price}`;
+            newPropInfo.appendChild(newPropPrice)
+
+            newProp.appendChild(newPropInfo)
+            thisPlayerProperties.appendChild(newProp)
         } else {
-            let propIdx = this.ownedProperties.indexOf(property);
-            this.ownedProperties.splice(propIdx, 1);
+            let propIdx = this.properties.indexOf(property);
+            this.properties.splice(propIdx, 1);
+            // remove from DOM
+            thisPlayerProperties.removeChild(property.domRef)
         }
     }
 
@@ -104,5 +135,17 @@ export class Player {
             let cardIdx = this.hand.indexOf(card);
             this.hand.splice(cardIdx, 1);
         }
+        // change DOM
+    }
+
+    changeEquipment(equipment, gain) {
+        if (gain){
+            this.equipment.push(equipment);
+        } else {
+            let equipIdx = this.equipment.indexOf(equipment);
+            this.equipment.splice(equipIdx, 1);
+            // change DOM
+        }
+        
     }
 }
