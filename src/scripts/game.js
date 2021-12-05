@@ -19,7 +19,7 @@ export class Game {
         this.currentPlayer = players[0];
         this.mainButton = document.getElementById('main-button');
         this.diceRoll = 0;
-        // this.board = new Board()
+        this.board = new Board();
     }
 
     onGameStart(){

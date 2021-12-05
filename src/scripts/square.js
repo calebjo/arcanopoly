@@ -54,11 +54,13 @@ export class MovementSquare extends Square {
 }
 
 export class PropertySquare extends Square {
-    constructor(position, domRef, playersOn, price, group, owned, mortgaged){
+    constructor(position, domRef, playersOn, name, price, group, owned, owner, mortgaged){
         super(position, domRef, playersOn)
+        this.name = name
         this.price = price
         this.group = group
         this.owned = owned
+        this.owner = owner
         this.mortgaged = mortgaged
     }
 }
@@ -76,8 +78,8 @@ export class CastleSquare extends Square {
 }
 
 export class DeckSquare extends Square {
-    constructor(position, domRef, playersOn, deck){
+    constructor(position, domRef, playersOn, deckType){
         super(position, domRef, playersOn)
-        this.deck = deck
+        this.deckType = deckType
     }
 }
