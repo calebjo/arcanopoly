@@ -101,6 +101,12 @@ export function landOnSquare(game, squareType, square){
     function landOnCastle(){
         // charges all other players 25 gp * the number of cards in the currentplayer's hand
         console.log('You are in landOnCastle()')
+
+        for (let i = 0; i < game.players.length; i++){
+            if (game.players[i] !== game.currentPlayer) {
+                game.players[i].changeGold(-(25 * game.currentPlayer.hand.length))
+            }
+        }
     }
 
     function landOnDeck(){

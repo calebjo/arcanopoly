@@ -409,10 +409,13 @@ html, body {
 
 .right-panel div {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: beleren;
+    font-size: 20px;
     margin-bottom: 24px;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
-    background: #2b2d40;
 }
 
 /* PROPERTY LIST STYLING ------------------------------------------ */
@@ -420,16 +423,38 @@ html, body {
 .properties {
     width: 100%;
     height: 25%;
+    background: #2b2d40;
+}
+
+.r-label-text {
+    margin-top: 8px;
 }
 
 /* HISTORY STYLING ------------------------------------------------ */
 
 .history {
     height: 20%;
+    background: #2b2d40;
 }
 
 /* CHAT BOX STYLING ----------------------------------------------- */
 
-.chat-box {
+.chat {
+    display: flex;
     height: 55%;
+    background: #2b2d40;
+}
+
+.chat-box {
+    display: flex;
+    align-self: flex-end;
+    width: 95%;
+    height: 85%;
+    background: rgb(19, 19, 31);
+}
+
+.user-chat {
+    display: flex;
+    width: 90%;
+    background:rgb(255, 255, 213);
 }
