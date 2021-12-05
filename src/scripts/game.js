@@ -10,6 +10,7 @@
 // startingGold   : Option for how much gold to start each player with (default 1000)
 // turnNum        : Integer counter game turn number (start at 0, incremented first)
 // currentPlayer  : Player instance of the player whose turn it is
+import { Board } from "./board";
 
 export class Game {
     constructor(players, startingGold){
@@ -53,6 +54,7 @@ export class Game {
     playTurn(){
         console.log(`${this.currentPlayer.name} is playing a turn!`) // TEST
         this.turnNum += 1
+        console.log(this.board)
 
         // change center button to 'Roll'
         this.mainButton.children[0].innerText = 'Roll'
