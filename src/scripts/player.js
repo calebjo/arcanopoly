@@ -86,21 +86,23 @@ export class Player {
         thisPlayerGold.children[1].innerText = `${this.gold} gold`
     }
 
-    gainProperty(square){
-        this.ownedProperties.push(square);
+    // takes in a target square (Property object) and a boolean for gaining/losing it
+    changeProperty(property, gain){
+        if (gain){
+            this.ownedProperties.push(property);
+        } else {
+            let propIdx = this.ownedProperties.indexOf(property);
+            this.ownedProperties.splice(propIdx, 1);
+        }
     }
 
-    loseProperty(square){
-        let propIdx = this.ownedProperties.indexOf(square);
-        this.ownedProperties.splice(propIdx, 1);
-    }
-
-    gainCard(card) {
-        this.hand.push(card);
-    }
-
-    loseCard(card) {
-        let cardIdx = this.hand.indexOf(card);
-        this.hand.splice(cardIdx, 1);
+    // takes in a target card object and a boolean for gaining/losing it
+    changeCard(card, gain) {
+        if (gain){
+            this.hand.push(card);
+        } else {
+            let cardIdx = this.hand.indexOf(card);
+            this.hand.splice(cardIdx, 1);
+        }
     }
 }
