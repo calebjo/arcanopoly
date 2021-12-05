@@ -9,6 +9,7 @@ body {
 
 html, body {
     height: 100%;
+    font-size: 15px; // CHANGE AS DEBUG FOR BOARD SIZING
 }
 
 @font-face {
@@ -40,12 +41,18 @@ html, body {
     align-items: center;
     width: 2rem;
     height: 2rem;
+    padding: 8px;
 }
 
 .mute-button embed {
+    display: flex;
     width: 2rem;
     height: 2rem;
     filter: brightness(1.2);
+}
+
+.mute-button:hover {
+    cursor: pointer;
 }
 
 .outer-wrapper {
@@ -453,6 +460,7 @@ html, body {
 /* PROPERTY LIST STYLING ------------------------------------------ */
 
 .properties {
+    overflow: auto;
     flex-direction: column;
     width: 100%;
     height: 25%;
@@ -460,6 +468,23 @@ html, body {
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
     margin-bottom: 24px;
+}
+
+/* width */
+.properties::-webkit-scrollbar {
+    width: 15px;
+}
+  
+/* Track */
+.properties::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 8px rgb(14, 14, 15);
+    border-radius: 10px;
+}
+
+/* Handle */
+.properties::-webkit-scrollbar-thumb {
+    background: rgb(13, 14, 34);
+    border-radius: 10px;
 }
 
 .my-prop-list {
