@@ -1,43 +1,51 @@
 
 // handle individual logic for a player landing on any square
-export function landOnSquare(game, player, squareType, position){
+export function landOnSquare(game, squareType, square){
     switch (squareType) {
         case ('tavern'):
-            landOnTavern(game, player, squareType, position)
+            landOnTavern();
             break;
         case ('tome'):
-            landOnTome(game, player, squareType, position)
+            landOnTome();
             break;
         case ('dungeon'):
-            landOnDungeon(game, player, squareType, position)
+            landOnDungeon();
             break;
         case ('movement'):
-            landOnMovement(game, player, squareType, position)
+            landOnMovement();
             break;
         case ('property'):
-            landOnProperty(game, player, squareType, position)
+            landOnProperty();
             break;
         case ('shop'):
-            landOnShop(game, player, squareType, position)
+            landOnShop();
             break;
         case ('castle'):
-            landOnCastle(game, player, squareType, position)
+            landOnCastle();
             break;
         case ('deck'):
-            landOnDeck(game, player, squareType, position)
+            landOnDeck();
             break;
     }
 
     function landOnTavern(){
-        // if turnNum is greater than 1, current player gains 100 gold
+        // if turnNum is greater than 1, current player gains 200 gold for LANDING on the tavern
+        console.log('You are in landOnTavern()')
+
+        if (game.turnNum > 1){
+            game.currentPlayer.gold += 200;
+            console.log(`${game.currentPlayer.name} has gained 200 gold for entering the tavern.`)
+        }
     }
 
     function landOnTome(){
         // current player may discard any number of their cards and draw new ones from the moon deck
+        console.log('You are in landOnTome()')
     }
 
     function landOnDungeon(){
         // current player goes to the "just visiting" area of the dungeon
+        console.log('You are in landOnDungeon()')
     }
 
     function landOnMovement(){
@@ -45,6 +53,7 @@ export function landOnSquare(game, player, squareType, position){
         // if 'go to dungeon', go to dungeon as prisoner
         // else if 'forward' type, reroll your dice and go forward that amount
         // else if 'backward' type, reroll your dice and go backward that amount
+        console.log('You are in landOnMovement()')
     }
 
     function landOnProperty(){
@@ -57,6 +66,20 @@ export function landOnSquare(game, player, squareType, position){
         //     if they do, add it to their properties and change property's owner to current player
         //     if not, do nothing
         //   if not, say 'Sorry, you don't have enough gold...'
+        console.log('You are in landOnProperty()')
+
+        if (square.owner){
+            if (square.owner !== this.currentPlayer){
+                this.currentPlayer.changeGold(-(square.rent))
+                square.owner.changeGold(square.rent)
+            }
+        } else {
+            if (this.currentPlayer.gold > square.price) {
+                console.log('Would you like to buy this property?')
+            } else {
+                console.log('Not enough gold to buy the property')
+            }
+        }
     }
 
     function landOnShop(){
@@ -66,16 +89,19 @@ export function landOnSquare(game, player, squareType, position){
         //     each item displays a picture and a price in gold
         //     on click, each "purchase" button will transfer the item to the player and charge them gp
         //     Any item that costs more than the player's gold total will be displayed in red + unclickable
+        console.log('You are in landOnShop()')
     }
 
     function landOnCastle(){
         // charges all other players 25 gp * the number of cards in the currentplayer's hand
+        console.log('You are in landOnCastle()')
     }
 
     function landOnDeck(){
         // check which deck type the square is
         // if 'sun' deck type, current player draws 3 cards from the 'sun' deck
         // else if 'moon' deck type, current player draws 2 cards from the 'moon' deck
+        console.log('You are in landOnDeck()')
     }
 
 }

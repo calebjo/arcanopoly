@@ -9,14 +9,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Game options (refactor later)
     const startingGold = 1000;
-    const allPlayers = [new Player(startingGold, 0, 'LoremDude', './assets/images/player-orange.png')];
+    const allPlayers = [new Player(startingGold, 0, 'LoremDude', './assets/images/player-cyan.png')];
 
     // if the "+" button is clicked on, a player will be created and added to the game
     const addPlayerButton = document.getElementById('add-player');
     // add the new player
     addPlayerButton.addEventListener("click", addPlayer);
     function addPlayer(){
-        const player = new Player(startingGold, allPlayers.length, 'IpsumGal', './assets/images/player-green.png');
+        const player = new Player(startingGold, allPlayers.length, 'IpsumGal', './assets/images/player-yellow.png');
         allPlayers.push(player);
     }
     

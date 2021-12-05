@@ -11,7 +11,7 @@
 // turnNum        : Integer counter game turn number (start at 0, incremented first)
 // currentPlayer  : Player instance of the player whose turn it is
 import { Board } from "./board";
-import { CastleSquare, DeckSquare, DungeonSquare, MovementSquare, PropertySquare, ShopSquare, TavernSquare, TomeSquare } from "./square";
+import { CastleSquare, DeckSquare, DungeonSquare, MovementSquare, PropertySquare, ShopSquare, Square, TavernSquare, TomeSquare } from "./square";
 import { landOnSquare } from "./landOnSquare";
 
 export class Game {
@@ -81,15 +81,8 @@ export class Game {
         this.movePlayer(currentPlayerEle, `sq-${targetNum}`)
 
 
-        // check which square the player landed in
+        // check which square the player landed in, handle appropriate logic
         this.handleNewPlayerPos();
-        // if property, check if owned. 
-        // if owned by non-current player, charge current and give gold to owner
-        // otherwise, prompt player to purchase unowned property
-
-        // then, allow players to "End Turn" with a button (not immediately invoked)
-
-
 
         // Switch to the next player and end the turn logic
         this.mainButton.addEventListener("click", endTurn);
@@ -128,45 +121,56 @@ export class Game {
         switch (newSquare.constructor){
             case (TavernSquare):
                 console.log('This is a tavern square!')
-                landOnSquare(this, this.currentPlayer, 'tavern', newPos)
+                landOnSquare(this, 'tavern', newSquare)
                 break;
             case (TomeSquare):
                 console.log('This is a tome square!')
-                landOnSquare(this, this.currentPlayer, 'tome', newPos)
+                landOnSquare(this, 'tome', newSquare)
                 break;
             case (DungeonSquare):
                 console.log('This is a dungeon square!')
-                landOnSquare(this, this.currentPlayer, 'dungeon', newPos)
+                landOnSquare(this, 'dungeon', newSquare)
                 break;
             case (MovementSquare):
                 console.log('This is a movement square!')
-                landOnSquare(this, this.currentPlayer, 'movement', newPos)
+                landOnSquare(this, 'movement', newSquare)
                 break;
             case (PropertySquare):
                 console.log('This is a property square!')
-                landOnSquare(this, this.currentPlayer, 'property', newPos)
+                landOnSquare(this, 'property', newSquare)
                 break;
             case (ShopSquare):
                 console.log('This is a shop square!')
-                landOnSquare(this, this.currentPlayer, 'shop', newPos)
+                landOnSquare(this, 'shop', newSquare)
                 break;
             case (CastleSquare):
                 console.log('This is a castle square!')
-                landOnSquare(this, this.currentPlayer, 'castle', newPos)
+                landOnSquare(this, 'castle', newSquare)
                 break;
             case (DeckSquare):
                 console.log('This is a deck square!')
-                landOnSquare(this, this.currentPlayer, 'deck', newPos)
+                landOnSquare(this, 'deck', newSquare)
                 break;
         }
     }
 
     movePlayer(playerEle, target) {
-        // takes in a player element (div with token inside) and a target square element
-        // moves the player's token to the target position
+        // takes in a player element (div with token inside) and a target square element to move to
+
         const playerObject = this.currentPlayer
         // parses the target square id (e.g. 'sq-32') into a position number
         const targetPos = parseInt(target.split('-')[1])
+        const squaresToMove = this.diceRoll
+
+        console.log(`${this.currentPlayer.name} has ${squaresToMove} squares to move.`)
+
+        for (let i = 0; i < squaresToMove; i++){
+            let traversedSquare = this.board.squares[(this.currentPlayer.currentSquare + i) % 40]
+            console.log(traversedSquare)
+
+            this.traverseSquare(playerObject, traversedSquare);
+        }
+        
 
         // store elements and objects of previous and target squares
         const targetSquareEle = document.getElementById(`sq-${targetPos}`)
@@ -181,6 +185,14 @@ export class Game {
         // remove the current player from the playersOn of the previous square, add to target playersOn
         previousSquareObject.playersOn.splice(previousSquareObject.playersOn.indexOf(playerObject), 1)
         targetSquareObject.playersOn.push(playerObject)
+    }
+
+    traverseSquare(playerObject, traversedSquare){
+        // changes each traversed square to the color of the player that traversed it
+        let playerColor = this.currentPlayer.sprite.split('-')[1].split('.')[0]
+        console.log(playerColor)
+        traversedSquare.domRef.style.background = playerColor;
+        // traversedSquare.domRef.style.background = '#323a4c';
     }
 
     handleDiceRoll(){
