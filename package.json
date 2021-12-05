@@ -27,6 +27,7 @@
     "babel-loader": "^8.2.3",
     "core-js": "^3.19.2",
     "css-loader": "^6.5.1",
+    "howler": "^2.2.3",
     "mini-css-extract-plugin": "^2.4.5",
     "regenerator-runtime": "^0.13.9",
     "sass": "^1.44.0",

@@ -13,6 +13,7 @@
 import { Board } from "./board";
 import { CastleSquare, DeckSquare, DungeonSquare, MovementSquare, PropertySquare, ShopSquare, Square, TavernSquare, TomeSquare } from "./square";
 import { landOnSquare } from "./landOnSquare";
+import {Howl, Howler} from 'howler';
 
 export class Game {
     constructor(players, startingGold){
@@ -26,9 +27,29 @@ export class Game {
     }
 
     onGameStart(){
-        // when Start is pressed, place the player tokens in the tavern
+        // Change global volume.
+        Howler.volume(1);
+        // Setup the new Howl
+        const gameStartSound = new Howl({
+            src: ['./assets/sounds/bubble-pop.wav']
+        });
+        // Play the sound at the start of the game.
+        gameStartSound.volume(0.35)
+        gameStartSound.play();
 
-        const playerTokens = document.getElementById('player-tokens')
+        // Play pop sound on clicking either the add player button or main button
+        this.mainButton.addEventListener('click', playButtonClickSound)
+        function playButtonClickSound(){
+            const pressSound = new Howl({
+                src: ['./assets/sounds/pop-alert.mp3']
+            });
+            // Play the sound on button click
+            pressSound.volume(0.1)
+            pressSound.play();
+        }
+        // -------------------------------------------------------------------------
+        // when Start is pressed, place the player tokens in the tavern
+        const tavern = document.getElementById('sq-0')
         // Add a token for each player and place it in the tavern
         for (let i = 0; i < this.players.length; i++){
             let player = document.createElement('div')
@@ -38,15 +59,15 @@ export class Game {
             // Create a new token element based on the given player's sprite
             playerIcon.setAttribute('src', `${this.players[i].sprite}`)
 
-            playerTokens.appendChild(player)
+            tavern.appendChild(player)
             player.appendChild(playerIcon)
 
             // Set each player token position to the tavern (sq-0)
-            this.movePlayer(player, 'sq-0')
+            this.players[i].movePlayer(this, 'sq-0')
         }
         
         // remove bouncing animation for start turn button
-        this.mainButton.style.removeProperty('animation')
+        // this.mainButton.style.removeProperty('animation')
 
         // then play a turn of the game
         console.log('The game has started!')
@@ -77,28 +98,29 @@ export class Game {
         console.log(`${this.currentPlayer.name} will move to the ${targetNum}th square.`)
 
         // get the current player and move their token to the target square
-        let currentPlayerEle = document.getElementById(`player-${this.currentPlayer.turnId}`)
-        this.movePlayer(currentPlayerEle, `sq-${targetNum}`)
-
+        this.currentPlayer.movePlayer(this, `sq-${targetNum}`)
 
         // check which square the player landed in, handle appropriate logic
         this.handleNewPlayerPos();
 
         // Switch to the next player and end the turn logic
+        
         this.mainButton.addEventListener("click", endTurn);
         const that = this;
         function endTurn(){
+            console.log(that)
+            console.log(that.mainButton)
             that.mainButton.removeEventListener("click", endTurn);
             // cycle to the next player
             let playerCount = that.players.length;
             let currentPlayerIdx = that.players.indexOf(that.currentPlayer);
             let nextPlayerIdx = (currentPlayerIdx + 1) % playerCount;
-
+    
             that.currentPlayer = that.players[nextPlayerIdx];
-
+    
             console.log(`The next player will be ${that.currentPlayer.name}.`) // DEBUG
             console.log('End of the turn.')// DEBUG
-
+    
             // if the game is not already won, play another turn
             if (!that.isWon()){ 
                 that.playTurn() 
@@ -107,6 +129,8 @@ export class Game {
             }
         }
     }
+
+    
 
     // -------------------------------------------------------------------------------
     // Game logic outside of loop
@@ -152,39 +176,6 @@ export class Game {
                 landOnSquare(this, 'deck', newSquare)
                 break;
         }
-    }
-
-    movePlayer(playerEle, target) {
-        // takes in a player element (div with token inside) and a target square element to move to
-
-        const playerObject = this.currentPlayer
-        // parses the target square id (e.g. 'sq-32') into a position number
-        const targetPos = parseInt(target.split('-')[1])
-        const squaresToMove = this.diceRoll
-
-        console.log(`${this.currentPlayer.name} has ${squaresToMove} squares to move.`)
-
-        for (let i = 0; i < squaresToMove; i++){
-            let traversedSquare = this.board.squares[(this.currentPlayer.currentSquare + i) % 40]
-            console.log(traversedSquare)
-
-            this.traverseSquare(playerObject, traversedSquare);
-        }
-        
-
-        // store elements and objects of previous and target squares
-        const targetSquareEle = document.getElementById(`sq-${targetPos}`)
-        const previousSquareObject = this.board.squares[playerObject.currentSquare]
-        const targetSquareObject = this.board.squares[targetPos]
-        // remove playerEle (the token) from old parent square, add to new parent square
-        playerEle.parentElement.removeChild(playerEle)
-        targetSquareEle.appendChild(playerEle)
-
-        // lastly, set player's current square to new coord and add player to square's occupants
-        playerObject.currentSquare = targetPos
-        // remove the current player from the playersOn of the previous square, add to target playersOn
-        previousSquareObject.playersOn.splice(previousSquareObject.playersOn.indexOf(playerObject), 1)
-        targetSquareObject.playersOn.push(playerObject)
     }
 
     traverseSquare(playerObject, traversedSquare){

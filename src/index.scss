@@ -18,12 +18,39 @@ html, body {
 
 /* OUTER STYLING -------------------------------------------------- */
 
-.social-links {
-    background:rgb(43, 45, 65);
+.top-settings {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    top: 0;
+    right: 2rem;
+    width: 10em;
+    height: 2.5rem;
+    border-bottom-left-radius: 6px;
+    background:rgb(26, 27, 41);
+}
+
+.top-settings div {
+    display: flex;
+}
+
+.mute-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+}
+
+.mute-button embed {
+    width: 2rem;
+    height: 2rem;
+    filter: brightness(1.2);
 }
 
 .outer-wrapper {
     display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     align-items: center;
@@ -309,6 +336,15 @@ html, body {
     100% {top:0em;}
 }
 
+// Hand styles
+
+.my-hand {
+    display: flex;
+    width: 100%;
+    margin: 20px;
+    background:rgb(39, 39, 49);
+}
+
 /* Individual square styles ----------------------------------------*/
 // 
 .corner-square div, .row div {
@@ -438,9 +474,9 @@ html, body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    width: 25%;
-    height: 42%;
-    margin: 0;
+    width: 6.5rem;
+    height: 4rem;
+    margin: 8px;
     border-radius: 8px;
     background: rgb(19, 19, 29);
 }

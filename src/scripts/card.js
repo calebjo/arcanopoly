@@ -55,6 +55,10 @@ export class MovementCard extends Card {
         this.targetSquare = targetSquare
         this.targetPlayer = targetPlayer
     }
+
+    play() {
+        targetPlayer.movePlayer
+    }
 }
 
 export class ModifierCard extends Card {

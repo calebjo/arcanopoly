@@ -148,4 +148,38 @@ export class Player {
         }
         
     }
+
+    movePlayer(game, target) {
+        // takes in a player element (div with token inside) and a target square element to move to
+
+        const playerObject = this
+        const playerTokenEle = document.getElementById(`player-${this.turnId}`)
+        // parses the target square id (e.g. 'sq-32') into a position number
+        const targetPos = parseInt(target.split('-')[1])
+        const squaresToMove = game.diceRoll
+
+        console.log(`${game.currentPlayer.name} has ${squaresToMove} squares to move.`)
+
+        for (let i = 0; i < squaresToMove; i++){
+            let traversedSquare = game.board.squares[(game.currentPlayer.currentSquare + i) % 40]
+            console.log(traversedSquare)
+
+            game.traverseSquare(playerObject, traversedSquare);
+        }
+        
+
+        // store elements and objects of previous and target squares
+        const targetSquareEle = document.getElementById(`sq-${targetPos}`)
+        const previousSquareObject = game.board.squares[playerObject.currentSquare]
+        const targetSquareObject = game.board.squares[targetPos]
+        // remove playerTokenEle (the token) from old parent square, add to new parent square
+        playerTokenEle.parentElement.removeChild(playerTokenEle)
+        targetSquareEle.appendChild(playerTokenEle)
+
+        // lastly, set player's current square to new coord and add player to square's occupants
+        playerObject.currentSquare = targetPos
+        // remove the current player from the playersOn of the previous square, add to target playersOn
+        previousSquareObject.playersOn.splice(previousSquareObject.playersOn.indexOf(playerObject), 1)
+        targetSquareObject.playersOn.push(playerObject)
+    }
 }

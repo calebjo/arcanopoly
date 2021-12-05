@@ -16,6 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // add the new player
     addPlayerButton.addEventListener("click", addPlayer);
     function addPlayer(){
+        const pressSound = new Howl({
+            src: ['./assets/sounds/pop-alert.mp3']
+        });
+        // Play the sound on button click
+        pressSound.volume(0.1)
+        pressSound.play();
         const player = new Player(startingGold, allPlayers.length, 'IpsumGal', './assets/images/player-yellow.png');
         allPlayers.push(player);
     }
