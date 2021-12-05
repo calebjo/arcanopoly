@@ -11,6 +11,7 @@
 // turnNum        : Integer counter game turn number (start at 0, incremented first)
 // currentPlayer  : Player instance of the player whose turn it is
 import { Board } from "./board";
+import { CastleSquare, DeckSquare, DungeonSquare, MovementSquare, PropertySquare, ShopSquare, TavernSquare, TomeSquare } from "./square";
 
 export class Game {
     constructor(players, startingGold){
@@ -54,7 +55,6 @@ export class Game {
     playTurn(){
         console.log(`${this.currentPlayer.name} is playing a turn!`) // TEST
         this.turnNum += 1
-        console.log(this.board)
 
         // change center button to 'Roll'
         this.mainButton.children[0].innerText = 'Roll'
@@ -81,7 +81,7 @@ export class Game {
 
 
         // check which square the player landed in
-        handleNewPlayerPos();
+        this.handleNewPlayerPos();
         // if property, check if owned. 
         // if owned by non-current player, charge current and give gold to owner
         // otherwise, prompt player to purchase unowned property
@@ -119,29 +119,47 @@ export class Game {
 
     handleNewPlayerPos() {
         const newPos = this.currentPlayer.currentSquare
-        const newSquare = this.currentPlayer.sdasdsadasdsad
+        const newSquare = this.board.squares[newPos]
 
+        console.log(newSquare)
+ 
         // check what kind of square the player landed on
-        switch (newPos){
-            case 0:
-            case 0:
+        switch (newSquare.constructor){
+            case (TavernSquare):
+                console.log('This is a tavern square!')
+                break;
+            case (TomeSquare):
+                console.log('This is a tome square!')
+                break;
+            case (DungeonSquare):
+                console.log('This is a dungeon square!')
+                break;
+            case (MovementSquare):
+                console.log('This is a movement square!')
+                break;
+            case (PropertySquare):
+                console.log('This is a property square!')
+                break;
+            case (ShopSquare):
+                console.log('This is a shop square!')
+                break;
+            case (CastleSquare):
+                console.log('This is a castle square!')
+                break;
+            case (DeckSquare):
+                console.log('This is a deck square!')
+                break;
         }
     }
 
     movePlayer(playerEle, target) {
         // takes in a player element (div with token inside) and a target square element
         // moves the player's token to the target position
-
         const playerObject = this.currentPlayer
         // parses the target square id (e.g. 'sq-32') into a position number
-        console.log(target)
-        console.log(parseInt(target.split('-')[1]))
-        
         const targetPos = parseInt(target.split('-')[1])
         const targetSquare = document.getElementById(`sq-${targetPos}`)
         // remove playerEle (the token) from old parent square, add to new parent square
-        console.log(playerEle)
-        console.log(playerEle.parentElement) //UNDEFINED
 
         playerEle.parentElement.removeChild(playerEle)
         targetSquare.appendChild(playerEle)
