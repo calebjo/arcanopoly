@@ -23,6 +23,14 @@ export class Deck {
             array[j] = swap;
         }
     }
+
+    draw(player, amount) {
+        for (let i = 0; i < amount; i++){
+            let thisCard = this.cards[i];
+            player.hand.push(thisCard)
+            this.cards.splice(this.card.indexOf(thisCard), 1)
+        }
+    }
 }
 
 // DECK SUBCLASSES -----------------------------------------------------------
