@@ -70,6 +70,7 @@ export function landOnSquare(game, squareType, square){
 
         if (square.owner){
             if (square.owner !== game.currentPlayer){
+                // charge current player rent, then pay owner
                 game.currentPlayer.changeGold(-(square.rent))
                 square.owner.changeGold(square.rent)
                 console.log(`${game.currentPlayer.name} paid ${square.owner.name} ${square.rent} gold.`)
@@ -78,9 +79,15 @@ export function landOnSquare(game, squareType, square){
             if (game.currentPlayer.gold > square.price) {
                 let buyProp = confirm(`Would you like to buy ${square.name}?`)
                 if (buyProp) {
+                    // charge player, then transfer property ownership
                     game.currentPlayer.changeGold(-(square.price))
                     square.owner = game.currentPlayer
                     game.currentPlayer.properties.push(square)
+                    // change property colors on purchase
+                    let embedded = square.domRef.children[0]
+                    // super ugly, change later to be player's colors
+                    embedded.style.filter = 'hue-rotate(40deg)'+'contrast(170%)'+'saturate(150%)'
+                    square.domRef.style.background = '#c660fc'
                 }
             } else {
                 console.log('Not enough gold to buy the property')
