@@ -59,8 +59,11 @@ html, body {
   z-index: 8;
   display: flex;
   flex-direction: column;
-  align-items: center;
   height: 100%;
+}
+
+.players-panel div:last-child {
+  align-self: center;
 }
 
 .player-turns {
@@ -72,14 +75,19 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
-  height: 5.5rem;
+  height: 7rem;
   background: #2b2d40;
   font-family: beleren;
-  font-size: 22px;
+  font-size: 20px;
   margin-bottom: 24px;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
+}
+
+.player-gold {
+  color: #fcc93f;
 }
 
 .player.selected {
@@ -87,7 +95,7 @@ html, body {
 }
 
 .player p {
-  margin: 5px;
+  margin: 8px 12px 2px 12px;
 }
 
 /* Inner player data */

@@ -37,7 +37,7 @@ export class Player {
         this.currentSquare = 0; // Start at the tavern;
         this.diceNum = 2;
         this.diceMax = 6;
-        this.ownedProperties = [];
+        this.properties = [];
         this.hand = [];
         this.equipment = [];
         this.buildPlayerEle(startingGold, turnId, name, sprite);
@@ -50,20 +50,29 @@ export class Player {
         // build new player
         const newPlayer = document.createElement('div');
         newPlayer.classList.add('player');
-        newPlayer.setAttribute('id', 'p1');
+        newPlayer.setAttribute('id', `p${turnId}`);
 
         const playerP = document.createElement('p')
         playerP.innerText = name
         newPlayer.appendChild(playerP)
 
+        const playerGold = document.createElement('div')
+        playerGold.innerText = `${startingGold} gold`
+        playerGold.classList.add('player-gold')
+        newPlayer.appendChild(playerGold)
+
         const playerInfo = document.createElement('div')
+        playerInfo.classList.add('player-info')
         newPlayer.appendChild(playerInfo)
 
         const playerCards = document.createElement('div')
+        playerCards.classList.add('player-cards')
         playerInfo.appendChild(playerCards)
         const pDivider = document.createElement('div')
+        pDivider.classList.add('p-divider')
         playerInfo.appendChild(pDivider)
         const playerEquipment = document.createElement('div')
+        playerEquipment.classList.add('player-equipment')
         playerInfo.appendChild(playerEquipment)
         
         // attach the player to the end of the players list
@@ -73,6 +82,8 @@ export class Player {
 
     changeGold(number){
         this.gold += number;
+        const thisPlayerGold = document.getElementById(`p${this.turnId}`)
+        thisPlayerGold.children[1].innerText = `${this.gold} gold`
     }
 
     gainProperty(square){

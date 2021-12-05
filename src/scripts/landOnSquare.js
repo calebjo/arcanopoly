@@ -69,13 +69,19 @@ export function landOnSquare(game, squareType, square){
         console.log('You are in landOnProperty()')
 
         if (square.owner){
-            if (square.owner !== this.currentPlayer){
-                this.currentPlayer.changeGold(-(square.rent))
+            if (square.owner !== game.currentPlayer){
+                game.currentPlayer.changeGold(-(square.rent))
                 square.owner.changeGold(square.rent)
+                console.log(`${game.currentPlayer.name} paid ${square.owner.name} ${square.rent} gold.`)
             }
         } else {
-            if (this.currentPlayer.gold > square.price) {
-                console.log('Would you like to buy this property?')
+            if (game.currentPlayer.gold > square.price) {
+                let buyProp = confirm(`Would you like to buy ${square.name}?`)
+                if (buyProp) {
+                    game.currentPlayer.changeGold(-(square.price))
+                    square.owner = game.currentPlayer
+                    game.currentPlayer.properties.push(square)
+                }
             } else {
                 console.log('Not enough gold to buy the property')
             }
