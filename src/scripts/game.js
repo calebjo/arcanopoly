@@ -12,6 +12,7 @@
 // currentPlayer  : Player instance of the player whose turn it is
 import { Board } from "./board";
 import { CastleSquare, DeckSquare, DungeonSquare, MovementSquare, PropertySquare, ShopSquare, TavernSquare, TomeSquare } from "./square";
+import { landOnSquare } from "./landOnSquare";
 
 export class Game {
     constructor(players, startingGold){
@@ -127,27 +128,35 @@ export class Game {
         switch (newSquare.constructor){
             case (TavernSquare):
                 console.log('This is a tavern square!')
+                landOnSquare(this, this.currentPlayer, 'tavern', newPos)
                 break;
             case (TomeSquare):
                 console.log('This is a tome square!')
+                landOnSquare(this, this.currentPlayer, 'tome', newPos)
                 break;
             case (DungeonSquare):
                 console.log('This is a dungeon square!')
+                landOnSquare(this, this.currentPlayer, 'dungeon', newPos)
                 break;
             case (MovementSquare):
                 console.log('This is a movement square!')
+                landOnSquare(this, this.currentPlayer, 'movement', newPos)
                 break;
             case (PropertySquare):
                 console.log('This is a property square!')
+                landOnSquare(this, this.currentPlayer, 'property', newPos)
                 break;
             case (ShopSquare):
                 console.log('This is a shop square!')
+                landOnSquare(this, this.currentPlayer, 'shop', newPos)
                 break;
             case (CastleSquare):
                 console.log('This is a castle square!')
+                landOnSquare(this, this.currentPlayer, 'castle', newPos)
                 break;
             case (DeckSquare):
                 console.log('This is a deck square!')
+                landOnSquare(this, this.currentPlayer, 'deck', newPos)
                 break;
         }
     }
