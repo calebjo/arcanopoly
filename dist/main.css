@@ -93,6 +93,7 @@ html, body {
   z-index: 8;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   height: 100%;
 }
 
@@ -103,6 +104,7 @@ html, body {
 .player-turns {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .player {
@@ -354,6 +356,23 @@ html, body {
     top: 0em;
   }
 }
+.deck1-empty, .deck2-empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deck1-empty div, .deck2-empty div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deck1-empty embed, .deck2-empty embed {
+  width: 8rem;
+  height: 12rem;
+}
+
 .my-hand {
   display: flex;
   width: 100%;

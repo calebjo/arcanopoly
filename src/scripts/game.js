@@ -13,7 +13,8 @@
 import { Board } from "./board";
 import { CastleSquare, DeckSquare, DungeonSquare, MovementSquare, PropertySquare, ShopSquare, Square, TavernSquare, TomeSquare } from "./square";
 import { landOnSquare } from "./landOnSquare";
-import {Howl, Howler} from 'howler';
+import { Howl, Howler } from 'howler';
+import { MoonDeck, SunDeck } from "./deck";
 
 export class Game {
     constructor(players, startingGold){
@@ -27,6 +28,7 @@ export class Game {
     }
 
     onGameStart(){
+        // -------------------------------------------------------------------------
         // Change global volume.
         Howler.volume(1);
         // Setup the new Howl
@@ -34,9 +36,36 @@ export class Game {
             src: ['./assets/sounds/bubble-pop.wav']
         });
         // Play the sound at the start of the game.
-        gameStartSound.volume(0.35)
+        gameStartSound.volume(0.15);
         gameStartSound.play();
+        // -------------------------------------------------------------------------
+        // Create Sun Deck and Moon Deck, placing them in their respective squares
 
+        // Create DOM elements and place them in the deck squares
+        const sunDeckEle = document.createElement('div')
+        sunDeckEle.classList.add('sun-deck')
+        const sunDeckEmbed = document.createElement('embed')
+        sunDeckEmbed.setAttribute('src', './assets/images/deck-sun.svg')
+        sunDeckEle.appendChild(sunDeckEmbed)
+        const deckBox1 = document.getElementsByClassName('deck1-empty')[0]
+        deckBox1.appendChild(sunDeckEle)
+
+        const moonDeckEle = document.createElement('div')
+        moonDeckEle.classList.add('moon-deck')
+        const moonDeckEmbed = document.createElement('embed')
+        moonDeckEmbed.setAttribute('src', './assets/images/deck-moon.svg')
+        moonDeckEle.appendChild(moonDeckEmbed)
+        const deckBox2 = document.getElementsByClassName('deck2-empty')[0]
+        deckBox2.appendChild(moonDeckEle)
+
+        // Create Deck objects in Node
+        const sunDeck = new SunDeck(1, sunDeckEle);
+        const moonDeck = new MoonDeck(2, moonDeckEle);
+
+        console.log(sunDeck)
+        console.log(moonDeck)
+
+        // -------------------------------------------------------------------------
         // Play pop sound on clicking either the add player button or main button
         this.mainButton.addEventListener('click', playButtonClickSound)
         function playButtonClickSound(){
@@ -44,7 +73,7 @@ export class Game {
                 src: ['./assets/sounds/pop-alert.mp3']
             });
             // Play the sound on button click
-            pressSound.volume(0.1)
+            pressSound.volume(0.1);
             pressSound.play();
         }
         // -------------------------------------------------------------------------

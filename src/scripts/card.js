@@ -5,11 +5,12 @@ import { Player } from "./player"
 // -----------------------------------------------------------------------------------
 // Parent class
 export class Card {
-    constructor(name, id, owner, rarity, price) {
+    constructor(id, name, img, rarity, owner, price) {
         this.name = name
+        this.img = img
+        this.rarity = rarity
         this.id = id
         this.owner = owner
-        this.rarity = rarity
         this.price = price
     }
 }
@@ -18,8 +19,8 @@ export class Card {
 
 export class MoneyCard extends Card {
     // cards that add or subtract gold from 1 or more targets
-    constructor(name, id, owner, rarity, price, moneyDiff, moneyMod, ...targetPlayers){
-        super(name, id, owner, rarity, price)
+    constructor(id, name, img, rarity, owner, price, moneyDiff, moneyMod, ...targetPlayers){
+        super(id, name, img, rarity, owner, price)
         this.moneyDiff = moneyDiff
         this.moneyMod = moneyMod
         this.targetPlayers = targetPlayers
@@ -35,8 +36,8 @@ export class MoneyCard extends Card {
 
 export class PropertyCard extends Card {
     // cards that give or take properties from players
-    constructor(name, id, owner, rarity, price, propertyTarget, ...targetPlayers){
-        super(name, id, owner, rarity, price)
+    constructor(id, name, img, rarity, owner, price, propertyTarget, ...targetPlayers){
+        super(id, name, img, rarity, owner, price)
         this.propertyTarget = propertyTarget
         this.targetPlayers = targetPlayers
     }
@@ -50,8 +51,8 @@ export class PropertyCard extends Card {
 
 export class MovementCard extends Card {
     // cards that move the target to a certain square (including self)
-    constructor(name, id, owner, rarity, price, targetSquare, targetPlayer){
-        super(name, id, owner, rarity, price)
+    constructor(id, name, img, rarity, owner, price, targetSquare, targetPlayer){
+        super(id, name, img, rarity, owner, price)
         this.targetSquare = targetSquare
         this.targetPlayer = targetPlayer
     }
@@ -63,18 +64,24 @@ export class MovementCard extends Card {
 
 export class ModifierCard extends Card {
     // cards that modify an existing stat, like the rent of properties
-    constructor(name, id, owner, rarity, price, targetStat, modifier, timer){
-        super(name, id, owner, rarity, price)
+    constructor(id, name, img, rarity, owner, price, targetStat, modifier, timer){
+        super(id, name, img, rarity, owner, price)
         this.targetStat = targetStat
         this.modifier = modifier
         this.timer = timer
     }
 }
 // -----------------------------------------------------------------------------------
-// Specific Card classes
-export class BalanceCard extends Card {
-    constructor(name, id, owner, rarity, price){
-        super(name, id, owner, rarity, price)
-    }
+// Specific Cards
+// Each card inherits an id, owner, price from Card
+// Each card should have a name, rarity, price of its own
+// the play() methods that are inherited should work for every subclass Card
 
-}
+// MONEY CARDS
+//new MoneyCard(id, name, img, rarity, owner, price, moneyDiff, moneyMod, ...targetPlayers)
+// new MoneyCard(1, 'Loot', img, 'common', null, price, 50, 1, null)
+// new MoneyCard(2, 'Collection', img, 'common', null, price, 25, moneyMod, null)
+// new MoneyCard(3, 'Tithe', img, 'rare', null, price, moneyDiff, moneyMod, null)
+// new MoneyCard(4, 'Rose', img, 'rare', null, price, moneyDiff, moneyMod, null)
+// new MoneyCard(4, 'Annihilation', './assets/images/card-annihilation.svg', legendary, null, price, 1000, moneyMod, null)
+
