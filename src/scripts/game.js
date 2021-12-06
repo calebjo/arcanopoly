@@ -123,17 +123,12 @@ export class Game {
         
         if (this.currentPlayer.hand.length > 0) {
             const cardClickable = document.querySelectorAll(".my-card")
-            for (var card of cardClickable) {
-                card.addEventListener("click", () =>{
-                    that.playThisCard(card)
+            console.log(cardClickable)
+            for (let i = 0; i < cardClickable.length; i++){
+                cardClickable[i].addEventListener("click", () =>{
+                    that.playThisCard(cardClickable[i])
                 })
             }
-            // const cardClickable2 = document.querySelectorAll(".my-card > embed")
-            // for (var card of cardClickable2) {
-            //     card.addEventListener("click", () =>{
-            //         that.playThisCard(card)
-            //     })
-            // }
         }
         
         // ----------------------------------------------------------------------------------------
@@ -236,6 +231,7 @@ export class Game {
     playThisCard(card){
         console.log('In game.playThisCard(card)')
         console.log(card)
+        // const thisCardObject = card.
     }
 
     handleDiceRoll(){
