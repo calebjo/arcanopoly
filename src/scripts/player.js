@@ -175,13 +175,20 @@ export class Player {
 
         console.log(`${game.currentPlayer.name} has ${squaresToMove} squares to move.`)
 
-        for (let i = 0; i < squaresToMove; i++){
-            let traversedSquare = game.board.squares[(game.currentPlayer.currentSquare + i) % 40]
-            console.log(traversedSquare)
-
-            game.traverseSquare(playerObject, traversedSquare);
+        for (let i = 0; i < squaresToMove; ++i){
+            console.log(`for loop i: ${i}`)
+            moveDelay(i)
         }
-        
+
+        function moveDelay(i) {
+            let traversedSquare = game.board.squares[(game.currentPlayer.currentSquare + i) % 40]
+            console.log('Traversing this square:')
+            console.log(traversedSquare)
+            console.log(`moveDelay i: ${i}`)
+            setTimeout(() => {
+                game.traverseSquare(playerObject, traversedSquare)
+            }, 800);
+        }
 
         // store elements and objects of previous and target squares
         const targetSquareEle = document.getElementById(`sq-${targetPos}`)

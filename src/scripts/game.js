@@ -180,35 +180,27 @@ export class Game {
         // check what kind of square the player landed on
         switch (newSquare.constructor){
             case (TavernSquare):
-                console.log('This is a tavern square!')
                 landOnSquare(this, 'tavern', newSquare)
                 break;
             case (TomeSquare):
-                console.log('This is a tome square!')
                 landOnSquare(this, 'tome', newSquare)
                 break;
             case (DungeonSquare):
-                console.log('This is a dungeon square!')
                 landOnSquare(this, 'dungeon', newSquare)
                 break;
             case (MovementSquare):
-                console.log('This is a movement square!')
                 landOnSquare(this, 'movement', newSquare)
                 break;
             case (PropertySquare):
-                console.log('This is a property square!')
                 landOnSquare(this, 'property', newSquare)
                 break;
             case (ShopSquare):
-                console.log('This is a shop square!')
                 landOnSquare(this, 'shop', newSquare)
                 break;
             case (CastleSquare):
-                console.log('This is a castle square!')
                 landOnSquare(this, 'castle', newSquare)
                 break;
             case (DeckSquare):
-                console.log('This is a deck square!')
                 landOnSquare(this, 'deck', newSquare)
                 break;
         }
@@ -217,9 +209,7 @@ export class Game {
     traverseSquare(playerObject, traversedSquare){
         // changes each traversed square to the color of the player that traversed it
         let playerColor = this.currentPlayer.sprite.split('-')[1].split('.')[0]
-        console.log(playerColor)
-        traversedSquare.domRef.style.background = playerColor;
-        // traversedSquare.domRef.style.background = '#323a4c';
+        traversedSquare.domRef.style.background = playerColor
     }
 
     handleDiceRoll(){
