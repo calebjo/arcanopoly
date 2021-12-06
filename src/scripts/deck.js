@@ -34,8 +34,14 @@ export class Deck {
                 break;
             }
             let thisCard = this.cards[i];
-            player.changeCard(thisCard, true)
-            this.cards.splice(i, 1)
+            player.changeCard(thisCard, true) // give card to player
+            this.cards.splice(i, 1) // remove the card from the deck
+            // Add card to icons DOM
+            const thisCardIcon = document.createElement('div')
+            thisCardIcon.classList.add('p-card')
+            const thisPlayerBar = document.getElementById(`p${player.turnId}`)
+            const thisPlayerCards = thisPlayerBar.children[2].children[0]
+            thisPlayerCards.appendChild(thisCardIcon)
         }
     }
 }

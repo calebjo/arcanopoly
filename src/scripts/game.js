@@ -60,10 +60,6 @@ export class Game {
 
         // Create Deck objects in Node
         const sunDeck = new SunDeck(0, sunDeckEle);
-        // Set all sun decks on the board to reference the new deck
-        // for (let i = 0; i < this.board.squares.length; i++){
-        //     if (this.board.squares[i] === )
-        // }
         const moonDeck = new MoonDeck(1, moonDeckEle);
         this.decks.push(sunDeck)
         this.decks.push(moonDeck)
@@ -100,9 +96,6 @@ export class Game {
             // Set each player token position to the tavern (sq-0)
             this.players[i].movePlayer(this, 'sq-0')
         }
-        
-        // remove bouncing animation for start turn button
-        // this.mainButton.style.removeProperty('animation')
 
         // then play a turn of the game
         console.log('The game has started!')
@@ -122,12 +115,22 @@ export class Game {
 
 
         // Whenever a card is grabbed and placed in the correct position, "play" the card.
+        // MVP: just click a card to activate it
+        // const cardClickable = document.getElementsByClassName('my-card')
+        // let that = this
+        // cardClickable.addEventListener("click", playThisCard, false)
 
+        // function playThisCard(event){
+        //     console.log(event.target)
+        //     // const cardObject = that.currentPlayer.cards.find( card => card.id === event.target )
+        // }
+        
+            
 
         // ----------------------------------------------------------------------------------------
         // when 'Roll' is clicked, roll the dice
+        let that = this
         this.mainButton.addEventListener("click", callRoll)
-        const that = this
         function callRoll(){
             that.diceRoll = that.handleDiceRoll.call(that);
             that.mainButton.children[0].innerText  = 'End'
@@ -150,7 +153,7 @@ export class Game {
         // Switch to the next player and end the turn logic
         
         this.mainButton.addEventListener("click", endTurn);
-        const that = this;
+        let that = this;
         function endTurn(){
             console.log(that)
             console.log(that.mainButton)
@@ -158,6 +161,7 @@ export class Game {
             that.mainButton.removeEventListener("click", endTurn);
             that.hideCurrentPlayerHand();
             that.hideDiceRolls();
+            that.deHighlightPlayer();
             // cycle to the next player
             let playerCount = that.players.length;
             let currentPlayerIdx = that.players.indexOf(that.currentPlayer);
@@ -290,9 +294,19 @@ export class Game {
     }
 
     highlightNewPlayer() {
+        const thisPlayerBar = document.getElementById(`p${this.currentPlayer.turnId}`)
+        thisPlayerBar.classList.add('selected')
         const playerHighlight = document.createElement('div')
         playerHighlight.classList.add('player-highlight')
-        
+        thisPlayerBar.appendChild(playerHighlight) // DEBUG
+
+    }
+
+    deHighlightPlayer() {
+        const thisPlayerBar = document.getElementById(`p${this.currentPlayer.turnId}`)
+        thisPlayerBar.classList.remove('selected')
+        const playerHighlight = document.getElementsByClassName('player-highlight')[0]
+        playerHighlight.remove()
     }
 
     isWon(){

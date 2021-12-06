@@ -125,12 +125,9 @@ html, body {
     color:rgb(252, 201, 63)
 }
 
-.player.selected {
-    background: #676883;
-}
-
 .player p {
     margin: 8px 12px 2px 12px;
+    text-shadow: 2px 4px 2px #000000;
 }
 
 /* Inner player data */
@@ -194,10 +191,18 @@ html, body {
     color:rgb(34, 32, 37);
 }
 
+.player.selected {
+    background: #676883;
+}
+
 .player-highlight {
+    z-index: -5;
     position: fixed;
     width: 3rem;
     height: 7rem;
+    left: 12%;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     background:rgb(211, 185, 116);
 }
 
