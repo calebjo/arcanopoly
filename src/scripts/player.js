@@ -185,9 +185,10 @@ export class Player {
             console.log('Traversing this square:')
             console.log(traversedSquare)
             console.log(`moveDelay i: ${i}`)
-            setTimeout(() => {
-                game.traverseSquare(playerObject, traversedSquare)
-            }, 800);
+            game.traverseSquare(playerObject, traversedSquare)
+            // setTimeout(() => {
+            //     game.traverseSquare(playerObject, traversedSquare)
+            // }, 200);
         }
 
         // store elements and objects of previous and target squares

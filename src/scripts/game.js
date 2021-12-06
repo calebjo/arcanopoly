@@ -15,6 +15,7 @@ import { CastleSquare, DeckSquare, DungeonSquare, MovementSquare, PropertySquare
 import { landOnSquare } from "./landOnSquare";
 import { Howl, Howler } from 'howler';
 import { MoonDeck, SunDeck } from "./deck";
+import { generateTooltip, generateInputWindow } from "./uiGenerator.js";
 
 export class Game {
     constructor(players, startingGold){
@@ -111,8 +112,10 @@ export class Game {
     }
 
     playTurn(){
-        console.log(`${this.currentPlayer.name} is playing a turn!`) // TEST
+        console.log(`${this.currentPlayer.name} is playing a turn!`) // DEBUG
         this.turnNum += 1
+
+        // Change the elements of the middle hand area to only contain the current player's cards
 
         // change center button to 'Roll'
         this.mainButton.children[0].innerText = 'Roll'
@@ -209,7 +212,10 @@ export class Game {
     traverseSquare(playerObject, traversedSquare){
         // changes each traversed square to the color of the player that traversed it
         let playerColor = this.currentPlayer.sprite.split('-')[1].split('.')[0]
+
+        // let currentolor = traversedSquare.domRef.style.background;
         traversedSquare.domRef.style.background = playerColor
+        // traversedSquare.domRef.style.background = currentolor
     }
 
     handleDiceRoll(){

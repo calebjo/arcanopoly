@@ -58,7 +58,7 @@ export class MovementCard extends Card {
     }
 
     play() {
-        targetPlayer.movePlayer
+        // targetPlayer.movePlayer
     }
 }
 
