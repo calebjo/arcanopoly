@@ -322,14 +322,15 @@ html, body {
   align-items: center;
   width: 4rem;
   height: 4rem;
-  filter: saturate(1.5);
 }
 
 .dice embed {
   display: flex;
   width: 4rem;
   height: 4rem;
-  filter: brightness(4);
+  filter: brightness(1.05);
+  box-shadow: 0 6px 6px black;
+  border-radius: 8px;
 }
 
 .roll-dice {

@@ -117,6 +117,8 @@ export class Game {
 
         // Change the elements of the middle hand area to only contain the current player's cards
         this.showCurrentPlayerHand();
+        // highlight the current player with a DOM element
+        this.highlightNewPlayer();
 
 
         // Whenever a card is grabbed and placed in the correct position, "play" the card.
@@ -160,7 +162,6 @@ export class Game {
             let playerCount = that.players.length;
             let currentPlayerIdx = that.players.indexOf(that.currentPlayer);
             let nextPlayerIdx = (currentPlayerIdx + 1) % playerCount;
-    
             that.currentPlayer = that.players[nextPlayerIdx];
     
             console.log(`The next player will be ${that.currentPlayer.name}.`) // DEBUG
@@ -286,6 +287,10 @@ export class Game {
         for (let i = 0; i < this.currentPlayer.hand.length; i++){
             this.currentPlayer.hand[i].removeFromScreen();
         }
+    }
+
+    highlightNewPlayer() {
+        console.log('a')
     }
 
     isWon(){
