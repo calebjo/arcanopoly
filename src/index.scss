@@ -127,7 +127,7 @@ html, body {
 
 .player p {
     margin: 8px 12px 2px 12px;
-    text-shadow: 2px 4px 2px #000000;
+    // text-shadow: 2px 4px 2px #000000;
 }
 
 /* Inner player data */
@@ -171,7 +171,7 @@ html, body {
     border-radius: 5px;
 }
 
-.add-player {
+.add-player , .confirm-targets{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -191,8 +191,23 @@ html, body {
     color:rgb(34, 32, 37);
 }
 
-.player.selected {
+.confirm-targets p{
+    display: flex;
+    font-family: versatile;
+    font-size: 24px;
+    color:rgb(34, 32, 37);
+}
+
+.player.current-turn {
     background: #676883;
+}
+
+.player.selected.on {
+    box-shadow: 4px 0 20px rgb(255, 212, 21);
+}
+
+.player.selected.off {
+    box-shadow: 4px 0 20px rgb(255, 250, 228, 0.7);
 }
 
 .player-highlight {

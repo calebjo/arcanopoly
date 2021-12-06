@@ -50,8 +50,12 @@ export class MoneyCard extends Card {
     // apply the money change to each target
     play(){
         for (let i = 0; i < this.targetPlayers.length; i++){
-            this.targetPlayers[i].moneyChange(this.moneyDiff * this.moneyMod)
+            // console.log(this)
+            // console.log(this.targetPlayers)
+            // console.log(this.targetPlayers[i])
+            this.targetPlayers[i].changeGold(this.moneyDiff * this.moneyMod)
         }
+        this.owner.changeCard(this, false) // owner loses the card, then hide it
     }
 }
 
@@ -65,7 +69,7 @@ export class PropertyCard extends Card {
 
     play(){
         for (let i = 0; i < this.targetPlayers.length; i++){
-            this.targetPlayers[i].moneyChange(this.moneyDiff * this.moneyMod)
+            this.targetPlayers[i].changeGold(this.moneyDiff * this.moneyMod)
         }
     }
 }

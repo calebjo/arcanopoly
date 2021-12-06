@@ -229,9 +229,49 @@ export class Game {
     }
 
     playThisCard(card){
+        // after clicking a card to play, player can set the target (if applicable) and play card
         console.log('In game.playThisCard(card)')
-        console.log(card)
-        // const thisCardObject = card.
+        const thisCardId = parseInt(card.getAttribute('id').split('-')[1])
+        const thisCardObject = this.currentPlayer.hand.find(card => card.id === thisCardId)
+        // determine target of card (IF APPLICABLE)
+        this.setCardTarget(thisCardObject);
+        // when targets are confirmed, add "Confirm" button below targets. On press, play the card.
+        const confirmButton = document.createElement('div');
+        confirmButton.classList.add('confirm-targets')
+        const playerTurns = document.getElementsByClassName('player-turns')[0];
+        const confirmP = document.createElement('p')
+        confirmP.innerText = 'Confirm'
+        confirmButton.appendChild(confirmP)
+        playerTurns.appendChild(confirmButton)
+         // When "Confirm" is clicked, play the card and reset the target UI
+        confirmButton.addEventListener("click", playAndReset)
+        function playAndReset(){
+            thisCardObject.play();
+            confirmButton.removeEventListener("click", playAndReset)
+            confirmButton.remove()
+        }
+    }
+
+    setCardTarget(card){
+        // creates UI elements to highlight targettable players
+        // on clicking a player (TOGGLE), they become a highlighted card target
+        // they are then added or removed from an array of targets
+        const targets = []
+        // manual logic for which kind of targets a card can select
+        switch (card.name){
+            case 'Loot': // I am the target
+                this.currentPlayer.makeTarget()
+                targets.push(this.currentPlayer)
+                break;
+            case 'Annihilation': // everyone is the target
+                for (let i = 0; i < this.players.length; i++){
+                    this.players[i].makeTarget()
+                    targets.push(this.players[i])
+                }
+                break;
+        }
+
+        card.targetPlayers = targets
     }
 
     handleDiceRoll(){
@@ -302,7 +342,7 @@ export class Game {
 
     highlightNewPlayer() {
         const thisPlayerBar = document.getElementById(`p${this.currentPlayer.turnId}`)
-        thisPlayerBar.classList.add('selected')
+        thisPlayerBar.classList.add('current-turn')
         const playerHighlight = document.createElement('div')
         playerHighlight.classList.add('player-highlight')
         thisPlayerBar.appendChild(playerHighlight) // DEBUG
@@ -311,7 +351,7 @@ export class Game {
 
     deHighlightPlayer() {
         const thisPlayerBar = document.getElementById(`p${this.currentPlayer.turnId}`)
-        thisPlayerBar.classList.remove('selected')
+        thisPlayerBar.classList.remove('current-turn')
         const playerHighlight = document.getElementsByClassName('player-highlight')[0]
         playerHighlight.remove()
     }
@@ -323,7 +363,7 @@ export class Game {
         for (let i = 0; i < this.players.length; i++){
             let thisPlayer = this.players[i];
 
-            if (thisPlayer.gold !== 0){
+            if (thisPlayer.gold > 0){
                 gameWon = false;
             }
         }

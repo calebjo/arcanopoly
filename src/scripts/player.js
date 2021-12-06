@@ -138,11 +138,13 @@ export class Player {
         const myHand = document.getElementsByClassName('my-hand')[0]
         if (gain){
             this.hand.push(card);
+            card.owner = this
             // change DOM
             card.addToScreen()
         } else {
             let cardIdx = this.hand.indexOf(card);
             this.hand.splice(cardIdx, 1);
+            card.owner = null
             // change DOM
             card.removeFromScreen()
         } 
@@ -201,5 +203,17 @@ export class Player {
         // remove the current player from the playersOn of the previous square, add to target playersOn
         previousSquareObject.playersOn.splice(previousSquareObject.playersOn.indexOf(playerObject), 1)
         targetSquareObject.playersOn.push(playerObject)
+    }
+
+    makeTarget(){
+        // highlights the player with an underglow to indicate that they have been targeted for a card
+        const playerEle = document.getElementById(`p${this.turnId}`);
+        playerEle.classList.add('selected', 'on')
+    }
+
+    makeNotTarget(){
+        // removes the underglow from the makeTarget function, since the player has been deselected
+        const playerEle = document.getElementById(`p${this.turnId}`);
+        playerEle.classList.add('selected', 'off')
     }
 }

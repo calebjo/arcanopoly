@@ -130,11 +130,11 @@ export class MoonDeck extends Deck {
             new MoneyCard(53, 'Rose', './assets/images/card-rose.png', 'rare', null, 75, 200, 1, null),
             new MoneyCard(54, 'Rose', './assets/images/card-rose.png', 'rare', null, 75, 200, 1, null),
             new MoneyCard(55, 'Rose', './assets/images/card-rose.png', 'rare', null, 75, 200, 1, null),
-            new MoneyCard(55, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, 1000, 1, null),
-            new MoneyCard(56, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, 1000, 1, null),
-            new MoneyCard(57, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, 1000, 1, null),
-            new MoneyCard(58, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, 1000, 1, null),
-            new MoneyCard(59, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, 1000, 1, null)
+            new MoneyCard(55, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -1000, 1, null),
+            new MoneyCard(56, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -1000, 1, null),
+            new MoneyCard(57, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -1000, 1, null),
+            new MoneyCard(58, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -1000, 1, null),
+            new MoneyCard(59, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -1000, 1, null)
         ];
 
         this.shuffle(cardsArray);
