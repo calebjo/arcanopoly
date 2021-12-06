@@ -290,7 +290,9 @@ export class Game {
     }
 
     highlightNewPlayer() {
-        console.log('a')
+        const playerHighlight = document.createElement('div')
+        playerHighlight.classList.add('player-highlight')
+        
     }
 
     isWon(){

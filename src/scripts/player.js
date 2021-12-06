@@ -57,6 +57,8 @@ export class Player {
 
         const playerP = document.createElement('p')
         playerP.innerText = name
+        let playerColor = sprite.split('-')[1].split('.')[0]
+        playerP.style.color = playerColor
         newPlayer.appendChild(playerP)
 
         const playerGold = document.createElement('div')

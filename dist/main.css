@@ -195,6 +195,13 @@ html, body {
   color: #222025;
 }
 
+.player-highlight {
+  position: fixed;
+  width: 3rem;
+  height: 7rem;
+  background: #d3b974;
+}
+
 /* BOARD STYLING -------------------------------------------------- */
 /* Overall board */
 .board {
