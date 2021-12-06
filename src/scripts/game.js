@@ -31,9 +31,7 @@ export class Game {
 
     onGameStart(){
         // -------------------------------------------------------------------------
-        // Change global volume.
-        Howler.volume(1);
-        // Setup the new Howl
+        // Setup Howl to play game start sound
         const gameStartSound = new Howl({
             src: ['./assets/sounds/bubble-pop.wav']
         });
@@ -154,8 +152,10 @@ export class Game {
         function endTurn(){
             console.log(that)
             console.log(that.mainButton)
+            // remove end turn interaction, hide player-specific DOM elements
             that.mainButton.removeEventListener("click", endTurn);
             that.hideCurrentPlayerHand();
+            that.hideDiceRolls();
             // cycle to the next player
             let playerCount = that.players.length;
             let currentPlayerIdx = that.players.indexOf(that.currentPlayer);
@@ -174,8 +174,6 @@ export class Game {
             }
         }
     }
-
-    
 
     // -------------------------------------------------------------------------------
     // Game logic outside of loop
@@ -246,9 +244,32 @@ export class Game {
         let roll = 0;
         for (let i = 0; i < diceNum; i++){
             let thisDieRoll = 1 + Math.floor(Math.random() * max)
+            this.displayDieRoll(thisDieRoll) // SHOULD APPEND THE DIE TO MIDDLE DOM
             roll += thisDieRoll;
         }
         return roll;
+    }
+
+    displayDieRoll(rollNum){
+        // displays a single die roll result on the DOM
+        const dieRollParent = document.getElementsByClassName('my-dice')[0]
+        const thisDieRollEle = document.createElement('div')
+        thisDieRollEle.classList.add('dice')
+        const thisDieRollEmbed = document.createElement('embed')
+        thisDieRollEmbed.setAttribute('src', `./assets/images/dice-${rollNum}.svg`)
+        thisDieRollEle.appendChild(thisDieRollEmbed)
+        dieRollParent.appendChild(thisDieRollEle)
+        console.log('In displayDieRoll()')
+    }
+
+    hideDiceRolls(){
+        // hides all of the dice from the DOM at the end of the turn
+        const dieRollChildren = document.getElementById('my-dice')
+        while (dieRollChildren.firstChild) {
+            dieRollChildren.removeChild(dieRollChildren.firstChild);
+        }
+
+        console.log('In hideDiceRolls()')
     }
 
     showCurrentPlayerHand() {

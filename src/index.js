@@ -2,6 +2,23 @@ import {Game} from './scripts/game.js';
 import {Player} from './scripts/player.js';
 
 document.addEventListener("DOMContentLoaded", () => {
+    // -------------------------------------------------------------
+    // AUDIO CONTROL SETTINGS
+    const muteButton = document.getElementsByClassName('mute-button')[0]
+    muteButton.addEventListener("click", muteUnmute)
+
+    let gameMuted = false;
+    function muteUnmute(){
+        // changes global volume to mute or 100%
+        if (!gameMuted){
+            Howler.volume(0);
+            gameMuted = true;
+        } else {
+            Howler.volume(1);
+            gameMuted = false;
+        }
+    }
+    // -------------------------------------------------------------
 
     // Game options (refactor later)
     const startingGold = 1000;
