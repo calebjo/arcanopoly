@@ -201,7 +201,7 @@ html, body {
   position: fixed;
   width: 3rem;
   height: 7rem;
-  left: 12%;
+  left: 9%;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   background: #d3b974;
@@ -228,6 +228,7 @@ html, body {
   flex-direction: column;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 /* Row containers */
@@ -432,6 +433,10 @@ html, body {
   transform: scale(2);
 }
 
+svg {
+  pointer-events: none;
+}
+
 /* Individual square styles ----------------------------------------*/
 .corner-square div, .row div {
   z-index: 5;
@@ -440,9 +445,20 @@ html, body {
   justify-content: center;
   background: #323a4c;
   box-shadow: 1px 1px 2px rgba(24, 24, 31, 0.6);
-  transition: background 1s;
 }
 
+.corner-square div.traverse, .row div.traverse {
+  animation: traverse 1s;
+}
+
+@keyframes traverse {
+  from {
+    background-color: #323a4c;
+  }
+  to {
+    background-color: #697696;
+  }
+}
 .row-horizontal div {
   z-index: 5;
   width: 4rem;

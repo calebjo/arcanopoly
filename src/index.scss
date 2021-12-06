@@ -200,7 +200,7 @@ html, body {
     position: fixed;
     width: 3rem;
     height: 7rem;
-    left: 12%;
+    left: 9%;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     background:rgb(211, 185, 116);
@@ -216,6 +216,7 @@ html, body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    // overflow: hidden;
     background:rgb(46, 44, 51);
     box-shadow: 0 0 48px rgba(1, 1, 5, 0.5), inset 0 0 80px rgba(2, 2, 10, 0.5);
 }
@@ -228,6 +229,7 @@ html, body {
     flex-direction: column;
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 /* Row containers */
@@ -431,6 +433,11 @@ html, body {
     // position: fixed;
 }
 
+// disable clicking on SVGs to allow for events to target SVG parent element
+svg {
+    pointer-events: none;
+}
+
 /* Individual square styles ----------------------------------------*/
 // 
 .corner-square div, .row div {
@@ -440,13 +447,25 @@ html, body {
     justify-content: center;
     background: #323a4c;
     box-shadow: 1px 1px 2px rgba(24, 24, 31, 0.6);
-    transition: background 1s;
+}
+
+.corner-square div.traverse, .row div.traverse {
+    // transition: background 1s;
+    animation: traverse 1s;
+}
+
+// animations for square traversal
+@keyframes traverse {
+    from {background-color: #323a4c;}
+    to {background-color: #697696;}
 }
 
 .row-horizontal div {
     z-index: 5;
     width: 4rem;
     height: 6rem;
+    // width: 7.7%;
+    // height: 100%;
     margin: 0.125rem;
     border-radius: 6px;
 }
@@ -455,6 +474,8 @@ html, body {
     z-index: 5;
     width: 6rem;
     height: 4rem;
+    // width: 100%;
+    // height: 7.7%;
     margin: 0.125rem;
     border-radius: 6px;
 }
@@ -463,6 +484,8 @@ html, body {
     z-index: 5;
     width: 8rem;
     height: 8rem;
+    // width: 15.38%;
+    // height: 100%;
     margin: 0.125rem;
     border-radius: 12px;
 }

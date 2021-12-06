@@ -45,7 +45,7 @@ export class Game {
         const sunDeckEle = document.createElement('div')
         sunDeckEle.classList.add('sun-deck')
         const sunDeckEmbed = document.createElement('embed')
-        sunDeckEmbed.setAttribute('src', './assets/images/deck-sun.svg')
+        sunDeckEmbed.setAttribute('src', './assets/images/deck-sun.png')
         sunDeckEle.appendChild(sunDeckEmbed)
         const deckBox1 = document.getElementsByClassName('deck1-empty')[0]
         deckBox1.appendChild(sunDeckEle)
@@ -53,7 +53,7 @@ export class Game {
         const moonDeckEle = document.createElement('div')
         moonDeckEle.classList.add('moon-deck')
         const moonDeckEmbed = document.createElement('embed')
-        moonDeckEmbed.setAttribute('src', './assets/images/deck-moon.svg')
+        moonDeckEmbed.setAttribute('src', './assets/images/deck-moon.png')
         moonDeckEle.appendChild(moonDeckEmbed)
         const deckBox2 = document.getElementsByClassName('deck2-empty')[0]
         deckBox2.appendChild(moonDeckEle)
@@ -103,6 +103,7 @@ export class Game {
     }
 
     playTurn(){
+        let that = this
         console.log(`${this.currentPlayer.name} is playing a turn!`) // DEBUG
         this.turnNum += 1
         // change center button to 'Roll'
@@ -116,20 +117,27 @@ export class Game {
 
         // Whenever a card is grabbed and placed in the correct position, "play" the card.
         // MVP: just click a card to activate it
-        // const cardClickable = document.getElementsByClassName('my-card')
-        // let that = this
-        // cardClickable.addEventListener("click", playThisCard, false)
 
-        // function playThisCard(event){
-        //     console.log(event.target)
-        //     // const cardObject = that.currentPlayer.cards.find( card => card.id === event.target )
-        // }
+        // If the current player has a hand, get all the cards within and add event listener
+        console.log(this.currentPlayer.hand.length)
         
-            
-
+        if (this.currentPlayer.hand.length > 0) {
+            const cardClickable = document.querySelectorAll(".my-card")
+            for (var card of cardClickable) {
+                card.addEventListener("click", () =>{
+                    that.playThisCard(card)
+                })
+            }
+            // const cardClickable2 = document.querySelectorAll(".my-card > embed")
+            // for (var card of cardClickable2) {
+            //     card.addEventListener("click", () =>{
+            //         that.playThisCard(card)
+            //     })
+            // }
+        }
+        
         // ----------------------------------------------------------------------------------------
         // when 'Roll' is clicked, roll the dice
-        let that = this
         this.mainButton.addEventListener("click", callRoll)
         function callRoll(){
             that.diceRoll = that.handleDiceRoll.call(that);
@@ -222,9 +230,12 @@ export class Game {
         // changes each traversed square to the color of the player that traversed it
         let playerColor = this.currentPlayer.sprite.split('-')[1].split('.')[0]
 
-        // let currentolor = traversedSquare.domRef.style.background;
         traversedSquare.domRef.style.background = playerColor
-        // traversedSquare.domRef.style.background = currentolor
+    }
+
+    playThisCard(card){
+        console.log('In game.playThisCard(card)')
+        console.log(card)
     }
 
     handleDiceRoll(){
