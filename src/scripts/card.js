@@ -13,6 +13,27 @@ export class Card {
         this.owner = owner
         this.price = price
     }
+
+    addToScreen(){
+        // adds this card to the cards that display on the board
+        console.log('In addToScreen()')
+        const myHand = document.getElementsByClassName('my-hand')[0]
+        const newCardEle = document.createElement('div')
+        newCardEle.classList.add('my-card')
+        newCardEle.setAttribute('id', `card-${this.id}`)
+        const newCardEmbed = document.createElement('embed')
+        newCardEmbed.setAttribute('src', `${this.img}`)
+        newCardEle.appendChild(newCardEmbed)
+        // append newly created card div
+        myHand.appendChild(newCardEle)
+    }
+
+    removeFromScreen(){
+        // removes this card from the cards that display on the board
+        console.log('In removeFromScreen()')
+        const thisCardEle = document.getElementById(`card-${this.id}`)
+        thisCardEle.remove()
+    }
 }
 // -----------------------------------------------------------------------------------
 // Subclasses related to common functionality

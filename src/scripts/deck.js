@@ -29,6 +29,10 @@ export class Deck {
 
     draw(player, amount) {
         for (let i = 0; i < amount; i++){
+            if (player.hand.length > 7){
+                console.log('Player has too many cards!')
+                break;
+            }
             let thisCard = this.cards[i];
             player.changeCard(thisCard, true)
             this.cards.splice(i, 1)

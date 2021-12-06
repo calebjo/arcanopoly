@@ -136,19 +136,13 @@ export class Player {
         const myHand = document.getElementsByClassName('my-hand')[0]
         if (gain){
             this.hand.push(card);
-            // change DOM using myHand
-            const newCardEle = document.createElement('div')
-            newCardEle.classList.add('my-card')
-            newCardEle.setAttribute('id', `card-${card.id}`)
-            const newCardEmbed = document.createElement('embed')
-            newCardEmbed.setAttribute('src', `${card.img}`)
-            newCardEle.appendChild(newCardEmbed)
-            // append newly created card div
-            myHand.appendChild(newCardEle)
+            // change DOM
+            card.addToScreen()
         } else {
             let cardIdx = this.hand.indexOf(card);
             this.hand.splice(cardIdx, 1);
             // change DOM
+            card.removeFromScreen()
         } 
     }
 

@@ -114,12 +114,17 @@ export class Game {
     playTurn(){
         console.log(`${this.currentPlayer.name} is playing a turn!`) // DEBUG
         this.turnNum += 1
-
-        // Change the elements of the middle hand area to only contain the current player's cards
-
         // change center button to 'Roll'
         this.mainButton.children[0].innerText = 'Roll'
 
+        // Change the elements of the middle hand area to only contain the current player's cards
+        this.showCurrentPlayerHand();
+
+
+        // Whenever a card is grabbed and placed in the correct position, "play" the card.
+
+
+        // ----------------------------------------------------------------------------------------
         // when 'Roll' is clicked, roll the dice
         this.mainButton.addEventListener("click", callRoll)
         const that = this
@@ -150,6 +155,7 @@ export class Game {
             console.log(that)
             console.log(that.mainButton)
             that.mainButton.removeEventListener("click", endTurn);
+            that.hideCurrentPlayerHand();
             // cycle to the next player
             let playerCount = that.players.length;
             let currentPlayerIdx = that.players.indexOf(that.currentPlayer);
@@ -243,6 +249,22 @@ export class Game {
             roll += thisDieRoll;
         }
         return roll;
+    }
+
+    showCurrentPlayerHand() {
+        // shows the cards in the current player's hand (INVOKE AT TURN BEGIN)
+        console.log('Showing the hand of this player...')
+        for (let i = 0; i < this.currentPlayer.hand.length; i++){
+            this.currentPlayer.hand[i].addToScreen();
+        }
+    }
+
+    hideCurrentPlayerHand() {
+        // hides the cards in the current player's hand (INVOKE AT TURN END)
+        console.log('Hiding the hand of this player...')
+        for (let i = 0; i < this.currentPlayer.hand.length; i++){
+            this.currentPlayer.hand[i].removeFromScreen();
+        }
     }
 
     isWon(){
