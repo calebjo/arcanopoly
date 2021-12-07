@@ -65,7 +65,7 @@ export function landOnSquare(game, squareType, square){
             case 'forward':
                 // reroll dice and go forward that amount
                 console.log("Forward movement! Roll the dice again!")
-                game.allowDiceRoll()
+                // game.allowDiceRoll()
                 break;
             case 'backward':
                 // reroll dice and go backward that amount

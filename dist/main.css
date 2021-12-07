@@ -215,7 +215,7 @@ html, body {
   position: fixed;
   width: 3rem;
   height: 7rem;
-  left: 9%;
+  left: 13%;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   background: #d3b974;
@@ -435,12 +435,13 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.05s;
+  transition: transform 0.3s ease-in-out;
 }
 
 .my-card embed {
   width: 8rem;
   height: 12rem;
+  transform-style: preserve-3d;
 }
 
 .my-card:hover {
@@ -500,9 +501,17 @@ svg {
 }
 
 /* Image styling */
-.corner-square embed {
+#sq-0 embed, #sq-20 embed {
   position: relative;
-  right: 2.5rem;
+  right: 2rem;
+  width: 85%;
+  height: 85%;
+  opacity: 65%;
+}
+
+#sq-10 embed, #sq-30 embed {
+  position: relative;
+  right: 3.2rem;
   width: 85%;
   height: 85%;
   opacity: 65%;
@@ -510,8 +519,8 @@ svg {
 
 /* Svg sizing */
 .row-horizontal embed, .row-vertical embed {
-  width: 75%;
-  height: 75%;
+  width: 100%;
+  height: 100%;
 }
 
 /* Svg positions for each row */
