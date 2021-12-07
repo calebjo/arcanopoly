@@ -135,18 +135,21 @@ export class Player {
     // takes in a target card object and a boolean for gaining/losing it
     changeCard(card, gain) {
         // find myHand DOM element
-        const myHand = document.getElementsByClassName('my-hand')[0]
         if (gain){
+            // change Node
             this.hand.push(card);
             card.owner = this
             // change DOM
             card.addToScreen()
+            card.addIconToScreen()
         } else {
-            let cardIdx = this.hand.indexOf(card);
-            this.hand.splice(cardIdx, 1);
-            card.owner = null
             // change DOM
             card.removeFromScreen()
+            card.removeIconFromScreen()
+            let cardIdx = this.hand.indexOf(card);
+            // change Node
+            this.hand.splice(cardIdx, 1);
+            card.owner = null
         } 
     }
 
@@ -154,39 +157,36 @@ export class Player {
     changeEquipment(equipment, gain) {
         if (gain){
             this.equipment.push(equipment);
+            equipment.owner = this;
             // change DOM
+            // equipment.addToScreen()
         } else {
             let equipIdx = this.equipment.indexOf(equipment);
             this.equipment.splice(equipIdx, 1);
             // change DOM
+            // equipment.removeFromScreen()
         }
     }
 
     movePlayer(game, target) {
-        // takes in a player element (div with token inside) and a target square element to move to
-
+        // takes in a game instance and a target square element to move to
         const playerObject = this
         const playerTokenEle = document.getElementById(`player-${this.turnId}`)
+        const playerCurrentSquare = game.currentPlayer.currentSquare
         // parses the target square id (e.g. 'sq-32') into a position number
         const targetPos = parseInt(target.split('-')[1])
         const squaresToMove = game.diceRoll
 
-        console.log(`${game.currentPlayer.name} has ${squaresToMove} squares to move.`)
-
-        for (let i = 0; i < squaresToMove; ++i){
-            console.log(`for loop i: ${i}`)
-            moveDelay(i)
-        }
-
-        function moveDelay(i) {
-            let traversedSquare = game.board.squares[(game.currentPlayer.currentSquare + i) % 40]
-            console.log('Traversing this square:')
+        console.log(`${game.currentPlayer.name} has ${squaresToMove} squares to move.`) // DEBUG
+        
+        delayedTimeout(0)
+        function delayedTimeout(i) {
+            let traversedSquare = game.board.squares[(playerCurrentSquare + i) % 40]
             console.log(traversedSquare)
-            console.log(`moveDelay i: ${i}`)
-            game.traverseSquare(playerObject, traversedSquare)
-            // setTimeout(() => {
-            //     game.traverseSquare(playerObject, traversedSquare)
-            // }, 200);
+            if (i < squaresToMove) {
+                game.traverseSquare(playerObject, traversedSquare)
+                setTimeout(delayedTimeout, 70, (i + 1))
+            }
         }
 
         // store elements and objects of previous and target squares

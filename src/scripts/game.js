@@ -12,10 +12,10 @@
 // currentPlayer  : Player instance of the player whose turn it is
 import { Board } from "./board";
 import { CastleSquare, DeckSquare, DungeonSquare, MovementSquare, PropertySquare, ShopSquare, Square, TavernSquare, TomeSquare } from "./square";
+import { Equipment } from "./equipment";
 import { landOnSquare } from "./landOnSquare";
 import { Howl, Howler } from 'howler';
 import { MoonDeck, SunDeck } from "./deck";
-import { generateTooltip, generateInputWindow } from "./uiGenerator.js";
 
 export class Game {
     constructor(players, startingGold){
@@ -135,9 +135,19 @@ export class Game {
         // when 'Roll' is clicked, roll the dice
         this.mainButton.addEventListener("click", callRoll)
         function callRoll(){
+            // Deselect any target players from cards that were played
+            for (let i = 0; i < that.players.length; i++){
+                let playerEle = document.getElementById(`p${that.players[i].turnId}`)
+                console.log(playerEle.classList)
+                // if (playerEle.classList.includes('selected')){
+                //     playerEle.classList.remove('selected', 'on', 'off')
+                // }
+            }
+            // Roll the dice
             that.diceRoll = that.handleDiceRoll.call(that);
             that.mainButton.children[0].innerText  = 'End'
             that.mainButton.removeEventListener("click", callRoll);
+            // Continue with the turn
             that.postRollTurn();
         }
     }
@@ -222,10 +232,13 @@ export class Game {
     }
 
     traverseSquare(playerObject, traversedSquare){
-        // changes each traversed square to the color of the player that traversed it
-        let playerColor = this.currentPlayer.sprite.split('-')[1].split('.')[0]
+        // traverses each square as a player moves (handling tavern passes, player animation, color animation)
 
-        traversedSquare.domRef.style.background = playerColor
+        // changes the player's position to the center of the traversed square
+
+        // changes each traversed square to the color of the player that traversed it
+        let playerColor = this.currentPlayer.sprite.split('-')[1].split('.')[0] // (e.g 'green' or 'cyan')
+        traversedSquare.domRef.style.backgroundColor = playerColor
     }
 
     playThisCard(card){

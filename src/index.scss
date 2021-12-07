@@ -464,15 +464,8 @@ svg {
     box-shadow: 1px 1px 2px rgba(24, 24, 31, 0.6);
 }
 
-.corner-square div.traverse, .row div.traverse {
-    // transition: background 1s;
-    animation: traverse 1s;
-}
-
-// animations for square traversal
-@keyframes traverse {
-    from {background-color: #323a4c;}
-    to {background-color: #697696;}
+.corner-square div, .row div {
+    transition: background 0.5s;
 }
 
 .row-horizontal div {

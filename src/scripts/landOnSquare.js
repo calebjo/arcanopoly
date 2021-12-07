@@ -105,14 +105,22 @@ export function landOnSquare(game, squareType, square){
     }
 
     function landOnCastle(){
-        // charges all other players 25 gp * the number of cards in the currentplayer's hand
+        // charges all other players 25 gp * the number of cards in their hand. The player that lands on
+        // the castle gains the total lost gold.
         console.log('You are in landOnCastle()')
 
+        let goldNum = 0;
+        let goldTotal = 0;
         for (let i = 0; i < game.players.length; i++){
             if (game.players[i] !== game.currentPlayer) {
-                game.players[i].changeGold(-(25 * game.currentPlayer.hand.length))
+                goldNum = -(25 * game.players[i].hand.length)
+                goldTotal += Math.abs(goldNum)
+                game.players[i].changeGold(goldNum)
             }
         }
+        game.currentPlayer.changeGold(goldTotal)
+
+        console.log(`Every player but ${game.currentPlayer.name} payed them a card tax!`)
     }
 
     function landOnDeck(){

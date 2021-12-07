@@ -1,4 +1,3 @@
-import { Player } from "./player"
 // all cards have an id, rarity, and price
 // each card will also have a play() method, which can be invoked on the owner's turn
 
@@ -33,6 +32,23 @@ export class Card {
         console.log('In removeFromScreen()')
         const thisCardEle = document.getElementById(`card-${this.id}`)
         thisCardEle.remove()
+    }
+
+    addIconToScreen(){
+        // Add card to icons DOM
+        const thisCardIcon = document.createElement('div')
+        thisCardIcon.classList.add('p-card')
+        const thisPlayerBar = document.getElementById(`p${this.owner.turnId}`)
+        const thisPlayerCards = thisPlayerBar.children[2].children[0]
+        thisPlayerCards.appendChild(thisCardIcon)
+    }
+
+    removeIconFromScreen(){
+        // Remove card from icons DOM
+        const thisPlayerBar = document.getElementById(`p${this.owner.turnId}`)
+        const thisCardParent = thisPlayerBar.children[2].children[0]
+        const thisCard = thisPlayerBar.children[2].children[0].children[0]
+        thisCardParent.removeChild(thisCard)
     }
 }
 // -----------------------------------------------------------------------------------
