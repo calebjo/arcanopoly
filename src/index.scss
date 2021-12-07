@@ -609,6 +609,7 @@ svg {
 .my-prop-list {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     flex-wrap: wrap;
     width: 100%;
     height: 100%;
@@ -618,8 +619,8 @@ svg {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    width: 8rem;
-    height: 4rem;
+    width: 9rem;
+    height: 5rem;
     margin: 8px;
     border-radius: 8px;
     background: rgb(19, 19, 29);
@@ -628,10 +629,11 @@ svg {
 .my-property div {
     display: flex;
     padding: 2px;
+    margin: 2px;
 }
 
 .my-prop-name {
-    font-size: 20px;
+    font-size: 16px;
 }
 
 .my-prop-image embed {

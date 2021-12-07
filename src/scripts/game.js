@@ -90,7 +90,7 @@ export class Game {
             player.appendChild(playerIcon)
 
             // Set each player token position to the tavern (sq-0)
-            this.players[i].movePlayer(this, 'sq-0')
+            // this.players[i].movePlayer(this, 'sq-0')
         }
 
         // then play a turn of the game
@@ -209,6 +209,10 @@ export class Game {
         // changes each traversed square to the color of the player that traversed it
         let playerColor = this.currentPlayer.sprite.split('-')[1].split('.')[0] // (e.g 'green' or 'cyan')
         traversedSquare.domRef.style.backgroundColor = playerColor
+        if (traversedSquare instanceof TavernSquare && this.turnNum > this.players.length) {
+            playerObject.changeGold(100, true)
+            console.log('Gained 100 gold for passing the tavern!')
+        }
     }
 
     playThisCard(card){

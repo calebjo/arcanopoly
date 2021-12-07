@@ -182,7 +182,6 @@ export class Player {
         delayedTimeout(0)
         function delayedTimeout(i) {
             let traversedSquare = game.board.squares[(playerCurrentSquare + i) % 40]
-            // console.log(traversedSquare)
             if (i < squaresToMove) {
                 game.traverseSquare(playerObject, traversedSquare)
                 setTimeout(delayedTimeout, 70, (i + 1))
@@ -191,6 +190,21 @@ export class Player {
                 game.handleNewPlayerPos();
             }
         }
+
+        // delayedColorChange(0)
+        // function delayedColorChange(i) {
+        //     let currentColor =  // (e.g 'green' or 'cyan')
+        //     console.log('In delayedColorChange')
+        //     console.log(playerColor)
+        //     if (i < squaresToMove) {
+        //         game.changeTraversedColor(playerObject, traversedSquare)
+        //         setTimeout(delayedTimeout, 70, (i + 1))
+        //     } else {
+        //         console.log('Done in delayedColorChange')
+        //     }
+
+        //     traversedSquare.domRef.style.backgroundColor = playerColor
+        // }
 
         // store elements and objects of previous and target squares
         const targetSquareEle = document.getElementById(`sq-${targetPos}`)

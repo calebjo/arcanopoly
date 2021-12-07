@@ -33,3 +33,11 @@ export function generatePropertyBuy(game, property) {
     document.getElementsByClassName('board')[0].appendChild(propertyBuyWindow)
 }
 
+export function generateSquareTooltip(game, square){
+    // generates a tooltip to tell the player what happens on the square they land on
+    // called when landing on a castle, movement, deck, or tavern.
+}
+
+export function generateTavernTooltip(game){
+    // generates a tooltip to tell the player that they have passed the tavern while moving
+}
