@@ -124,6 +124,14 @@ export class Player {
 
             newProp.appendChild(newPropInfo)
             thisPlayerProperties.appendChild(newProp)
+            // play Howler sound as the property changes
+            const buyPropSound = new Howl({
+                src: ['./assets/sounds/vg-bonus.wav']
+            });
+            // Play the sound at the start of the game.
+            buyPropSound.volume(0.35);
+            buyPropSound.play();
+
         } else {
             let propIdx = this.properties.indexOf(property);
             this.properties.splice(propIdx, 1);

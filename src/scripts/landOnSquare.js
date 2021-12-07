@@ -101,15 +101,13 @@ export function landOnSquare(game, squareType, square){
                     // charge player, then transfer property ownership
                     game.currentPlayer.changeGold(-(square.price))
                     game.currentPlayer.changeProperty(square, true)
-                    // change property colors on purchase
+                    // change property colors on purchase to player colors
                     let embedded = square.domRef.children[0]
-                    // super ugly, change later to be player's colors
-                    // embedded.style.filter = 'hue-rotate(40deg)'+'contrast(170%)'+'saturate(150%)'
                     let playerColor = game.currentPlayer.sprite.split('-')[1].split('.')[0] // (e.g 'green' or 'cyan')
                     embedded.style.background = playerColor
-                    embedded.style.borderRadius = '4rem'
-                    embedded.style.width = '4rem';
-                    embedded.style.height = '4rem';
+                    embedded.style.borderRadius = '3.5rem'
+                    embedded.style.width = '3.5rem';
+                    embedded.style.height = '3.5rem';
                     embedded.style.boxShadow = '0 0 8px rgba(0,0,0,0.85)'
                 }
             } else {

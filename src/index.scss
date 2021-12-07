@@ -525,8 +525,9 @@ svg {
 
 /* Svg sizing */
 .row-horizontal embed, .row-vertical embed {
-    width: 90%;
-    height: 90%;
+    width: 3.5rem;
+    height: 3.5rem;
+    transition: background 0.4s ease-in;
 }
 
 /* Svg positions for each row */
