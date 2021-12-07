@@ -610,16 +610,29 @@ svg {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  width: 6.5rem;
+  width: 8rem;
   height: 4rem;
   margin: 8px;
   border-radius: 8px;
   background: #13131d;
 }
 
+.my-property div {
+  display: flex;
+  padding: 2px;
+}
+
+.my-prop-name {
+  font-size: 20px;
+}
+
 .my-prop-image embed {
   width: 2rem;
   height: 2rem;
+}
+
+.my-prop-price {
+  color: #eed06f;
 }
 
 .r-label-text {
