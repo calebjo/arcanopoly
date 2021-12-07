@@ -2,31 +2,6 @@
 // A player corresponds to either a human or computer playing the game. 
 // 
 // Players belong to a game instance
-//
-// Instance variables:
-// 
-// gold : integer referring to the amount of gold a player has
-// turnId : integer from 0-7 referring to the order in which a player takes their turn
-// name : string referring to 
-// sprite : a string url of the png sprite representing the player that moves around the board
-// currentSquare : the square that the player is currently on
-// diceNum : the number of dice a player rolls when they roll dice. Defaults to 2.
-// ownedProperties: array of square elements referring to the properties a player owns
-// hand : array of the hand of cards that a player owns. Cannot exceed 8 cards.
-// equipment: array of the equipment that a player owns. Cannot exceed 6 equipment.
-//
-// A player should be able to: 
-// gain/lose gold, gain/lose a property, gain/lose a card, gain/lose an equipment
-// move to a given square
-// 
-// Functions:
-// constructor(startingGold, turnId, name, sprite)
-// changeGold(number)
-// gainProperty(square)
-// loseProperty(square)
-// gainCard(card)
-// loseCard(card)
-// movePlayer(targetSquare)
 
 import { PropertyCard } from "./card";
 import { PropertySquare, TavernSquare } from "./square";
@@ -40,6 +15,7 @@ export class Player {
         this.currentSquare = 0; // Start at the tavern;
         this.diceNum = 2;
         this.diceMax = 6;
+        this.tavernMod = 1;
         this.properties = [];
         this.hand = [];
         this.equipment = [];
@@ -182,7 +158,7 @@ export class Player {
         const playerTokenEle = document.getElementById(`player-${this.turnId}`)
         const playerCurrentSquare = game.currentPlayer.currentSquare
         // parses the target square id (e.g. 'sq-32') into a position number
-        const targetPos = parseInt(target.split('-')[1])
+        // const targetPos = parseInt(target.split('-')[1])
         const squaresToMove = game.diceRoll
 
         console.log(`${game.currentPlayer.name} has ${squaresToMove} squares to move.`) // DEBUG
@@ -192,43 +168,35 @@ export class Player {
             let traversedSquare = game.board.squares[(playerCurrentSquare + i) % 40]
             if (i < squaresToMove) {
                 game.traverseSquare(playerObject, traversedSquare)
-                console.log('After traverseSquare')
-                setTimeout(delayedTimeout, 70, (i + 1))
-            } else {
-                // check which square the player landed in, handle appropriate logic (handled after landing)
+
+                console.log('Color changes here')
+                let playerColor = game.currentPlayer.sprite.split('-')[1].split('.')[0] // (e.g 'green' or 'cyan')
+                traversedSquare.domRef.style.backgroundColor = playerColor
+
+                // store elements and objects of previous and target squares
+                const thisTargetPos = (playerObject.currentSquare + 1) % 40
+                const targetSquareEle = document.getElementById(`sq-${thisTargetPos}`)
+                // remove playerTokenEle (the token) from old parent square, add to new parent square
+                playerTokenEle.parentElement.removeChild(playerTokenEle)
+                targetSquareEle.appendChild(playerTokenEle)
+                // lastly, set player's current square to new coord and add player to square's occupants
+                playerObject.currentSquare = thisTargetPos
+
+                const previousSquareObject = game.board.squares[playerObject.currentSquare]
+                const targetSquareObject = game.board.squares[thisTargetPos]
+                // remove the current player from the playersOn of the previous square, add to target playersOn
+                previousSquareObject.playersOn.splice(previousSquareObject.playersOn.indexOf(playerObject), 1)
+                targetSquareObject.playersOn.push(playerObject)
+
+                setTimeout(delayedTimeout, 70, (i + 1)) // recursively call again until target is reached
+
+            } else { // player has landed
+                // check which square the player landed in, handle appropriate logic
                 game.handleNewPlayerPos();
             }
-            console.log('After setTimeout calls')
+            console.log('Color changes BACK here')
+            
         }
-
-        // delayedColorChange(0)
-        // function delayedColorChange(i) {
-        //     let currentColor =  // (e.g 'green' or 'cyan')
-        //     console.log('In delayedColorChange')
-        //     console.log(playerColor)
-        //     if (i < squaresToMove) {
-        //         game.changeTraversedColor(playerObject, traversedSquare)
-        //         setTimeout(delayedTimeout, 70, (i + 1))
-        //     } else {
-        //         console.log('Done in delayedColorChange')
-        //     }
-
-        //     traversedSquare.domRef.style.backgroundColor = playerColor
-        // }
-
-        // store elements and objects of previous and target squares
-        const targetSquareEle = document.getElementById(`sq-${targetPos}`)
-        const previousSquareObject = game.board.squares[playerObject.currentSquare]
-        const targetSquareObject = game.board.squares[targetPos]
-
-        // remove playerTokenEle (the token) from old parent square, add to new parent square
-        playerTokenEle.parentElement.removeChild(playerTokenEle)
-        targetSquareEle.appendChild(playerTokenEle)
-        // lastly, set player's current square to new coord and add player to square's occupants
-        playerObject.currentSquare = targetPos
-        // remove the current player from the playersOn of the previous square, add to target playersOn
-        previousSquareObject.playersOn.splice(previousSquareObject.playersOn.indexOf(playerObject), 1)
-        targetSquareObject.playersOn.push(playerObject)
     }
 
     makeTarget(){

@@ -323,6 +323,10 @@ html, body {
   border-radius: 8px;
 }
 
+.deck1-empty embed, .deck2-empty embed {
+  position: fixed;
+}
+
 .dice-container {
   display: flex;
   flex-direction: column;

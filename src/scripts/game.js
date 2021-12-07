@@ -1,15 +1,7 @@
 
 // A game instance should contain all of the logic for running a game of Arcanopoly.
 // The Game will be created in index.js and start immediately.
-// 
-//
-// constructor(players, startingGold)
-// 
-// Instance variables:
-// players        : Array of the Player instances that are playing the game (min 2)
-// startingGold   : Option for how much gold to start each player with (default 1000)
-// turnNum        : Integer counter game turn number (start at 0, incremented first)
-// currentPlayer  : Player instance of the player whose turn it is
+
 import { Board } from "./board";
 import { CastleSquare, DeckSquare, DungeonSquare, MovementSquare, PropertySquare, ShopSquare, Square, TavernSquare, TomeSquare } from "./square";
 import { Equipment } from "./equipment";
@@ -202,15 +194,13 @@ export class Game {
     }
 
     traverseSquare(playerObject, traversedSquare){
-        // traverses each square as a player moves (handling tavern passes, player animation, color animation)
+        // traverses each square as a player moves
 
         // changes the player's position to the center of the traversed square
 
-        // changes each traversed square to the color of the player that traversed it
-        let playerColor = this.currentPlayer.sprite.split('-')[1].split('.')[0] // (e.g 'green' or 'cyan')
-        traversedSquare.domRef.style.backgroundColor = playerColor
+        // if tavern is traversed, give player gold
         if (traversedSquare instanceof TavernSquare && this.turnNum > this.players.length) {
-            playerObject.changeGold(100, true)
+            playerObject.changeGold((100 * playerObject.tavernMod), true)
             console.log('Gained 100 gold for passing the tavern!')
         }
     }

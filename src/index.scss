@@ -327,6 +327,10 @@ html, body {
     border-radius: 8px;
 }
 
+.deck1-empty embed, .deck2-empty embed {
+    position: fixed;
+}
+
 // contains dice rolls and button
 .dice-container {
     display: flex;
