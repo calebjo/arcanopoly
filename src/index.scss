@@ -290,7 +290,6 @@ html, body {
 
 .middle-content {
     display: flex;
-    // z-index: 30;
     aspect-ratio: 1 / 1;
     outline-offset: -2px;
     outline: 8px solid rgb(211, 185, 116);
@@ -459,7 +458,7 @@ svg {
 /* Individual square styles ----------------------------------------*/
 // 
 .corner-square div, .row div {
-    z-index: 5;
+    // z-index: 5;
     display: flex;
     align-items: center;
     justify-content: center;

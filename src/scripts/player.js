@@ -3,9 +3,6 @@
 // 
 // Players belong to a game instance
 
-import { PropertyCard } from "./card";
-import { PropertySquare, TavernSquare } from "./square";
-
 export class Player {
     constructor(startingGold, turnId, name, sprite) {
         this.gold = startingGold;
@@ -78,36 +75,13 @@ export class Player {
 
     // takes in a target square (Property object) and a boolean for gaining/losing it
     changeProperty(property, gain){
-        const thisPlayerProperties = document.getElementsByClassName('my-prop-list')[0]
+        let thisPlayerProperties = document.getElementsByClassName('my-prop-list')[0]
         if (gain){
             this.properties.push(property);
-            property.owner = this
+            property.owner = this;
             // add to DOM
-            const newProp = document.createElement('div')
-            newProp.classList.add('my-property')
-            const newPropName = document.createElement('div')
-            newPropName.classList.add('my-prop-name')
-            newPropName.innerText = `${property.name}`;
-            newProp.appendChild(newPropName)
+            property.addToScreen();
 
-            // append children (image and price) to info
-            const newPropInfo = document.createElement('div')
-            newPropInfo.classList.add('my-prop-info')
-            const newPropImage = document.createElement('div')
-            newPropImage.classList.add('my-prop-image')
-            const newPropImageEmbed = document.createElement('embed')
-            const embedSrc = property.domRef.children[0].getAttribute('src')
-            newPropImageEmbed.setAttribute('src', `${embedSrc}`)
-            newPropImage.appendChild(newPropImageEmbed)
-            
-            newPropInfo.appendChild(newPropImage)
-            const newPropPrice = document.createElement('div')
-            newPropPrice.classList.add('my-prop-price')
-            newPropPrice.innerText = `${property.price}`;
-            newPropInfo.appendChild(newPropPrice)
-
-            newProp.appendChild(newPropInfo)
-            thisPlayerProperties.appendChild(newProp)
             // play Howler sound as the property changes
             const buyPropSound = new Howl({
                 src: ['./assets/sounds/vg-bonus.wav']
@@ -115,12 +89,11 @@ export class Player {
             // Play the sound at the start of the game.
             buyPropSound.volume(0.35);
             buyPropSound.play();
-
         } else {
             let propIdx = this.properties.indexOf(property);
             this.properties.splice(propIdx, 1);
             // remove from DOM
-            thisPlayerProperties.removeChild(property.domRef)
+            property.removeFromScreen();
         }
     }
 

@@ -64,6 +64,41 @@ export class PropertySquare extends Square {
         this.owner = owner
         this.mortgaged = mortgaged
     }
+
+    addToScreen() {
+        let thisPlayerProperties = document.getElementsByClassName('my-prop-list')[0]
+        // add to DOM
+        const newProp = document.createElement('div')
+        newProp.classList.add('my-property')
+        const newPropName = document.createElement('div')
+        newPropName.classList.add('my-prop-name')
+        newPropName.innerText = `${this.name}`;
+        newProp.appendChild(newPropName)
+
+        // append children (image and price) to info
+        const newPropInfo = document.createElement('div')
+        newPropInfo.classList.add('my-prop-info')
+        const newPropImage = document.createElement('div')
+        newPropImage.classList.add('my-prop-image')
+        const newPropImageEmbed = document.createElement('embed')
+        const embedSrc = this.domRef.children[0].getAttribute('src')
+        newPropImageEmbed.setAttribute('src', `${embedSrc}`)
+        newPropImage.appendChild(newPropImageEmbed)
+        
+        newPropInfo.appendChild(newPropImage)
+        const newPropPrice = document.createElement('div')
+        newPropPrice.classList.add('my-prop-price')
+        newPropPrice.innerText = `${this.price}`;
+        newPropInfo.appendChild(newPropPrice)
+
+        newProp.appendChild(newPropInfo)
+        thisPlayerProperties.appendChild(newProp)
+    }
+
+    removeFromScreen() {
+        let thisPlayerProperties = document.getElementsByClassName('my-prop-list')[0]
+        thisPlayerProperties.removeChild(this.domRef)
+    }
 }
 
 export class ShopSquare extends Square {

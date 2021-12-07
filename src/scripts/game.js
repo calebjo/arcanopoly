@@ -91,12 +91,13 @@ export class Game {
         let that = this
 
         console.log(`${this.currentPlayer.name} is playing a turn!`) // DEBUG
+        console.log(`I own these properties: ${this.currentPlayer.properties}`) // DEBUG
         this.turnNum += 1
 
-        // Change the elements of the middle hand area to only contain the current player's cards
+        // Show the current player's cards
         this.showCurrentPlayerHand();
-        // highlight the current player with a DOM element
-        this.highlightNewPlayer();
+        // Highlight the current player with DOM changes
+        this.highlightThisPlayer();
 
         // Whenever a card is grabbed and placed in the correct position, "play" the card.
         // MVP: just click a card to activate it
@@ -353,7 +354,7 @@ export class Game {
         }
     }
 
-    highlightNewPlayer() {
+    highlightThisPlayer() {
         const thisPlayerBar = document.getElementById(`p${this.currentPlayer.turnId}`)
         thisPlayerBar.classList.add('current-turn')
         const playerHighlight = document.createElement('div')

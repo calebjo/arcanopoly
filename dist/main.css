@@ -458,7 +458,6 @@ svg {
 
 /* Individual square styles ----------------------------------------*/
 .corner-square div, .row div {
-  z-index: 5;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -1,4 +1,3 @@
-import { Player } from "./player";
 
 export class ComputerPlayer {
     constructor(startingGold, turnId, name, sprite) {
