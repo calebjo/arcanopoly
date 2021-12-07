@@ -37,7 +37,7 @@ export class Deck {
             let thisCard = this.cards[i];
             player.changeCard(thisCard, true) // give card to player
             this.cards.splice(i, 1) // remove the card from the deck
-            animateCardDraw()
+            animateCardDraw(this, amount);
         }
     }
 }

@@ -1,9 +1,6 @@
 // animations for importing into game file
 
-export function animateCardDraw(deck, cardNum){
-    // visual and audio cues for when cards are drawn
-    
-}
+import { MoonDeck, SunDeck } from "./deck"
 
 export function animateGoldChange(player, number){
     const thisPlayerEle = document.getElementById(`p${player.turnId}`)
@@ -27,6 +24,28 @@ export function animateGoldChange(player, number){
     }
 }
 
-export function animateDeckCreate(game) {
-    
+export function animateCardDraw(deck, amount){
+    var thisDeck;
+    var newCard;
+    drawAnimate(0)
+    function drawAnimate(i){
+        if (i < amount) {
+            if (deck instanceof SunDeck){
+                // animate 1 card drawing from the sun deck to the hand
+                thisDeck = document.getElementsByClassName('sun-deck')[0]
+                newCard = document.createElement('embed')
+                newCard.setAttribute('src', './assets/images/deck-sun.png')
+                thisDeck.appendChild(newCard)
+                newCard.classList.add('new-sun-card')
+            } else if (deck instanceof MoonDeck){
+                // animate 1 card drawing from the moon deck to the hand
+                thisDeck = document.getElementsByClassName('moon-deck')[0]
+                newCard = document.createElement('embed')
+                newCard.setAttribute('src', './assets/images/deck-moon.png')
+                thisDeck.appendChild(newCard)
+                newCard.classList.add('new-moon-card')
+            }
+            setTimeout(drawAnimate, 500, (i + 1))
+        }
+    }
 }

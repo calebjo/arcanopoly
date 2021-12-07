@@ -462,6 +462,43 @@ html, body {
     height: 12rem;
 }
 
+.new-sun-card, .new-moon-card {
+    z-index: 100;
+}
+
+.new-sun-card {
+    animation: sun-card 1s ease-out;
+}
+
+@keyframes sun-card {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(200px) translateX(75px);
+        opacity: 0;
+    }
+}
+
+.new-moon-card {
+    animation: moon-card 1s ease-out;
+}
+
+@keyframes moon-card {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(200px) translateX(-75px);
+        opacity: 0;
+    }
+}
+
+
 // Hand styles
 
 .my-hand {
@@ -636,22 +673,23 @@ svg {
     margin-bottom: 24px;
 }
 
-/* width */
+// Properties scroll bar custom ----------
 .properties::-webkit-scrollbar {
     width: 15px;
 }
   
-/* Track */
+
 .properties::-webkit-scrollbar-track {
     box-shadow: inset 0 0 8px rgb(14, 14, 15);
     border-radius: 10px;
 }
 
-/* Handle */
+
 .properties::-webkit-scrollbar-thumb {
     background: rgb(13, 14, 34);
     border-radius: 10px;
 }
+// ----------------------------------------
 
 .my-prop-list {
     display: flex;
