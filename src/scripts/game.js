@@ -160,9 +160,6 @@ export class Game {
         // get the current player and move their token to the target square
         this.currentPlayer.movePlayer(this, `sq-${targetNum}`)
 
-        // check which square the player landed in, handle appropriate logic
-        this.handleNewPlayerPos();
-
         // Switch to the next player and end the turn logic
         
         this.mainButton.addEventListener("click", endTurn);

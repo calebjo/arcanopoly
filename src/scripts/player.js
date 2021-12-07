@@ -186,6 +186,8 @@ export class Player {
             if (i < squaresToMove) {
                 game.traverseSquare(playerObject, traversedSquare)
                 setTimeout(delayedTimeout, 70, (i + 1))
+            } else {
+                game.handleNewPlayerPos(); // after player lands on square, resolve square landing
             }
         }
 
@@ -203,6 +205,8 @@ export class Player {
         // remove the current player from the playersOn of the previous square, add to target playersOn
         previousSquareObject.playersOn.splice(previousSquareObject.playersOn.indexOf(playerObject), 1)
         targetSquareObject.playersOn.push(playerObject)
+        // check which square the player landed in, handle appropriate logic
+        
     }
 
     makeTarget(){
