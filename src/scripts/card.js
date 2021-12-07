@@ -15,7 +15,7 @@ export class Card {
 
     addToScreen(){
         // adds this card to the cards that display on the board
-        console.log('In addToScreen()')
+        // console.log('In addToScreen()')
         const myHand = document.getElementsByClassName('my-hand')[0]
         const newCardEle = document.createElement('div')
         newCardEle.classList.add('my-card')
@@ -29,7 +29,7 @@ export class Card {
 
     removeFromScreen(){
         // removes this card from the cards that display on the board
-        console.log('In removeFromScreen()')
+        // console.log('In removeFromScreen()')
         const thisCardEle = document.getElementById(`card-${this.id}`)
         thisCardEle.remove()
     }

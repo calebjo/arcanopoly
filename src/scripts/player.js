@@ -182,12 +182,13 @@ export class Player {
         delayedTimeout(0)
         function delayedTimeout(i) {
             let traversedSquare = game.board.squares[(playerCurrentSquare + i) % 40]
-            console.log(traversedSquare)
+            // console.log(traversedSquare)
             if (i < squaresToMove) {
                 game.traverseSquare(playerObject, traversedSquare)
                 setTimeout(delayedTimeout, 70, (i + 1))
             } else {
-                game.handleNewPlayerPos(); // after player lands on square, resolve square landing
+                // check which square the player landed in, handle appropriate logic (handled after landing)
+                game.handleNewPlayerPos();
             }
         }
 
@@ -199,14 +200,11 @@ export class Player {
         // remove playerTokenEle (the token) from old parent square, add to new parent square
         playerTokenEle.parentElement.removeChild(playerTokenEle)
         targetSquareEle.appendChild(playerTokenEle)
-
         // lastly, set player's current square to new coord and add player to square's occupants
         playerObject.currentSquare = targetPos
         // remove the current player from the playersOn of the previous square, add to target playersOn
         previousSquareObject.playersOn.splice(previousSquareObject.playersOn.indexOf(playerObject), 1)
         targetSquareObject.playersOn.push(playerObject)
-        // check which square the player landed in, handle appropriate logic
-        
     }
 
     makeTarget(){

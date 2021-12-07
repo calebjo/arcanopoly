@@ -1,3 +1,4 @@
+import { generatePropertyBuy } from "./generateUI";
 
 // handle individual logic for a player landing on any square
 export function landOnSquare(game, squareType, square){
@@ -46,6 +47,7 @@ export function landOnSquare(game, squareType, square){
     function landOnDungeon(){
         // current player goes to the "just visiting" area of the dungeon
         console.log('You are in landOnDungeon()')
+        console.log("Thankfully, you're just visiting!")
     }
 
     function landOnMovement(){
@@ -54,6 +56,22 @@ export function landOnSquare(game, squareType, square){
         // else if 'forward' type, reroll your dice and go forward that amount
         // else if 'backward' type, reroll your dice and go backward that amount
         console.log('You are in landOnMovement()')
+        switch (square.moveType) {
+            case 'dungeon':
+                // go to the dungeon as a prisoner
+                console.log("You're going straight to the dungeon!")
+                // game.imprison(game.currentPlayer)
+                break;
+            case 'forward':
+                // reroll dice and go forward that amount
+                console.log("Forward movement! Roll the dice again!")
+                game.allowDiceRoll()
+                break;
+            case 'backward':
+                // reroll dice and go backward that amount
+                console.log("Backward movement...Roll the dice to go back.")
+                break;
+        }
     }
 
     function landOnProperty(){
@@ -75,8 +93,9 @@ export function landOnSquare(game, squareType, square){
                 square.owner.changeGold(square.rent)
                 console.log(`${game.currentPlayer.name} paid ${square.owner.name} ${square.rent} gold.`)
             }
-        } else {
+        } else {  
             if (game.currentPlayer.gold > square.price) {
+                // generatePropertyBuy(game, square) // generate UI element
                 let buyProp = confirm(`Would you like to buy ${square.name}?`)
                 if (buyProp) {
                     // charge player, then transfer property ownership

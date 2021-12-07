@@ -63,10 +63,6 @@ export class Game {
         const moonDeck = new MoonDeck(1, moonDeckEle);
         this.decks.push(sunDeck)
         this.decks.push(moonDeck)
-
-        console.log(sunDeck)
-        console.log(moonDeck)
-
         // -------------------------------------------------------------------------
         // Play pop sound on clicking either the add player button or main button
         this.mainButton.addEventListener('click', playButtonClickSound)
@@ -106,24 +102,18 @@ export class Game {
         let that = this
         console.log(`${this.currentPlayer.name} is playing a turn!`) // DEBUG
         this.turnNum += 1
-        // change center button to 'Roll'
-        this.mainButton.children[0].innerText = 'Roll'
 
         // Change the elements of the middle hand area to only contain the current player's cards
         this.showCurrentPlayerHand();
         // highlight the current player with a DOM element
         this.highlightNewPlayer();
 
-
         // Whenever a card is grabbed and placed in the correct position, "play" the card.
         // MVP: just click a card to activate it
-
         // If the current player has a hand, get all the cards within and add event listener
-        console.log(this.currentPlayer.hand.length)
         
         if (this.currentPlayer.hand.length > 0) {
             const cardClickable = document.querySelectorAll(".my-card")
-            console.log(cardClickable)
             for (let i = 0; i < cardClickable.length; i++){
                 cardClickable[i].addEventListener("click", () =>{
                     that.playThisCard(cardClickable[i])
@@ -131,25 +121,8 @@ export class Game {
             }
         }
         
-        // ----------------------------------------------------------------------------------------
         // when 'Roll' is clicked, roll the dice
-        this.mainButton.addEventListener("click", callRoll)
-        function callRoll(){
-            // Deselect any target players from cards that were played
-            for (let i = 0; i < that.players.length; i++){
-                let playerEle = document.getElementById(`p${that.players[i].turnId}`)
-                console.log(playerEle.classList)
-                // if (playerEle.classList.includes('selected')){
-                //     playerEle.classList.remove('selected', 'on', 'off')
-                // }
-            }
-            // Roll the dice
-            that.diceRoll = that.handleDiceRoll.call(that);
-            that.mainButton.children[0].innerText  = 'End'
-            that.mainButton.removeEventListener("click", callRoll);
-            // Continue with the turn
-            that.postRollTurn();
-        }
+        this.allowDiceRoll();
     }
 
     postRollTurn(){
@@ -161,12 +134,16 @@ export class Game {
         this.currentPlayer.movePlayer(this, `sq-${targetNum}`)
 
         // Switch to the next player and end the turn logic
-        
+        this.endGameTurn()
+    }
+
+    // -------------------------------------------------------------------------------
+    // Game logic outside of loop
+
+    endGameTurn() {
         this.mainButton.addEventListener("click", endTurn);
         let that = this;
         function endTurn(){
-            console.log(that)
-            console.log(that.mainButton)
             // remove end turn interaction, hide player-specific DOM elements
             that.mainButton.removeEventListener("click", endTurn);
             that.hideCurrentPlayerHand();
@@ -190,13 +167,9 @@ export class Game {
         }
     }
 
-    // -------------------------------------------------------------------------------
-    // Game logic outside of loop
-
     handleNewPlayerPos() {
         const newPos = this.currentPlayer.currentSquare
         const newSquare = this.board.squares[newPos]
-
         console.log(newSquare)
  
         // check what kind of square the player landed on
@@ -259,6 +232,18 @@ export class Game {
             thisCardObject.play();
             confirmButton.removeEventListener("click", playAndReset)
             confirmButton.remove()
+            // deselect all selected players
+            for (let i = 0; i < playerTurns.children.length; i++){
+                if (playerTurns.children[i].classList.contains('selected')) {
+                    playerTurns.children[i].classList.remove('selected')
+                }
+                if (playerTurns.children[i].classList.contains('on')) {
+                    playerTurns.children[i].classList.remove('on')
+                }
+                if (playerTurns.children[i].classList.contains('off')) {
+                    playerTurns.children[i].classList.remove('off')
+                }
+            }
         }
     }
 
@@ -284,12 +269,27 @@ export class Game {
         card.targetPlayers = targets
     }
 
+    allowDiceRoll() {
+        // change center button to 'Roll'
+        this.mainButton.children[0].innerText = 'Roll'
+
+        let that = this
+        this.mainButton.addEventListener("click", callRoll)
+        function callRoll(){
+            // Roll the dice
+            that.diceRoll = that.handleDiceRoll.call(that);
+            that.mainButton.children[0].innerText  = 'End'
+            that.mainButton.removeEventListener("click", callRoll);
+            // Continue with the turn
+            that.postRollTurn();
+        }
+    }
+
     handleDiceRoll(){
         // when Roll button is clicked, calculate dice to roll and roll them
         console.log(`Rolling dice for ${this.currentPlayer.name}!`) // DEBUG
 
         let diceRoll = 0;
-
         let playerDiceNum = this.currentPlayer.diceNum
         let playerMax = this.currentPlayer.diceMax
 
@@ -321,7 +321,6 @@ export class Game {
         thisDieRollEmbed.setAttribute('src', `./assets/images/dice-${rollNum}.svg`)
         thisDieRollEle.appendChild(thisDieRollEmbed)
         dieRollParent.appendChild(thisDieRollEle)
-        console.log('In displayDieRoll()')
     }
 
     hideDiceRolls(){
@@ -330,13 +329,10 @@ export class Game {
         while (dieRollChildren.firstChild) {
             dieRollChildren.removeChild(dieRollChildren.firstChild);
         }
-
-        console.log('In hideDiceRolls()')
     }
 
     showCurrentPlayerHand() {
         // shows the cards in the current player's hand (INVOKE AT TURN BEGIN)
-        console.log('Showing the hand of this player...')
         for (let i = 0; i < this.currentPlayer.hand.length; i++){
             this.currentPlayer.hand[i].addToScreen();
         }
@@ -344,7 +340,6 @@ export class Game {
 
     hideCurrentPlayerHand() {
         // hides the cards in the current player's hand (INVOKE AT TURN END)
-        console.log('Hiding the hand of this player...')
         for (let i = 0; i < this.currentPlayer.hand.length; i++){
             this.currentPlayer.hand[i].removeFromScreen();
         }

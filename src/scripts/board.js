@@ -12,7 +12,6 @@ import { CastleSquare } from "./square";
 import { DeckSquare } from "./square";
 
 // constructor that calls createBoard
-
 // createBoard function that maps the DOM elements to Square node objects
 
 export class Board {
