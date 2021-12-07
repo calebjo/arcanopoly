@@ -467,7 +467,7 @@ html, body {
 }
 
 .new-sun-card {
-    animation: sun-card 1s ease-out;
+    animation: sun-card 1s ease-in-out;
 }
 
 @keyframes sun-card {
@@ -477,13 +477,14 @@ html, body {
     }
 
     to {
-        transform: translateY(200px) translateX(75px);
+        z-index: 200;
+        transform: translateY(200px) translateX(75px) rotateX(.2turn);
         opacity: 0;
     }
 }
 
 .new-moon-card {
-    animation: moon-card 1s ease-out;
+    animation: moon-card 1s ease-in-out;
 }
 
 @keyframes moon-card {
@@ -493,7 +494,8 @@ html, body {
     }
 
     to {
-        transform: translateY(200px) translateX(-75px);
+        z-index: 200;
+        transform: translateY(200px) translateX(-75px)  rotateX(.2turn);
         opacity: 0;
     }
 }
@@ -516,6 +518,17 @@ html, body {
     justify-content: center;
     align-items: center;
     transition: transform .3s ease-in-out;
+    animation: card-fade 0.7s ease-in;
+}
+
+@keyframes card-fade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .my-card embed{

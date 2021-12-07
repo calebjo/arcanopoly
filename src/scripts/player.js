@@ -93,7 +93,7 @@ export class Player {
                 src: ['./assets/sounds/vg-bonus.wav']
             });
             // Play the sound at the start of the game.
-            buyPropSound.volume(0.35);
+            buyPropSound.volume(0.25);
             buyPropSound.play();
         } else {
             let propIdx = this.properties.indexOf(property);
