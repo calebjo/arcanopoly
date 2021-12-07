@@ -15,15 +15,22 @@ export class ComputerPlayer {
         this.buildPlayerEle(startingGold, turnId, name, sprite);
     }
 
-    pressButton() {
-
+    pressButton(button) {
+        // automatically presses the Roll, End, and Confirm buttons
+        button.click();
     }
 
     buyProperty() {
-
+        let realConfirm = window.confirm;
+        window.confirm = function() {
+            window.confirm = realConfirm;
+            return true;
+        };
+        // click(picture element);
+        // Refactor if implementing actual UI instead of confirm box
     }
 
     playCard() {
-
+        // when the computer draws a card, immediately play it
     }
 }

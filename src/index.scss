@@ -215,7 +215,7 @@ html, body {
     position: fixed;
     width: 3rem;
     height: 7rem;
-    left: 13%;
+    left: 65px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     background:rgb(211, 185, 116);
@@ -290,7 +290,7 @@ html, body {
 
 .middle-content {
     display: flex;
-    z-index: 2;
+    // z-index: 30;
     aspect-ratio: 1 / 1;
     outline-offset: -2px;
     outline: 8px solid rgb(211, 185, 116);
@@ -447,6 +447,7 @@ html, body {
 }
 
 .my-card:hover {
+    z-index: 31;
     transform: scale(2);
 }
 
