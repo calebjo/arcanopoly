@@ -104,8 +104,13 @@ export function landOnSquare(game, squareType, square){
                     // change property colors on purchase
                     let embedded = square.domRef.children[0]
                     // super ugly, change later to be player's colors
-                    embedded.style.filter = 'hue-rotate(40deg)'+'contrast(170%)'+'saturate(150%)'
-                    square.domRef.style.background = '#c660fc'
+                    // embedded.style.filter = 'hue-rotate(40deg)'+'contrast(170%)'+'saturate(150%)'
+                    let playerColor = game.currentPlayer.sprite.split('-')[1].split('.')[0] // (e.g 'green' or 'cyan')
+                    embedded.style.background = playerColor
+                    embedded.style.borderRadius = '4rem'
+                    embedded.style.width = '4rem';
+                    embedded.style.height = '4rem';
+                    embedded.style.boxShadow = '0 0 8px rgba(0,0,0,0.85)'
                 }
             } else {
                 console.log('Not enough gold to buy the property')

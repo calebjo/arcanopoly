@@ -184,11 +184,13 @@ export class Player {
             let traversedSquare = game.board.squares[(playerCurrentSquare + i) % 40]
             if (i < squaresToMove) {
                 game.traverseSquare(playerObject, traversedSquare)
+                console.log('After traverseSquare')
                 setTimeout(delayedTimeout, 70, (i + 1))
             } else {
                 // check which square the player landed in, handle appropriate logic (handled after landing)
                 game.handleNewPlayerPos();
             }
+            console.log('After setTimeout calls')
         }
 
         // delayedColorChange(0)

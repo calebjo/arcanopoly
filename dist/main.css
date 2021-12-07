@@ -519,8 +519,8 @@ svg {
 
 /* Svg sizing */
 .row-horizontal embed, .row-vertical embed {
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
 }
 
 /* Svg positions for each row */
