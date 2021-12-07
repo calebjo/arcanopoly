@@ -119,6 +119,19 @@ html, body {
     margin-bottom: 24px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+    animation: append-player 0.3s ease-out;
+}
+
+@keyframes append-player {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 .player-gold {
@@ -696,6 +709,8 @@ svg {
 //---------------------------------------------------------------------
 // POPUPS, TOOLTIPS, ETC
 
+// -----------------------
+// Property buying
 .property-buy-popup {
     display: flex;
     flex-direction: column;
@@ -745,4 +760,25 @@ svg {
 
 button:hover {
     cursor: pointer;
+}
+
+// -----------------------
+// Gold change notification
+
+.gold-notif {
+    font-family: beleren;
+    font-size: 40px;
+    color: rgb(255, 199, 14);
+    animation: gold-fade 2s ease-in-out;
+    text-shadow: 0 0 4px rgba(2, 2, 10, 0.9);
+}
+
+@keyframes gold-fade {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
 }

@@ -1,5 +1,6 @@
+import { Player } from "./player";
 
-export class ComputerPlayer {
+export class ComputerPlayer extends Player{
     constructor(startingGold, turnId, name, sprite) {
         super(startingGold, turnId, name, sprite)
         this.currentSquare = 0; // Start at the tavern;

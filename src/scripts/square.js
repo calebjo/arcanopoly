@@ -66,10 +66,11 @@ export class PropertySquare extends Square {
     }
 
     addToScreen() {
-        let thisPlayerProperties = document.getElementsByClassName('my-prop-list')[0]
+        const thisPlayerProperties = document.getElementsByClassName('my-prop-list')[0]
         // add to DOM
         const newProp = document.createElement('div')
         newProp.classList.add('my-property')
+        newProp.setAttribute('id', `${this.position}`) // id is the property square's position
         const newPropName = document.createElement('div')
         newPropName.classList.add('my-prop-name')
         newPropName.innerText = `${this.name}`;
@@ -96,8 +97,9 @@ export class PropertySquare extends Square {
     }
 
     removeFromScreen() {
-        let thisPlayerProperties = document.getElementsByClassName('my-prop-list')[0]
-        thisPlayerProperties.removeChild(this.domRef)
+        const thisPlayerProperties = document.getElementsByClassName('my-prop-list')[0]
+        const thisProperty = document.getElementById(`${this.position}`)
+        thisPlayerProperties.removeChild(thisProperty)
     }
 }
 

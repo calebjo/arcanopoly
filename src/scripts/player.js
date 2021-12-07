@@ -3,6 +3,8 @@
 // 
 // Players belong to a game instance
 
+import { animateGoldChange } from "./generateAnimations";
+
 export class Player {
     constructor(startingGold, turnId, name, sprite) {
         this.gold = startingGold;
@@ -60,12 +62,16 @@ export class Player {
         playerTurns.appendChild(newPlayer);
     }
 
+    // takes in a number (positive for gain, negative for loss) to charge a player
+    // adds a fading notification near gold counts to show amount gained/lost
     changeGold(number){
         if (this.gold + number <= 0){
             this.gold = 0
-            this.bankruptMe() // bankrupts a player
-        } else { // add/substract gold
+            animateGoldChange(this, number)
+            this.bankruptMe()
+        } else { // add/substract gold as normal
             this.gold += number;
+            animateGoldChange(this, number)
         }
         
         // change DOM

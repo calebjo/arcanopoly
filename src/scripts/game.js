@@ -94,8 +94,10 @@ export class Game {
         console.log(`I own these properties: ${this.currentPlayer.properties}`) // DEBUG
         this.turnNum += 1
 
-        // Show the current player's cards
+        // Show current player's specific DOM elements (hand, properties)
         this.showCurrentPlayerHand();
+        this.showCurrentPlayerProperties();
+
         // Highlight the current player with DOM changes
         this.highlightThisPlayer();
 
@@ -138,6 +140,7 @@ export class Game {
             // remove end turn interaction, hide player-specific DOM elements
             that.mainButton.removeEventListener("click", endTurn);
             that.hideCurrentPlayerHand();
+            that.hideCurrentPlayerProperties();
             that.hideDiceRolls();
             that.deHighlightPlayer();
 
@@ -351,6 +354,20 @@ export class Game {
         // hides the cards in the current player's hand (INVOKE AT TURN END)
         for (let i = 0; i < this.currentPlayer.hand.length; i++){
             this.currentPlayer.hand[i].removeFromScreen();
+        }
+    }
+
+    showCurrentPlayerProperties(){
+        // shows the current player's properties in the player's "my properties" window
+        for (let i = 0; i < this.currentPlayer.properties.length; i++){
+            this.currentPlayer.properties[i].addToScreen();
+        }
+    }
+
+    hideCurrentPlayerProperties(){
+        // hides the current player's properties in the player's "my properties" window
+        for (let i = 0; i < this.currentPlayer.properties.length; i++){
+            this.currentPlayer.properties[i].removeFromScreen();
         }
     }
 
