@@ -7,7 +7,7 @@ import { PropertyCard } from "./card";
 import { PropertySquare, TavernSquare } from "./square";
 
 export class Player {
-    constructor(startingGold, turnId, name, sprite){
+    constructor(startingGold, turnId, name, sprite) {
         this.gold = startingGold;
         this.turnId = turnId;
         this.name = name;
@@ -230,6 +230,12 @@ export class Player {
         // change player element styles to grayed out. Skip player on every turn after.
         const playerEle = document.getElementById(`p${this.turnId}`);
         playerEle.style.background = '#501313'
+
+        // remove each of the player's properties from their ownership
+        for (let i = 0; i < this.properties.length; i++) {
+            this.changeProperty(this.properties[i], false)
+        }
+
         this.bankrupt = true
         console.log('I went bankrupt....')
     }
