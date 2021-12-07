@@ -26,3 +26,7 @@ export function animateGoldChange(player, number){
         if (i < 1) {setTimeout(delayRemove, 2000, (i + 1))}
     }
 }
+
+export function animateDeckCreate(game) {
+    
+}

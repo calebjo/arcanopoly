@@ -339,6 +339,22 @@ html, body {
     border-radius: 8px;
 }
 
+.sun-deck, .moon-deck {
+    animation: deck-create 1s;
+}
+
+@keyframes deck-create {
+    from {
+        transform: perspective(700px) translate3d(0, 100px, 100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: perspective(0) translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+
 .deck1-empty embed, .deck2-empty embed {
     position: fixed;
 }
@@ -372,6 +388,19 @@ html, body {
     align-items: center;
     width: 4rem;
     height: 4rem;
+    animation: dice-create 0.4s ease-out;
+}
+
+@keyframes dice-create {
+    from {
+        transform: perspective(700px) translate3d(0, 100px, 100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: perspective(0) translate3d(0, 0, 0);
+        opacity: 1;
+    }
 }
 
 .dice embed {
