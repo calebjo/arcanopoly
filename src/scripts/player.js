@@ -16,9 +16,11 @@ export class Player {
         this.diceNum = 2;
         this.diceMax = 6;
         this.tavernMod = 1;
+        this.rerolls = 0;
         this.properties = [];
         this.hand = [];
         this.equipment = [];
+        this.bankrupt = false;
         this.buildPlayerEle(startingGold, turnId, name, sprite);
     }
 
@@ -62,10 +64,16 @@ export class Player {
     }
 
     changeGold(number){
-        this.gold += number;
+        if (this.gold + number <= 0){
+            this.gold = 0
+            this.bankruptMe() // bankrupts a player
+        } else { // add/substract gold
+            this.gold += number;
+        }
+        
         // change DOM
-        const thisPlayerGold = document.getElementById(`p${this.turnId}`)
-        thisPlayerGold.children[1].innerText = `${this.gold} gold`
+        const thisPlayerEle = document.getElementById(`p${this.turnId}`)
+        thisPlayerEle.children[1].innerText = `${this.gold} gold`
     }
 
     // takes in a target square (Property object) and a boolean for gaining/losing it
@@ -160,6 +168,7 @@ export class Player {
         // parses the target square id (e.g. 'sq-32') into a position number
         // const targetPos = parseInt(target.split('-')[1])
         const squaresToMove = game.diceRoll
+        let originalColor = null;
 
         console.log(`${game.currentPlayer.name} has ${squaresToMove} squares to move.`) // DEBUG
         
@@ -169,7 +178,9 @@ export class Player {
             if (i < squaresToMove) {
                 game.traverseSquare(playerObject, traversedSquare)
 
-                console.log('Color changes here')
+                // store original color for later
+                originalColor = traversedSquare.domRef.style.backgroundColor; 
+                // change square color
                 let playerColor = game.currentPlayer.sprite.split('-')[1].split('.')[0] // (e.g 'green' or 'cyan')
                 traversedSquare.domRef.style.backgroundColor = playerColor
 
@@ -188,14 +199,18 @@ export class Player {
                 previousSquareObject.playersOn.splice(previousSquareObject.playersOn.indexOf(playerObject), 1)
                 targetSquareObject.playersOn.push(playerObject)
 
-                setTimeout(delayedTimeout, 70, (i + 1)) // recursively call again until target is reached
+                setTimeout(delayedTimeout, 80, (i + 1)) // recursively call again until target is reached
 
             } else { // player has landed
                 // check which square the player landed in, handle appropriate logic
                 game.handleNewPlayerPos();
             }
-            console.log('Color changes BACK here')
-            
+
+            changeColorBack(0)
+            function changeColorBack(i) {
+                if (i === 1){ traversedSquare.domRef.style.backgroundColor = originalColor }
+                if (i < 1) {setTimeout(changeColorBack, 320, (i + 1))}
+            }
         }
     }
 
@@ -209,5 +224,13 @@ export class Player {
         // removes the underglow from the makeTarget function, since the player has been deselected
         const playerEle = document.getElementById(`p${this.turnId}`);
         playerEle.classList.add('selected', 'off')
+    }
+
+    bankruptMe(){
+        // change player element styles to grayed out. Skip player on every turn after.
+        const playerEle = document.getElementById(`p${this.turnId}`);
+        playerEle.style.background = '#501313'
+        this.bankrupt = true
+        console.log('I went bankrupt....')
     }
 }

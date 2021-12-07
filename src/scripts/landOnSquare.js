@@ -34,7 +34,7 @@ export function landOnSquare(game, squareType, square){
         console.log('You are in landOnTavern()')
 
         if (game.turnNum > 1){
-            game.currentPlayer.gold += 200;
+            game.currentPlayer.changeGold((200*game.currentPlayer.tavernMod), true)
             console.log(`${game.currentPlayer.name} has gained 200 gold for entering the tavern.`)
         }
     }
@@ -109,6 +109,7 @@ export function landOnSquare(game, squareType, square){
                     embedded.style.width = '3.5rem';
                     embedded.style.height = '3.5rem';
                     embedded.style.boxShadow = '0 0 8px rgba(0,0,0,0.85)'
+                    square.domRef.style.background = 'green' // happens AFTER trail ends
                 }
             } else {
                 console.log('Not enough gold to buy the property')

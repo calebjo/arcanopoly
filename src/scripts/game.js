@@ -80,9 +80,6 @@ export class Game {
 
             tavern.appendChild(player)
             player.appendChild(playerIcon)
-
-            // Set each player token position to the tavern (sq-0)
-            // this.players[i].movePlayer(this, 'sq-0')
         }
 
         // then play a turn of the game
@@ -92,6 +89,7 @@ export class Game {
 
     playTurn(){
         let that = this
+
         console.log(`${this.currentPlayer.name} is playing a turn!`) // DEBUG
         this.turnNum += 1
 
@@ -141,12 +139,25 @@ export class Game {
             that.hideCurrentPlayerHand();
             that.hideDiceRolls();
             that.deHighlightPlayer();
-            // cycle to the next player
+
+            // cycle to the next player, skipping if bankrupt
             let playerCount = that.players.length;
             let currentPlayerIdx = that.players.indexOf(that.currentPlayer);
             let nextPlayerIdx = (currentPlayerIdx + 1) % playerCount;
-            that.currentPlayer = that.players[nextPlayerIdx];
-    
+            let nextPlayer = that.players[nextPlayerIdx]
+
+            if (!(nextPlayer.bankrupt)) {
+                console.log('Next player is not bankrupt.')
+                that.currentPlayer = nextPlayer
+            }
+            // skip if bankrupt
+            while (nextPlayer.bankrupt) {
+                console.log(`Skipping the bankrupt player ${nextPlayer.name}`)
+                nextPlayerIdx = (nextPlayerIdx + 1) % playerCount;
+                that.currentPlayer = that.players[nextPlayerIdx];
+                nextPlayer = that.currentPlayer
+            }
+
             console.log(`The next player will be ${that.currentPlayer.name}.`) // DEBUG
             console.log('End of the turn.')// DEBUG
     
@@ -154,7 +165,13 @@ export class Game {
             if (!that.isWon()){ 
                 that.playTurn() 
             } else {
-                that.gameOver();
+                let winner = null;
+                for (let i = 0; i < that.players.length; i++){
+                    if (that.players[i].gold > 0){
+                        winner = that.players[i];
+                    }
+                }
+                that.gameOver(winner);
             }
         }
     }
@@ -195,9 +212,6 @@ export class Game {
 
     traverseSquare(playerObject, traversedSquare){
         // traverses each square as a player moves
-
-        // changes the player's position to the center of the traversed square
-
         // if tavern is traversed, give player gold
         if (traversedSquare instanceof TavernSquare && this.turnNum > this.players.length) {
             playerObject.changeGold((100 * playerObject.tavernMod), true)
@@ -359,19 +373,22 @@ export class Game {
         // check if the game has been won by a player (all other players have bankrupted)
         let gameWon = false;
 
-        for (let i = 0; i < this.players.length; i++){
-            let thisPlayer = this.players[i];
-
-            if (thisPlayer.gold > 0){
-                gameWon = false;
+        let bankruptCount = 0;
+        for (let i = 0; i < this.players.length; i++) {
+            if (this.players[i].gold <= 0){
+                bankruptCount += 1;
             }
+        }
+        if (bankruptCount >= this.players.length - 1) {
+            gameWon = true;
         }
 
         return gameWon;
     }
 
-    gameOver(){
-        // PLACEHOLDER
+    gameOver(winner){
+        // The game is over! Overlay the entire HTML with a winning screen.
         console.log('The game is over!') // DEBUG
+        alert(`The game is over! ${winner.name} has won!!`)
     }
 }

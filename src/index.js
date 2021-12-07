@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // -------------------------------------------------------------
 
     // Game options (refactor later)
-    const startingGold = 1000;
+    const startingGold = 500;
     const allPlayers = [new Player(startingGold, 0, 'LoremDude', './assets/images/player-cyan.png')];
     const playerSprites = [
         './assets/images/player-blue.png',
