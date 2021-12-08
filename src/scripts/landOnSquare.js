@@ -113,8 +113,13 @@ export function landOnSquare(game, squareType, square){
         } else {  
             if (game.currentPlayer.gold > square.price) {
                 // generatePropertyBuy(game, square) // generate UI element
-                let buyProp = confirm(`Would you like to buy ${square.name}?`)
-                if (game.currentPlayer instanceof ComputerPlayer) {game.currentPlayer.buyProperty()}
+                // if computer, always buy the property
+                let buyProp = false;
+                if (game.currentPlayer instanceof ComputerPlayer) {
+                    buyProp = true
+                } else {
+                    buyProp = confirm(`Would you like to buy ${square.name}?`)
+                }
                 if (buyProp) {
                     // charge player, then transfer property ownership
                     game.currentPlayer.changeGold(-(square.price))

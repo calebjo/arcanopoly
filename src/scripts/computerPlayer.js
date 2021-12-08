@@ -20,14 +20,6 @@ export class ComputerPlayer extends Player{
         button.click();
     }
 
-    buyProperty() {
-        console.log('In buyProperty')
-        'use strict';
-        var oldConfirm = window.confirm;
-        window.confirm = function (e) {return true;}
-        // Refactor if implementing actual UI instead of confirm box
-    }
-
     playCard() {
         // when the computer draws a card, immediately play it
     }

@@ -62,13 +62,13 @@ document.addEventListener("DOMContentLoaded", () => {
         // add a random player with placeholder values
         const randomSprite = playerSprites[Math.floor(Math.random()*playerSprites.length)]
         const randomName = playerNames[Math.floor(Math.random()*playerNames.length)]
-
-        const player = new Player(startingGold, allPlayers.length, randomName, randomSprite);
         // const player = new ComputerPlayer(startingGold, allPlayers.length, randomName, randomSprite);
+        const player = new Player(startingGold, allPlayers.length, randomName, randomSprite);
         allPlayers.push(player);
         // ensure unique names and colors
-        playerSprites.splice(randomSprite, 1)
-        playerNames.splice(randomName, 1)
+        playerSprites.splice(playerSprites.indexOf(randomSprite), 1)
+        playerNames.splice(playerNames.indexOf(randomName), 1)
+
         if (allPlayers.length > 5) { 
             addPlayerButton.removeEventListener("click", addPlayer); 
             addPlayerButton.remove();

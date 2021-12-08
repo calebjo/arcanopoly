@@ -183,13 +183,18 @@ export class Player {
             } else { // player has landed
                 // check which square the player landed in, handle appropriate logic
                 game.handleNewPlayerPos();
-                game.handleComputerPress();
             }
 
             changeColorBack(0)
             function changeColorBack(i) {
                 if (i === 1){ traversedSquare.domRef.style.backgroundColor = originalColor }
                 if (i < 1) {setTimeout(changeColorBack, 320, (i + 1))}
+            }
+
+            delayComputerPress(0)
+            function delayComputerPress(i) {
+                if (i === 1){ game.handleComputerPress(); }
+                if (i < 1) {setTimeout(delayComputerPress, 1000, (i + 1))}
             }
         }
     }
