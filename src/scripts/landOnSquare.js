@@ -1,4 +1,4 @@
-import { generatePropertyBuy } from "./generateUI";
+import { generatePropertyBuy, generateShop, generateTome } from "./generateUI";
 import { ComputerPlayer } from "./computerPlayer";
 
 // handle individual logic for a player landing on any square
@@ -43,13 +43,13 @@ export function landOnSquare(game, squareType, square){
     function landOnTome(){
         // current player may discard any number of their cards and draw new ones from the moon deck
         console.log('You are in landOnTome()')
+        generateTome(game);
     }
 
     function landOnDungeon(){
         // current player goes to the "just visiting" area of the dungeon
         console.log('You are in landOnDungeon()')
         console.log("Thankfully, you're just visiting!")
-        square
     }
 
     function landOnMovement(){
@@ -63,11 +63,11 @@ export function landOnSquare(game, squareType, square){
                 // go to the dungeon as a prisoner
                 console.log("You're going straight to the dungeon!")
             
+                // MOVE PLAYER TO DUNGEON
                 const player = game.currentPlayer
                 const playerTokenEle = document.getElementById(`player-${player.turnId}`)
                 const dungeonEle = document.getElementById(`sq-10`)
                 const previousSquareObject = game.board.squares[player.currentSquare]
-                
                 playerTokenEle.parentElement.removeChild(playerTokenEle)
                 dungeonEle.appendChild(playerTokenEle)
                 // update Node objects
@@ -87,6 +87,7 @@ export function landOnSquare(game, squareType, square){
             case 'backward':
                 // reroll dice and go backward that amount
                 console.log("Backward movement...Roll the dice to go back.")
+                // DOES NOTHING ATM
                 break;
         }
     }
@@ -148,6 +149,7 @@ export function landOnSquare(game, squareType, square){
         //     on click, each "purchase" button will transfer the item to the player and charge them gp
         //     Any item that costs more than the player's gold total will be displayed in red + unclickable
         console.log('You are in landOnShop()')
+        generateShop(game);
     }
 
     function landOnCastle(){
