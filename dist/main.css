@@ -545,6 +545,7 @@ html, body {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   transition: transform 0.3s ease-in-out;
   animation: card-fade-in 0.4s ease-in;
 }

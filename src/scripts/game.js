@@ -122,8 +122,9 @@ export class Game {
     }
 
     postRollTurn(){
+        this.allowCardPlay();
         // when Roll is pressed, handle moving the player
-        this.handlePlayerMove()
+        this.handlePlayerMove();
 
         if (this.rolls > 0){
             // if rerolls remain, allow for dice rerolling
@@ -135,11 +136,9 @@ export class Game {
         }
     }
 
-    // -------------------------------------------------------------------------------
-    // Game logic outside of loop
-
     endGameTurn() {
         this.checkWinner(); // if there is a winner, game over
+        this.allowCardPlay();
         this.mainButton.addEventListener("click", endTurn);
         let that = this;
         function endTurn(){
@@ -266,6 +265,7 @@ export class Game {
         if (this.currentPlayer.hand.length > 0) {
             const cardClickable = document.querySelectorAll(".my-card")
             for (let i = 0; i < cardClickable.length; i++){
+                cardClickable[i].removeEventListener("click", playThis) // remove in case of duplicates
                 cardClickable[i].addEventListener("click", playThis)
                 function playThis(){
                     cardClickable[i].removeEventListener("click", playThis)
@@ -296,6 +296,7 @@ export class Game {
         function playAndReset(){
             thisCardObject.play();
             confirmButton.removeEventListener("click", playAndReset)
+            // SHOULD NOW ADD AN EVENT LISTENER FOR CANCELING THE CARD PLAY
             confirmButton.remove()
             // deselect all selected players
             for (let i = 0; i < playerTurns.children.length; i++){

@@ -50,8 +50,8 @@ export function generateShop(game){
     // equipment displays the icon and price
 
 
-    // const shop = document.createElement('div')
-    // shop.classList.add('shop')
+    const shop = document.createElement('div')
+    shop.classList.add('shop')
     
     function makeShopColumn(){
         // appends a "card column" child to the shop element
@@ -79,12 +79,12 @@ export function generateShop(game){
     const shopCol3 = document.createElement('div')
 
     // PLACEHOLDER: 
-    // alert("You've landed on a shop square! Unfortunately, it's under construction...")
+    alert("You've landed on a shop square! Unfortunately, it's under construction...")
 }
 
 export function generateTome(game){
     // PLACEHOLDER:
-    // alert("You've landed on a tome square! Unfortunately, it's under construction...")
+    alert("You've landed on a tome square! Unfortunately, it's under construction...")
 }
 
 export function generateGameEndScreen(winner){

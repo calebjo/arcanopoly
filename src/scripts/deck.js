@@ -5,6 +5,7 @@ import { MoneyCard } from "./card";
 import { PropertyCard } from "./card";
 import { MovementCard } from "./card";
 import { ModifierCard } from "./card";
+import { Game } from "./game";
 import { animateCardDraw } from "./generateAnimations";
 
 // generateDeck(type) function
@@ -28,7 +29,7 @@ export class Deck {
         }
     }
 
-    draw(player, amount) {
+    draw(game, player, amount) {
         for (let i = 0; i < amount; i++){
             if (player.hand.length > 7){
                 console.log('Player has too many cards!')
@@ -39,6 +40,7 @@ export class Deck {
             this.cards.splice(i, 1) // remove the card from the deck
             animateCardDraw(this, amount);
         }
+        game.allowCardPlay();
     }
 }
 
