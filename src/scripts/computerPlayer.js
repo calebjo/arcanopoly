@@ -12,7 +12,7 @@ export class ComputerPlayer extends Player{
         this.hand = [];
         this.equipment = [];
         this.bankrupt = false;
-        this.buildPlayerEle(startingGold, turnId, name, sprite);
+        // this.buildPlayerEle(startingGold, turnId, name, sprite);
     }
 
     pressButton(button) {
@@ -21,12 +21,10 @@ export class ComputerPlayer extends Player{
     }
 
     buyProperty() {
-        let realConfirm = window.confirm;
-        window.confirm = function() {
-            window.confirm = realConfirm;
-            return true;
-        };
-        // click(picture element);
+        console.log('In buyProperty')
+        'use strict';
+        var oldConfirm = window.confirm;
+        window.confirm = function (e) {return true;}
         // Refactor if implementing actual UI instead of confirm box
     }
 

@@ -183,6 +183,7 @@ export class Player {
             } else { // player has landed
                 // check which square the player landed in, handle appropriate logic
                 game.handleNewPlayerPos();
+                game.handleComputerPress();
             }
 
             changeColorBack(0)

@@ -163,8 +163,23 @@ html, body {
   margin: 2px;
   background: #10131c;
   border-radius: 2px;
+  animation: p-card 0.5s linear;
 }
 
+@keyframes p-card {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 .p-divider {
   display: flex;
   background: #1c2130;

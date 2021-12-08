@@ -1,5 +1,6 @@
 import {Game} from './scripts/game.js';
 import {Player} from './scripts/player.js';
+import {ComputerPlayer} from './scripts/computerPlayer.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     // -------------------------------------------------------------
@@ -63,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const randomName = playerNames[Math.floor(Math.random()*playerNames.length)]
 
         const player = new Player(startingGold, allPlayers.length, randomName, randomSprite);
+        // const player = new ComputerPlayer(startingGold, allPlayers.length, randomName, randomSprite);
         allPlayers.push(player);
         // ensure unique names and colors
         playerSprites.splice(randomSprite, 1)

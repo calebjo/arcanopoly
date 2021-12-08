@@ -8,6 +8,7 @@ import { Equipment } from "./equipment";
 import { landOnSquare } from "./landOnSquare";
 import { Howl, Howler } from 'howler';
 import { MoonDeck, SunDeck } from "./deck";
+import { ComputerPlayer } from "./computerPlayer";
 
 export class Game {
     constructor(players, startingGold){
@@ -94,38 +95,48 @@ export class Game {
         console.log(`${this.currentPlayer.name} is playing a turn!`) // DEBUG
         this.turnNum += 1
         // Add the player's rerolls to the dice roll num, if any
+        this.rolls = 1
         this.rolls += this.currentPlayer.rerolls
 
         // Show current player's specific DOM elements (hand, properties)
         this.showCurrentPlayerHand();
         this.showCurrentPlayerProperties();
-        this.highlightThisPlayer();
-
-        // Show a token that contains the number of dice rerolls that a player has (if greater than 0)
         this.showRerollToken();
+        this.highlightThisPlayer();
 
         // When a card is clicked, play it
         this.allowCardPlay();
-        // Change main button to "Roll". When clicked, rolls the dice.
-        this.allowDiceRoll();
+
+        // if the current player is imprisoned, they must pay 50 gold to get out (or lose)
+        const prisoners = this.board.squares[10].prisoners
+        if (prisoners.includes(this.currentPlayer)){
+            this.handleImprisoned();
+        } else {
+            // Change main button to "Roll". When clicked, rolls the dice.
+            this.allowDiceRoll();
+            this.handleComputerPress();
+        }
     }
 
     postRollTurn(){
         // move the current player based on the dice roll
         let targetNum = (this.currentPlayer.currentSquare + this.diceRoll) % 40;
+        // if the target is a movement square, give an extra reroll early (to account for timeout logic later)
+        if (targetNum === 4){ 
+            this.rolls += 1 
+            // this.showRerollToken()
+        }
         console.log(`${this.currentPlayer.name} will move to the ${targetNum}th square.`)
         // get the current player and move their token to the target square
         this.currentPlayer.movePlayer(this, `sq-${targetNum}`)
 
-        // check if there are any rerolls left on the dice
         if (this.rolls > 0){
-            // if so, allow for dice rerolling
-            this.allowDiceRoll()
-            // highlight the reroll counter token
-            console.log('AAAAAAAAAAAAAAAAAAAAAA')
+            // if rerolls remain, allow for dice rerolling
+            this.allowDiceRoll();
+            this.handleComputerPress();
         } else {
             // Switch to the next player and end the turn logic
-            this.endGameTurn()
+            this.endGameTurn();
         }
     }
 
@@ -177,6 +188,18 @@ export class Game {
                 }
                 that.gameOver(winner);
             }
+        }
+
+        this.handleComputerPress();
+    }
+
+    // -------------------------------------------------------------------------------
+
+    handleComputerPress() {
+        console.log('In handleComputerPress()')
+        if (this.currentPlayer instanceof ComputerPlayer) {
+            // if it's a computer player, press the button/auto confirm.
+            this.currentPlayer.pressButton(this.mainButton)
         }
     }
 
@@ -276,6 +299,26 @@ export class Game {
         }
     }
 
+    handleImprisoned(){
+        // change main button to "Pay", which costs 50 gold to get out of jail
+        console.log('In handleImprisoned')
+
+        this.mainButton.children[0].innerText = 'Pay'
+
+        let that = this
+        this.mainButton.addEventListener("click", freePlayer)
+        function freePlayer(){
+            // player pays 50 gold to get free, then ends turn
+            that.currentPlayer.changeGold(-50)
+            that.board.squares[10].prisoners.splice(that.currentPlayer, 1)
+
+            that.mainButton.removeEventListener("click", freePlayer)
+            that.mainButton.children[0].innerText  = 'End'
+            // Continue with the turn
+            that.postRollTurn();
+        }
+    }
+
     setCardTarget(card){
         // creates UI elements to highlight targettable players
         // on clicking a player (TOGGLE), they become a highlighted card target
@@ -305,6 +348,7 @@ export class Game {
         let that = this
         this.mainButton.addEventListener("click", callRoll)
         function callRoll(){
+            console.log(that.rolls)
             that.rolls -= 1
             that.hideRerollToken()
             that.showRerollToken()
@@ -312,8 +356,14 @@ export class Game {
             that.diceRoll = that.handleDiceRoll.call(that)
             that.mainButton.children[0].innerText  = 'End'
             that.mainButton.removeEventListener("click", callRoll)
-            // Continue with the turn
-            that.postRollTurn();
+            // Continue with the turn if there are no rolls left
+            console.log(that.rolls)
+            if (that.rolls <= 0) { 
+                console.log('Out of rolls!!!!')
+                that.postRollTurn(); 
+            } else {
+                console.log('More rolls to go!!!!!!!')
+            }
         }
     }
 
@@ -335,6 +385,7 @@ export class Game {
 
         console.log(`The dice roll was a ${diceRoll}!`) // DEBUG
         return diceRoll;
+        // return 2; // DEBUG ------------------ RETURN A SPECIFIC VALUE TO GUARANTEE SQUARE HITS
     }
 
     displayDieRoll(rollNum) {
@@ -365,7 +416,7 @@ export class Game {
             rerollToken.style.position = 'fixed'
             rerollToken.style.bottom = '31.5rem'
             rerollToken.style.left = '53rem'
-            rerollToken.innerText = `${this.rolls - 1}`
+            rerollToken.innerText = `${this.rolls-1}`
 
             diceContainer.appendChild(rerollToken)
         }

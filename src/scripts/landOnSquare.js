@@ -1,4 +1,5 @@
 import { generatePropertyBuy } from "./generateUI";
+import { ComputerPlayer } from "./computerPlayer";
 
 // handle individual logic for a player landing on any square
 export function landOnSquare(game, squareType, square){
@@ -71,16 +72,17 @@ export function landOnSquare(game, squareType, square){
                 dungeonEle.appendChild(playerTokenEle)
                 // update Node objects
                 player.currentSquare = 10
+                game.rolls = 0
                 previousSquareObject.playersOn.splice(previousSquareObject.playersOn.indexOf(player), 1)
                 square.playersOn.push(player)
-                square.prisoners.push(player)
+                game.board.squares[10].prisoners.push(player)
                 
                 break;
             case 'forward':
                 // reroll dice and go forward that amount
                 console.log("Forward movement! Roll the dice again!")
-                // game.rolls += 1
-                // game.allowDiceRoll()
+                game.rolls += 1
+                game.allowDiceRoll()
                 break;
             case 'backward':
                 // reroll dice and go backward that amount
@@ -112,6 +114,7 @@ export function landOnSquare(game, squareType, square){
             if (game.currentPlayer.gold > square.price) {
                 // generatePropertyBuy(game, square) // generate UI element
                 let buyProp = confirm(`Would you like to buy ${square.name}?`)
+                if (game.currentPlayer instanceof ComputerPlayer) {game.currentPlayer.buyProperty()}
                 if (buyProp) {
                     // charge player, then transfer property ownership
                     game.currentPlayer.changeGold(-(square.price))
