@@ -86,10 +86,10 @@ export class Game {
         console.log('The game has started!')
         this.playTurn()
     }
+    // ------------------------------------------------------------------------------------------------
+    // GAME LOOP LOGIC
 
     playTurn(){
-        let that = this
-
         console.log(`${this.currentPlayer.name} is playing a turn!`) // DEBUG
         console.log(`I own these properties: ${this.currentPlayer.properties}`) // DEBUG
         this.turnNum += 1
@@ -101,20 +101,9 @@ export class Game {
         // Highlight the current player with DOM changes
         this.highlightThisPlayer();
 
-        // Whenever a card is grabbed and placed in the correct position, "play" the card.
-        // MVP: just click a card to activate it
-        // If the current player has a hand, get all the cards within and add event listener
-        
-        if (this.currentPlayer.hand.length > 0) {
-            const cardClickable = document.querySelectorAll(".my-card")
-            for (let i = 0; i < cardClickable.length; i++){
-                cardClickable[i].addEventListener("click", () =>{
-                    that.playThisCard(cardClickable[i])
-                })
-            }
-        }
-        
-        // when 'Roll' is clicked, roll the dice
+        // When a card is clicked, play it
+        this.allowCardPlay();
+        // Change main button to "Roll". When clicked, rolls the dice.
         this.allowDiceRoll();
     }
 
@@ -183,7 +172,7 @@ export class Game {
     handleNewPlayerPos() {
         const newPos = this.currentPlayer.currentSquare
         const newSquare = this.board.squares[newPos]
-        console.log(newSquare)
+        console.log(newSquare) // player's target square
  
         // check what kind of square the player landed on
         switch (newSquare.constructor){
@@ -220,6 +209,23 @@ export class Game {
         if (traversedSquare instanceof TavernSquare && this.turnNum > this.players.length) {
             playerObject.changeGold((100 * playerObject.tavernMod), true)
             console.log('Gained 100 gold for passing the tavern!')
+        }
+    }
+
+    allowCardPlay(){
+        // Whenever a card is grabbed and placed in the correct position, "play" the card.
+        // MVP: just click a card to activate it
+        // If the current player has a hand, get all the cards within and add event listener to each
+        let that = this
+        if (this.currentPlayer.hand.length > 0) {
+            const cardClickable = document.querySelectorAll(".my-card")
+            for (let i = 0; i < cardClickable.length; i++){
+                cardClickable[i].addEventListener("click", playThis)
+                function playThis(){
+                    cardClickable[i].removeEventListener("click", playThis)
+                    that.playThisCard(cardClickable[i])
+                }
+            }
         }
     }
 

@@ -509,10 +509,10 @@ html, body {
   justify-content: center;
   align-items: center;
   transition: transform 0.3s ease-in-out;
-  animation: card-fade 0.7s ease-in;
+  animation: card-fade-in 0.4s ease-in;
 }
 
-@keyframes card-fade {
+@keyframes card-fade-in {
   from {
     opacity: 0;
   }
