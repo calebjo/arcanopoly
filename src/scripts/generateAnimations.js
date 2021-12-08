@@ -49,3 +49,19 @@ export function animateCardDraw(deck, amount){
         }
     }
 }
+
+// export function animateGameEndCoins(){
+//     // makes a cascase of coins fall from the sky during game end
+//     const coinContainer = document.createElement('div')
+//     coinContainer.classList.add('coin-container')
+
+//     coinGenerator(0)
+//     function coinGenerator(i) {
+//         // generate a coin with a random animation (Sass random properties)
+//         let thisCoin = document.createElement('embed')
+//         thisCoin.classList.append('coin-end-game')
+//         thisCoin.setAttribute('src', './assets/images/falling-coin.png')
+//         coinContainer.appendChild(thisCoin)
+//         setTimeout(coinGenerator, 300, (i+1))
+//     }
+// }

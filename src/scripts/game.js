@@ -9,6 +9,7 @@ import { landOnSquare } from "./landOnSquare";
 import { Howl, Howler } from 'howler';
 import { MoonDeck, SunDeck } from "./deck";
 import { ComputerPlayer } from "./computerPlayer";
+import { generateGameEndScreen } from "./generateUI";
 
 export class Game {
     constructor(players, startingGold){
@@ -92,6 +93,7 @@ export class Game {
     // GAME LOOP LOGIC
 
     playTurn(){
+        this.checkWinner(); // if there is a winner, game over
         console.log(`${this.currentPlayer.name} is playing a turn!`) // DEBUG
         this.turnNum += 1
         // Add the player's rerolls to the dice roll num, if any
@@ -110,6 +112,7 @@ export class Game {
         // if the current player is imprisoned, they must pay 50 gold to get out (or lose)
         const prisoners = this.board.squares[10].prisoners
         if (prisoners.includes(this.currentPlayer)){
+            this.rolls = 0
             this.handleImprisoned();
         } else {
             // Change main button to "Roll". When clicked, rolls the dice.
@@ -119,16 +122,8 @@ export class Game {
     }
 
     postRollTurn(){
-        // move the current player based on the dice roll
-        let targetNum = (this.currentPlayer.currentSquare + this.diceRoll) % 40;
-        // if the target is a movement square, give an extra reroll early (to account for timeout logic later)
-        if (targetNum === 4){ 
-            this.rolls += 1 
-            // this.showRerollToken()
-        }
-        console.log(`${this.currentPlayer.name} will move to the ${targetNum}th square.`)
-        // get the current player and move their token to the target square
-        this.currentPlayer.movePlayer(this, `sq-${targetNum}`)
+        // when Roll is pressed, handle moving the player
+        this.handlePlayerMove()
 
         if (this.rolls > 0){
             // if rerolls remain, allow for dice rerolling
@@ -144,6 +139,7 @@ export class Game {
     // Game logic outside of loop
 
     endGameTurn() {
+        this.checkWinner(); // if there is a winner, game over
         this.mainButton.addEventListener("click", endTurn);
         let that = this;
         function endTurn(){
@@ -167,15 +163,15 @@ export class Game {
             }
             // skip if bankrupt
             while (nextPlayer.bankrupt) {
+                if (that.players.every(player => player.bankrupt)) { 
+                    break;
+                }
                 console.log(`Skipping the bankrupt player ${nextPlayer.name}`)
                 nextPlayerIdx = (nextPlayerIdx + 1) % playerCount;
                 that.currentPlayer = that.players[nextPlayerIdx];
                 nextPlayer = that.currentPlayer
             }
 
-            console.log(`The next player will be ${that.currentPlayer.name}.`) // DEBUG
-            console.log('End of the turn.')// DEBUG
-    
             // if the game is not already won, play another turn
             if (!that.isWon()){ 
                 that.playTurn() 
@@ -188,6 +184,9 @@ export class Game {
                 }
                 that.gameOver(winner);
             }
+
+            console.log(`The next player will be ${that.currentPlayer.name}.`) // DEBUG
+            console.log('End of the turn.') // DEBUG
         }
 
         this.handleComputerPress();
@@ -201,6 +200,19 @@ export class Game {
             // if it's a computer player, press the button/auto confirm.
             this.currentPlayer.pressButton(this.mainButton)
         }
+    }
+
+    handlePlayerMove() {
+        // move the current player based on the dice roll
+        let targetNum = (this.currentPlayer.currentSquare + this.diceRoll) % 40;
+        // if the target is a movement square, give an extra reroll early (to account for timeout logic later)
+        if (targetNum === 4){ 
+            this.rolls += 1 
+            // this.showRerollToken()
+        }
+        console.log(`${this.currentPlayer.name} will move to the ${targetNum}th square.`)
+        // get the current player and move their token to the target square
+        this.currentPlayer.movePlayer(this, `sq-${targetNum}`)
     }
 
     handleNewPlayerPos() {
@@ -280,6 +292,7 @@ export class Game {
         playerTurns.appendChild(confirmButton)
          // When "Confirm" is clicked, play the card and reset the target UI
         confirmButton.addEventListener("click", playAndReset)
+        let that = this
         function playAndReset(){
             thisCardObject.play();
             confirmButton.removeEventListener("click", playAndReset)
@@ -296,6 +309,8 @@ export class Game {
                     playerTurns.children[i].classList.remove('off')
                 }
             }
+
+            that.checkWinner() // When a card is played, check to see if the game just ended
         }
     }
 
@@ -314,8 +329,8 @@ export class Game {
 
             that.mainButton.removeEventListener("click", freePlayer)
             that.mainButton.children[0].innerText  = 'End'
-            // Continue with the turn
-            that.postRollTurn();
+            // End the turn
+            that.endGameTurn();
         }
     }
 
@@ -385,7 +400,7 @@ export class Game {
 
         console.log(`The dice roll was a ${diceRoll}!`) // DEBUG
         return diceRoll;
-        // return 2; // DEBUG ------------------ RETURN A SPECIFIC VALUE TO GUARANTEE SQUARE HITS
+        // return 30; // DEBUG ------------------ RETURN A SPECIFIC VALUE TO GUARANTEE SQUARE HITS
     }
 
     displayDieRoll(rollNum) {
@@ -487,12 +502,31 @@ export class Game {
             gameWon = true;
         }
 
+        console.log(gameWon)
         return gameWon;
+    }
+
+    checkWinner(){
+        console.log('In game.checkWinner()')
+        if (this.isWon()) {
+            let winner = null;
+            for (let i = 0; i < this.players.length; i++){
+                if (this.players[i].gold > 0){
+                    winner = this.players[i];
+                }
+            }
+            this.gameOver(winner);
+        }
     }
 
     gameOver(winner){
         // The game is over! Overlay the entire HTML with a winning screen.
-        console.log('The game is over!') // DEBUG
-        alert(`The game is over! ${winner.name} has won!!`)
+        if (winner === null) {
+            console.log('Everyone lost!')
+            generateGameEndScreen(winner)
+        } else {
+            console.log('The game is over!') // DEBUG
+            generateGameEndScreen(winner)
+        }
     }
 }

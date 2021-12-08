@@ -87,19 +87,17 @@ export class Player {
             property.owner = this;
             // add to DOM
             property.addToScreen();
-
             // play Howler sound as the property changes
             const buyPropSound = new Howl({
                 src: ['./assets/sounds/vg-bonus.wav']
             });
-            // Play the sound at the start of the game.
             buyPropSound.volume(0.25);
             buyPropSound.play();
         } else {
             let propIdx = this.properties.indexOf(property);
             this.properties.splice(propIdx, 1);
             // remove from DOM
-            property.removeFromScreen();
+            // property.removeFromScreen();
         }
     }
 

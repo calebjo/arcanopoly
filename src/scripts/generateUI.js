@@ -43,3 +43,19 @@ export function generateSquareTooltip(game, square){
 export function generateTavernTooltip(game){
     // generates a tooltip to tell the player that they have passed the tavern while moving
 }
+
+export function generateGameEndScreen(winner){
+    console.log('Generating end game cover screen.....')
+    const outerWrapper = document.getElementsByClassName('outer-wrapper')[0]
+    const gameEndCover = document.createElement('div')
+    gameEndCover.classList.add('game-end-cover')
+
+    const gameEndText = document.createElement('div')
+    if (winner){
+        gameEndText.innerText = `Game over! ${winner.name} is the winner!`
+    } else {
+        gameEndText.innerText = `Game over! Everyone lost...`
+    }
+    gameEndCover.appendChild(gameEndText)
+    outerWrapper.appendChild(gameEndCover)
+}
