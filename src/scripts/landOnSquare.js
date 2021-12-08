@@ -48,23 +48,38 @@ export function landOnSquare(game, squareType, square){
         // current player goes to the "just visiting" area of the dungeon
         console.log('You are in landOnDungeon()')
         console.log("Thankfully, you're just visiting!")
+        square
     }
 
     function landOnMovement(){
         // check what type of movement square
         // if 'go to dungeon', go to dungeon as prisoner
-        // else if 'forward' type, reroll your dice and go forward that amount
-        // else if 'backward' type, reroll your dice and go backward that amount
+        // else if 'forward' type, reroll your dice and go forward that amount (ADD +1 TO GAME.ROLLS)
+        // else if 'backward' type, reroll your dice and go backward that amount (ADD +1 TO GAME.ROLLS)
         console.log('You are in landOnMovement()')
         switch (square.moveType) {
             case 'dungeon':
                 // go to the dungeon as a prisoner
                 console.log("You're going straight to the dungeon!")
-                // game.imprison(game.currentPlayer)
+            
+                const player = game.currentPlayer
+                const playerTokenEle = document.getElementById(`player-${player.turnId}`)
+                const dungeonEle = document.getElementById(`sq-10`)
+                const previousSquareObject = game.board.squares[player.currentSquare]
+                
+                playerTokenEle.parentElement.removeChild(playerTokenEle)
+                dungeonEle.appendChild(playerTokenEle)
+                // update Node objects
+                player.currentSquare = 10
+                previousSquareObject.playersOn.splice(previousSquareObject.playersOn.indexOf(player), 1)
+                square.playersOn.push(player)
+                square.prisoners.push(player)
+                
                 break;
             case 'forward':
                 // reroll dice and go forward that amount
                 console.log("Forward movement! Roll the dice again!")
+                // game.rolls += 1
                 // game.allowDiceRoll()
                 break;
             case 'backward':

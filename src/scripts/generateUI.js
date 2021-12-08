@@ -11,9 +11,11 @@ export function generatePropertyBuy(game, property) {
     const propertyBuyWindow = document.createElement('div')
     propertyBuyWindow.classList.add('property-buy-popup')
 
+    const propertyBuyTextContainer = document.createElement('div')
     const propertyBuyText = document.createElement('p')
     propertyBuyText.innerText = `Would you like to buy ${property.name} for ${property.price} gold?`
-    propertyBuyWindow.appendChild(propertyBuyText)
+    propertyBuyTextContainer.appendChild(propertyBuyText)
+    propertyBuyWindow.appendChild(propertyBuyTextContainer)
 
     const buttonContainer = document.createElement('div')
     buttonContainer.classList.add('button-container')

@@ -15,7 +15,7 @@ export class Player {
         this.diceNum = 2;
         this.diceMax = 6;
         this.tavernMod = 1;
-        this.rerolls = 0;
+        this.rerolls = 0; // Player's rerolls (increased by equipment)
         this.properties = [];
         this.hand = [];
         this.equipment = [];

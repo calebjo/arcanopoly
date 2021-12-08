@@ -8,7 +8,7 @@ export function animateGoldChange(player, number){
     const newGoldNotif = document.createElement('div')
     newGoldNotif.classList.add('gold-notif')
     newGoldNotif.style.position = 'fixed'
-    newGoldNotif.style.left = '9rem'
+    newGoldNotif.style.left = '13rem'
     
     if (number > 0) {
         newGoldNotif.innerText = `+${number}`

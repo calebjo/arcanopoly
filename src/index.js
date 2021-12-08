@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const allPlayers = [new Player(startingGold, 0, 'LoremDude', './assets/images/player-cyan.png')];
     const playerSprites = [
         './assets/images/player-blue.png',
-        './assets/images/player-cyan.png',
         './assets/images/player-green.png',
         './assets/images/player-orange.png',
         './assets/images/player-pink.png',
@@ -65,6 +64,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const player = new Player(startingGold, allPlayers.length, randomName, randomSprite);
         allPlayers.push(player);
+        // ensure unique names and colors
+        playerSprites.splice(randomSprite, 1)
+        playerNames.splice(randomName, 1)
+        if (allPlayers.length > 5) { 
+            addPlayerButton.removeEventListener("click", addPlayer); 
+            addPlayerButton.remove();
+        }
     }
     
     // the main button starts by saying "Start"

@@ -17,6 +17,7 @@ export class Game {
         this.currentPlayer = players[0];
         this.mainButton = document.getElementById('main-button');
         this.diceRoll = 0;
+        this.rolls = 1;
         this.board = new Board();
         this.decks = [];
     }
@@ -83,7 +84,7 @@ export class Game {
         }
 
         // then play a turn of the game
-        console.log('The game has started!')
+        console.log('The game has started!') // DEBUG
         this.playTurn()
     }
     // ------------------------------------------------------------------------------------------------
@@ -91,15 +92,17 @@ export class Game {
 
     playTurn(){
         console.log(`${this.currentPlayer.name} is playing a turn!`) // DEBUG
-        console.log(`I own these properties: ${this.currentPlayer.properties}`) // DEBUG
         this.turnNum += 1
+        // Add the player's rerolls to the dice roll num, if any
+        this.rolls += this.currentPlayer.rerolls
 
         // Show current player's specific DOM elements (hand, properties)
         this.showCurrentPlayerHand();
         this.showCurrentPlayerProperties();
-
-        // Highlight the current player with DOM changes
         this.highlightThisPlayer();
+
+        // Show a token that contains the number of dice rerolls that a player has (if greater than 0)
+        this.showRerollToken();
 
         // When a card is clicked, play it
         this.allowCardPlay();
@@ -111,12 +114,19 @@ export class Game {
         // move the current player based on the dice roll
         let targetNum = (this.currentPlayer.currentSquare + this.diceRoll) % 40;
         console.log(`${this.currentPlayer.name} will move to the ${targetNum}th square.`)
-
         // get the current player and move their token to the target square
         this.currentPlayer.movePlayer(this, `sq-${targetNum}`)
 
-        // Switch to the next player and end the turn logic
-        this.endGameTurn()
+        // check if there are any rerolls left on the dice
+        if (this.rolls > 0){
+            // if so, allow for dice rerolling
+            this.allowDiceRoll()
+            // highlight the reroll counter token
+            console.log('AAAAAAAAAAAAAAAAAAAAAA')
+        } else {
+            // Switch to the next player and end the turn logic
+            this.endGameTurn()
+        }
     }
 
     // -------------------------------------------------------------------------------
@@ -131,6 +141,7 @@ export class Game {
             that.hideCurrentPlayerHand();
             that.hideCurrentPlayerProperties();
             that.hideDiceRolls();
+            that.hideRerollToken();
             that.deHighlightPlayer();
 
             // cycle to the next player, skipping if bankrupt
@@ -294,10 +305,13 @@ export class Game {
         let that = this
         this.mainButton.addEventListener("click", callRoll)
         function callRoll(){
+            that.rolls -= 1
+            that.hideRerollToken()
+            that.showRerollToken()
             // Roll the dice
-            that.diceRoll = that.handleDiceRoll.call(that);
+            that.diceRoll = that.handleDiceRoll.call(that)
             that.mainButton.children[0].innerText  = 'End'
-            that.mainButton.removeEventListener("click", callRoll);
+            that.mainButton.removeEventListener("click", callRoll)
             // Continue with the turn
             that.postRollTurn();
         }
@@ -306,31 +320,24 @@ export class Game {
     handleDiceRoll(){
         // when Roll button is clicked, calculate dice to roll and roll them
         console.log(`Rolling dice for ${this.currentPlayer.name}!`) // DEBUG
+        // hide any previous roll dice
+        this.hideDiceRolls()
 
-        let diceRoll = 0;
         let playerDiceNum = this.currentPlayer.diceNum
         let playerMax = this.currentPlayer.diceMax
-
         // roll dice
-        diceRoll = this.rollDice(playerDiceNum, playerMax);
+        let diceRoll = 0;
+        for (let i = 0; i < playerDiceNum; i++){
+            let thisDieRoll = 1 + Math.floor(Math.random() * playerMax)
+            this.displayDieRoll(thisDieRoll) // SHOULD APPEND THE DIE TO MIDDLE DOM
+            diceRoll += thisDieRoll;
+        }
 
         console.log(`The dice roll was a ${diceRoll}!`) // DEBUG
         return diceRoll;
     }
 
-    rollDice(diceNum, max){
-        // returns the number of squares the player will move based on the dice roll
-        
-        let roll = 0;
-        for (let i = 0; i < diceNum; i++){
-            let thisDieRoll = 1 + Math.floor(Math.random() * max)
-            this.displayDieRoll(thisDieRoll) // SHOULD APPEND THE DIE TO MIDDLE DOM
-            roll += thisDieRoll;
-        }
-        return roll;
-    }
-
-    displayDieRoll(rollNum){
+    displayDieRoll(rollNum) {
         // displays a single die roll result on the DOM
         const dieRollParent = document.getElementsByClassName('my-dice')[0]
         const thisDieRollEle = document.createElement('div')
@@ -341,11 +348,33 @@ export class Game {
         dieRollParent.appendChild(thisDieRollEle)
     }
 
-    hideDiceRolls(){
+    hideDiceRolls() {
         // hides all of the dice from the DOM at the end of the turn
         const dieRollChildren = document.getElementById('my-dice')
         while (dieRollChildren.firstChild) {
             dieRollChildren.removeChild(dieRollChildren.firstChild);
+        }
+    }
+
+    showRerollToken() {
+        if (this.rolls > 1) {
+            // creates a token to the right of the main button that displays the player's number of rerolls
+            const diceContainer = document.getElementsByClassName('dice-container')[0]
+            const rerollToken = document.createElement('div')
+            rerollToken.classList.add('reroll-token')
+            rerollToken.style.position = 'fixed'
+            rerollToken.style.bottom = '31.5rem'
+            rerollToken.style.left = '53rem'
+            rerollToken.innerText = `${this.rolls - 1}`
+
+            diceContainer.appendChild(rerollToken)
+        }
+    }
+
+    hideRerollToken() {
+        let rerollToken = document.getElementsByClassName('reroll-token')[0]
+        if (rerollToken) {
+            rerollToken.remove();
         }
     }
 
