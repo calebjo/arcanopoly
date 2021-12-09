@@ -1,4 +1,4 @@
-import { generatePropertyBuy, generateShop, generateTome } from "./generateUI";
+import { generateHistory, generatePropertyBuy, generateShop, generateTome } from "./generateUI";
 import { ComputerPlayer } from "./computerPlayer";
 
 // handle individual logic for a player landing on any square
@@ -38,6 +38,7 @@ export function landOnSquare(game, squareType, square){
             game.currentPlayer.changeGold((200*game.currentPlayer.tavernMod), true)
             console.log(`${game.currentPlayer.name} has gained 200 gold for entering the tavern.`)
         }
+        generateHistory(game, 'tavernVisit', game.currentPlayer, square)
     }
 
     function landOnTome(){
@@ -76,7 +77,7 @@ export function landOnSquare(game, squareType, square){
                 previousSquareObject.playersOn.splice(previousSquareObject.playersOn.indexOf(player), 1)
                 square.playersOn.push(player)
                 game.board.squares[10].prisoners.push(player)
-                
+                generateHistory(game, 'dungeon', game.currentPlayer, square)
                 break;
             case 'forward':
                 // reroll dice and go forward that amount
@@ -134,6 +135,7 @@ export function landOnSquare(game, squareType, square){
                     embedded.style.height = '3.5rem';
                     embedded.style.boxShadow = '0 0 8px rgba(0,0,0,0.85)'
                     square.domRef.style.background = 'green' // happens AFTER trail ends
+                    generateHistory(game, 'propBuy', game.currentPlayer, square)
                 }
             } else {
                 console.log('Not enough gold to buy the property')

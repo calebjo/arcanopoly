@@ -5,9 +5,11 @@ body {
     color: #ffffff;
     margin: 0;
     padding: 0;
+    overflow: hidden;
 }
 
 html, body {
+    width: 100%;
     height: 100%;
     font-size: 15px; // CHANGE AS DEBUG FOR BOARD SIZING
 }
@@ -229,7 +231,7 @@ html, body {
 .confirm-targets p{
     display: flex;
     font-family: versatile;
-    font-size: 24px;
+    font-size: 20px;
     color:rgb(34, 32, 37);
 }
 
@@ -700,7 +702,7 @@ svg {
     z-index: 8;
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 30%;
     margin-top: 24px;
     margin-left: 24px;
 }
@@ -723,6 +725,7 @@ svg {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     margin-bottom: 24px;
+    border-top: 4px solid rgba(255, 221, 128, 0.856);
 }
 
 // Properties scroll bar custom ----------
@@ -789,12 +792,86 @@ svg {
 /* HISTORY STYLING ------------------------------------------------ */
 
 .history {
+    display: flex;
     flex-direction: column;
     height: 20%;
     background: #2b2d40;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     margin-bottom: 24px;
+    border-top: 4px solid rgba(255, 221, 128, 0.856);
+}
+
+.game-history {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    margin-left: 12px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+// same scroll styles as the properties scroll
+.game-history::-webkit-scrollbar {
+    width: 15px;
+}
+  
+
+.game-history::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(14, 14, 15);
+    border-radius: 10px;
+}
+
+
+.game-history::-webkit-scrollbar-thumb {
+    background: rgb(20, 20, 34);
+    border-radius: 10px;
+}
+
+.history-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 10.5rem;
+    height: 7rem;
+    margin: 6px;
+    border-radius: 10px;
+    background-color: rgba(1, 1, 5, 0.5);
+    animation: history-create 0.4s ease-in;
+}
+
+@keyframes history-create {
+    from {
+        border-radius: 7rem;
+        transform: translateX(-200px);
+        opacity: 0;
+    }
+    to {
+        border-radius: 10px;
+        opacity: 1;
+    }
+}
+
+.history-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    
+}
+
+.history-item embed {
+    max-width: 3rem;
+    max-height: 3rem;
+    width: auto;
+    height: auto;
+}
+
+.history-text {
+    font-size: 14px;
+    font-family: versatile;
 }
 
 /* CHAT BOX STYLING ----------------------------------------------- */
@@ -807,6 +884,7 @@ svg {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     margin-bottom: 24px;
+    border-top: 4px solid rgba(255, 221, 128, 0.856);
 }
 
 .chat-box {
@@ -839,7 +917,6 @@ svg {
     position: fixed;
     width: 16rem;
     height: 10rem;
-    // padding: 1rem;
     background:#3d3e50;
     box-shadow: 0 0 32px rgb(23, 23, 26);
     border:6px solid rgb(211, 185, 116);
@@ -860,8 +937,6 @@ svg {
     height: 30%;
     align-items: center;
     justify-content: space-evenly;
-    // padding: 0.5rem;
-    // margin: 1rem;
 }
 
 .property-buy-popup button {
@@ -930,9 +1005,6 @@ button:hover {
     0% {
         height: 0;
     }
-    40% {
-        height: 80vh;
-    }
     100% {
         height: 100vh;
     }
@@ -943,7 +1015,6 @@ button:hover {
     z-index: 9999;
     width: 35vw;
     height: 10vh;
-    // animation: bounceShake 2.5s infinite ease-in-out;
 }
 
 // .coin-container {

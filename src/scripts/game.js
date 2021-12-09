@@ -9,7 +9,7 @@ import { landOnSquare } from "./landOnSquare";
 import { Howl, Howler } from 'howler';
 import { MoonDeck, SunDeck } from "./deck";
 import { ComputerPlayer } from "./computerPlayer";
-import { generateGameEndScreen } from "./generateUI";
+import { generateCardConfirm, generateGameEndScreen } from "./generateUI";
 
 export class Game {
     constructor(players, startingGold){
@@ -283,14 +283,8 @@ export class Game {
         // determine target of card (IF APPLICABLE)
         this.setCardTarget(thisCardObject);
         // when targets are confirmed, add "Confirm" button below targets. On press, play the card.
-        const confirmButton = document.createElement('div');
-        confirmButton.classList.add('confirm-targets')
-        const playerTurns = document.getElementsByClassName('player-turns')[0];
-        const confirmP = document.createElement('p')
-        confirmP.innerText = 'Confirm'
-        confirmButton.appendChild(confirmP)
-        playerTurns.appendChild(confirmButton)
-         // When "Confirm" is clicked, play the card and reset the target UI
+        let confirmButton = generateCardConfirm(this)
+        // When "Confirm" is clicked, play the card and reset the target UI
         confirmButton.addEventListener("click", playAndReset)
         let that = this
         function playAndReset(){
@@ -310,7 +304,7 @@ export class Game {
                     playerTurns.children[i].classList.remove('off')
                 }
             }
-
+            generateHistory(that, 'cardPlay', that.currentPlayer, thisCardObject)
             that.checkWinner() // When a card is played, check to see if the game just ended
         }
     }

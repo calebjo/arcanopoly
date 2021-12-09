@@ -1,3 +1,13 @@
+export function generateCardConfirm(game){
+    const confirmButton = document.createElement('div');
+    confirmButton.classList.add('confirm-targets')
+    const playerTurns = document.getElementsByClassName('player-turns')[0];
+    const confirmP = document.createElement('p')
+    confirmP.innerText = 'Confirm'
+    confirmButton.appendChild(confirmP)
+    playerTurns.appendChild(confirmButton)
+    return confirmButton;
+}
 
 export function generatePropertyHover(game) {
 
@@ -85,6 +95,61 @@ export function generateShop(game){
 export function generateTome(game){
     // PLACEHOLDER:
     alert("You've landed on a tome square! Unfortunately, it's under construction...")
+}
+
+export function generateHistory(game, event, player, object){
+    // when any significant event happens, record a log of it in the history box
+    // (e.g property buy, go to dungeon, tavern, card draw/play, castle, equipment gain)
+    const gameHistory = document.getElementsByClassName('game-history')[0]
+    const newHistoryItem = document.createElement('div')
+    newHistoryItem.classList.add('history-item')
+    const newHistoryContainer = document.createElement('div')
+    newHistoryContainer.classList.add('history-container')
+
+    const newHistoryName = document.createElement('div')
+    newHistoryName.classList.add('history-name')
+    const newHistoryText = document.createElement('div')
+    newHistoryText.classList.add('history-text')
+    const newHistoryImage = document.createElement('embed')
+    // determines values of HTML based on event
+    let thisText = 'oops!' // error default
+    let thisSrc = 'oops!'  // error default
+    switch (event){
+        case 'propBuy':
+            thisText = 'bought'
+            thisSrc = `${'./assets/images/' + object.group + '.svg'}`
+            break;
+        case 'cardPlay':
+            thisText = 'played'
+            thisSrc = `${object.img}`
+            break;
+        case 'bankrupt':
+            thisText = 'bankrupted...'
+            thisSrc = `./assets/images/skull-icon.png`
+            break;
+        case 'dungeon':
+            thisText = 'went to'
+            thisSrc = `./assets/images/gate-icon.png`
+            break;
+        case 'tavernVisit':
+            thisText = 'visited'
+            thisSrc = `./assets/images/mug-icon.png`
+            break;
+        case 'tavernPass':
+            thisText = 'passed'
+            thisSrc = `./assets/images/mug-icon.png`
+            break;
+    }
+    newHistoryName.innerText = player.name
+    newHistoryText.innerText = thisText
+    newHistoryImage.setAttribute('src', thisSrc)
+
+    newHistoryContainer.appendChild(newHistoryName)
+    newHistoryContainer.appendChild(newHistoryText)
+    newHistoryContainer.appendChild(newHistoryImage)
+
+    newHistoryItem.appendChild(newHistoryContainer)
+    gameHistory.appendChild(newHistoryItem)
 }
 
 export function generateGameEndScreen(winner){
