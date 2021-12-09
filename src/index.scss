@@ -25,7 +25,7 @@ html, body {
     display: flex;
     position: fixed;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
     top: 0;
     right: 19rem;
     width: 12rem;
@@ -42,6 +42,22 @@ html, body {
     cursor: pointer;
 }
 
+.instructions-image {
+    z-index: 9999999;
+    position: fixed;
+    animation: instructions 0.25s ease-in-out;
+}
+
+@keyframes instructions {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
 .social-links {
     display: flex;
     position: fixed;
@@ -51,7 +67,6 @@ html, body {
     right: 6rem;
     width: 12rem;
     height: 2.5rem;
-    background:rgb(26, 27, 41);
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
 }

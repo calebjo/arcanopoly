@@ -20,6 +20,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     // -------------------------------------------------------------
+    const instructionsButton = document.getElementsByClassName('instructions')[0]
+    instructionsButton.addEventListener("click", displayInstructions)
+
+    let displayed = false;
+    function displayInstructions(){
+        // shows or hides the instructions
+        if (!displayed){
+            const instructionsImg = document.createElement('img')
+            instructionsImg.classList.add('instructions-image')
+            instructionsImg.setAttribute('src', './assets/images/instructions.png')
+            const outerWrapper = document.getElementsByClassName('outer-wrapper')[0]
+            outerWrapper.appendChild(instructionsImg)
+            displayed = true;
+        } else {
+            document.getElementsByClassName('instructions-image')[0].remove()
+            displayed = false;
+        }
+    }
+    // -------------------------------------------------------------
 
     // Game options (refactor later)
     const startingGold = 500;
