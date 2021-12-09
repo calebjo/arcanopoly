@@ -51,3 +51,16 @@ Arcanopoly will be implemented with the following (_tentative_) technologies:
 | Add Cards/Equipment | <span style="color:orange">**Medium-hard** </span> | Add additional, more complex cards and equipment. OOP FTW! |
 | Add Options | <span style="color:orange">**Medium-hard** </span> | Add game options to the start of any game (this might actually be fairly easy, just low priority).
 | Online Multiplayer | <span style="color:red">**Very Hard** </span> | Add support for actual human players via [Colyseus.io's](https://www.colyseus.io/) server setup process. Deploy on Heroku. |
+
+# Attribution
+
+* **Styles**
+    * reset.css:  https://meyerweb.com/eric/tools/css/reset/
+    * Fonts: Beleren from https://upfonts.com/
+* **Images**:
+    * Square/Dice Icons: https://fontawesome.com/, various
+    * Property Icons: https://game-icons.net/, various
+    * Card Clipart: Copyright-free clipart found on Google
+    * Equipment Icons: https://craftpix.net/, various
+* **Names**:
+    * Random usernames: https://jimpix.co.uk/words/random-username-generator.asp
