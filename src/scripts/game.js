@@ -396,7 +396,7 @@ export class Game {
 
         console.log(`The dice roll was a ${diceRoll}!`) // DEBUG
         return diceRoll;
-        // return 30; // DEBUG ------------------ RETURN A SPECIFIC VALUE TO GUARANTEE SQUARE HITS
+        // return 5; // DEBUG ------------------ RETURN A SPECIFIC VALUE TO GUARANTEE SQUARE HITS
     }
 
     displayDieRoll(rollNum) {

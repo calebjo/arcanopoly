@@ -144,7 +144,10 @@ export function generateHistory(game, event, player, object){
     newHistoryName.innerText = player.name;
     newHistoryText.innerText = thisText;
     newHistoryImage.setAttribute('src', thisSrc)
-    if (event === 'dungeon'){ newHistoryImage.style.filter = 'invert(1)'} // make dungeon icon readable
+    if (['dungeon','bankrupt','tavernVisit','tavernPass'].includes(event)){ 
+        // make dark icons more readable here
+        newHistoryImage.style.filter = 'invert(1)'
+    } 
 
     newHistoryContainer.appendChild(newHistoryName)
     newHistoryContainer.appendChild(newHistoryText)

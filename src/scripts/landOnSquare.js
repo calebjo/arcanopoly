@@ -1,5 +1,6 @@
 import { generateHistory, generatePropertyBuy, generateShop, generateTome } from "./generateUI";
 import { ComputerPlayer } from "./computerPlayer";
+import { giveTempEquipment } from "./equipment";
 
 // handle individual logic for a player landing on any square
 export function landOnSquare(game, squareType, square){
@@ -152,6 +153,8 @@ export function landOnSquare(game, squareType, square){
         //     Any item that costs more than the player's gold total will be displayed in red + unclickable
         console.log('You are in landOnShop()')
         generateShop(game);
+        // TEMPORARY FUNCTIONALITY: GIVE PLAYER AN EQUIPMENT
+        giveTempEquipment(game.currentPlayer)
     }
 
     function landOnCastle(){
