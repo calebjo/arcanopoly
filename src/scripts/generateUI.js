@@ -140,9 +140,11 @@ export function generateHistory(game, event, player, object){
             thisSrc = `./assets/images/mug-icon.png`
             break;
     }
-    newHistoryName.innerText = player.name
-    newHistoryText.innerText = thisText
+    newHistoryName.style.color = `${player.sprite.split('-')[1].split('.')[0]}`;
+    newHistoryName.innerText = player.name;
+    newHistoryText.innerText = thisText;
     newHistoryImage.setAttribute('src', thisSrc)
+    if (event === 'dungeon'){ newHistoryImage.style.filter = 'invert(1)'} // make dungeon icon readable
 
     newHistoryContainer.appendChild(newHistoryName)
     newHistoryContainer.appendChild(newHistoryText)

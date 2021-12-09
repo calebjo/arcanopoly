@@ -293,6 +293,7 @@ export class Game {
             // SHOULD NOW ADD AN EVENT LISTENER FOR CANCELING THE CARD PLAY
             confirmButton.remove()
             // deselect all selected players
+            let playerTurns = document.getElementsByClassName('player-turns')[0]
             for (let i = 0; i < playerTurns.children.length; i++){
                 if (playerTurns.children[i].classList.contains('selected')) {
                     playerTurns.children[i].classList.remove('selected')

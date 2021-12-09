@@ -809,8 +809,9 @@ svg {
     width: 100%;
     height: 100%;
     margin-left: 12px;
-    overflow-x: scroll;
-    overflow-y: hidden;
+    // overflow-x: scroll;
+    // overflow-y: hidden;
+    overflow: hidden;
 }
 
 // same scroll styles as the properties scroll
