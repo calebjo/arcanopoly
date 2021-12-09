@@ -32,7 +32,6 @@ export class Deck {
     draw(game, player, amount) {
         for (let i = 0; i < amount; i++){
             if (player.hand.length > 7){
-                console.log('Player has too many cards!')
                 break;
             }
             let thisCard = this.cards[i];

@@ -147,7 +147,7 @@ export class Player {
         const squaresToMove = game.diceRoll
         let originalColor = null;
 
-        console.log(`${game.currentPlayer.name} has ${squaresToMove} squares to move.`) // DEBUG
+        // console.log(`${game.currentPlayer.name} has ${squaresToMove} squares to move.`) // DEBUG
         
         delayedTimeout(0)
         function delayedTimeout(i) {
@@ -220,6 +220,6 @@ export class Player {
         }
 
         this.bankrupt = true
-        console.log('I went bankrupt....')
+        // console.log('I went bankrupt....')
     }
 }

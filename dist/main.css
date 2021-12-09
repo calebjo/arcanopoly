@@ -342,7 +342,9 @@ html, body {
 .top-bar, .bottom-bar {
   display: flex;
   width: 100%;
+  max-width: 100%;
   height: 50%;
+  max-height: 50%;
 }
 
 .top-bar {
@@ -540,7 +542,11 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+  max-width: 100%;
   width: 100%;
+  height: 90%;
+  min-height: 90%;
+  max-height: 90%;
   margin: 20px;
   background: #272731;
   box-shadow: 0 -8px 16px rgba(9, 9, 10, 0.3);

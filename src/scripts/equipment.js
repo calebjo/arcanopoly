@@ -15,7 +15,7 @@ export class Equipment {
     
     addIconToScreen(){
         // adds this card to the cards that display on the board
-        console.log('In Equipment.addIconToScreen()')
+        // console.log('In Equipment.addIconToScreen()')
 
 
         const newEquipEle = document.createElement('div')
@@ -76,7 +76,7 @@ export function giveTempEquipment(player){
     boots.owner = player;
     boots.addToPlayer(player);
     boots.addIconToScreen();
-    console.log(`You've been given the ${boots.name}!`)
+    // console.log(`You've been given the ${boots.name}!`)
 }
 
 // EQUIPMENT LIST ---------------------

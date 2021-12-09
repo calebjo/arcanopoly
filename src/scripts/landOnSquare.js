@@ -33,25 +33,25 @@ export function landOnSquare(game, squareType, square){
 
     function landOnTavern(){
         // if turnNum is greater than 1, current player gains 200 gold for LANDING on the tavern
-        console.log('You are in landOnTavern()')
+        // console.log('You are in landOnTavern()')
 
         if (game.turnNum > 1){
             game.currentPlayer.changeGold((200*game.currentPlayer.tavernMod), true)
-            console.log(`${game.currentPlayer.name} has gained 200 gold for entering the tavern.`)
+            // console.log(`${game.currentPlayer.name} has gained 200 gold for entering the tavern.`)
         }
         generateHistory(game, 'tavernVisit', game.currentPlayer, square)
     }
 
     function landOnTome(){
         // current player may discard any number of their cards and draw new ones from the moon deck
-        console.log('You are in landOnTome()')
+        // console.log('You are in landOnTome()')
         generateTome(game);
     }
 
     function landOnDungeon(){
         // current player goes to the "just visiting" area of the dungeon
-        console.log('You are in landOnDungeon()')
-        console.log("Thankfully, you're just visiting!")
+        // console.log('You are in landOnDungeon()')
+        // console.log("Thankfully, you're just visiting!")
     }
 
     function landOnMovement(){
@@ -59,11 +59,11 @@ export function landOnSquare(game, squareType, square){
         // if 'go to dungeon', go to dungeon as prisoner
         // else if 'forward' type, reroll your dice and go forward that amount (ADD +1 TO GAME.ROLLS)
         // else if 'backward' type, reroll your dice and go backward that amount (ADD +1 TO GAME.ROLLS)
-        console.log('You are in landOnMovement()')
+        // console.log('You are in landOnMovement()')
         switch (square.moveType) {
             case 'dungeon':
                 // go to the dungeon as a prisoner
-                console.log("You're going straight to the dungeon!")
+                // console.log("You're going straight to the dungeon!")
             
                 // MOVE PLAYER TO DUNGEON
                 const player = game.currentPlayer
@@ -82,13 +82,13 @@ export function landOnSquare(game, squareType, square){
                 break;
             case 'forward':
                 // reroll dice and go forward that amount
-                console.log("Forward movement! Roll the dice again!")
+                // console.log("Forward movement! Roll the dice again!")
                 game.rolls += 1
                 game.allowDiceRoll()
                 break;
             case 'backward':
                 // reroll dice and go backward that amount
-                console.log("Backward movement...Roll the dice to go back.")
+                // console.log("Backward movement...Roll the dice to go back.")
                 // DOES NOTHING ATM
                 break;
         }
@@ -104,14 +104,14 @@ export function landOnSquare(game, squareType, square){
         //     if they do, add it to their properties and change property's owner to current player
         //     if not, do nothing
         //   if not, say 'Sorry, you don't have enough gold...'
-        console.log('You are in landOnProperty()')
+        // console.log('You are in landOnProperty()')
 
         if (square.owner){
             if (square.owner !== game.currentPlayer){
                 // charge current player rent, then pay owner
                 game.currentPlayer.changeGold(-(square.rent))
                 square.owner.changeGold(square.rent)
-                console.log(`${game.currentPlayer.name} paid ${square.owner.name} ${square.rent} gold.`)
+                // console.log(`${game.currentPlayer.name} paid ${square.owner.name} ${square.rent} gold.`)
             }
         } else {  
             if (game.currentPlayer.gold > square.price) {
@@ -139,7 +139,7 @@ export function landOnSquare(game, squareType, square){
                     generateHistory(game, 'propBuy', game.currentPlayer, square)
                 }
             } else {
-                console.log('Not enough gold to buy the property')
+                // console.log('Not enough gold to buy the property')
             }
         }
     }
@@ -151,7 +151,7 @@ export function landOnSquare(game, squareType, square){
         //     each item displays a picture and a price in gold
         //     on click, each "purchase" button will transfer the item to the player and charge them gp
         //     Any item that costs more than the player's gold total will be displayed in red + unclickable
-        console.log('You are in landOnShop()')
+        // console.log('You are in landOnShop()')
         generateShop(game);
         // TEMPORARY FUNCTIONALITY: GIVE PLAYER AN EQUIPMENT
         giveTempEquipment(game.currentPlayer)
@@ -160,7 +160,7 @@ export function landOnSquare(game, squareType, square){
     function landOnCastle(){
         // charges all other players 25 gp * the number of cards in their hand. The player that lands on
         // the castle gains the total lost gold.
-        console.log('You are in landOnCastle()')
+        // console.log('You are in landOnCastle()')
 
         let goldNum = 0;
         let goldTotal = 0;
@@ -173,14 +173,14 @@ export function landOnSquare(game, squareType, square){
         }
         game.currentPlayer.changeGold(goldTotal)
 
-        console.log(`Every player but ${game.currentPlayer.name} payed them a card tax!`)
+        // console.log(`Every player but ${game.currentPlayer.name} payed them a card tax!`)
     }
 
     function landOnDeck(){
         // check which deck type the square is
         // if 'sun' deck type, current player draws 3 cards from the 'sun' deck
         // else if 'moon' deck type, current player draws 2 cards from the 'moon' deck
-        console.log('You are in landOnDeck()')
+        // console.log('You are in landOnDeck()')
         if (square.deckType === 'sun'){ // sun deck draw
             game.decks[0].draw(game, game.currentPlayer, 3)
         } else { // moon deck draw

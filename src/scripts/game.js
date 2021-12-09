@@ -86,7 +86,7 @@ export class Game {
         }
 
         // then play a turn of the game
-        console.log('The game has started!') // DEBUG
+        // console.log('The game has started!') // DEBUG
         this.playTurn()
     }
     // ------------------------------------------------------------------------------------------------
@@ -94,7 +94,7 @@ export class Game {
 
     playTurn(){
         this.checkWinner(); // if there is a winner, game over
-        console.log(`${this.currentPlayer.name} is playing a turn!`) // DEBUG
+        // console.log(`${this.currentPlayer.name} is playing a turn!`) // DEBUG
         this.turnNum += 1
         // Add the player's rerolls to the dice roll num, if any
         this.rolls = 1
@@ -157,7 +157,7 @@ export class Game {
             let nextPlayer = that.players[nextPlayerIdx]
 
             if (!(nextPlayer.bankrupt)) {
-                console.log('Next player is not bankrupt.')
+                // console.log('Next player is not bankrupt.') // DEBUG
                 that.currentPlayer = nextPlayer
             }
             // skip if bankrupt
@@ -165,7 +165,7 @@ export class Game {
                 if (that.players.every(player => player.bankrupt)) { 
                     break;
                 }
-                console.log(`Skipping the bankrupt player ${nextPlayer.name}`)
+                // console.log(`Skipping the bankrupt player ${nextPlayer.name}`) // DEBUG
                 nextPlayerIdx = (nextPlayerIdx + 1) % playerCount;
                 that.currentPlayer = that.players[nextPlayerIdx];
                 nextPlayer = that.currentPlayer
@@ -184,8 +184,8 @@ export class Game {
                 that.gameOver(winner);
             }
 
-            console.log(`The next player will be ${that.currentPlayer.name}.`) // DEBUG
-            console.log('End of the turn.') // DEBUG
+            // console.log(`The next player will be ${that.currentPlayer.name}.`) // DEBUG
+            // console.log('End of the turn.') // DEBUG
         }
 
         this.handleComputerPress();
@@ -194,7 +194,7 @@ export class Game {
     // -------------------------------------------------------------------------------
 
     handleComputerPress() {
-        console.log('In handleComputerPress()')
+        // console.log('In handleComputerPress()')
         if (this.currentPlayer instanceof ComputerPlayer) {
             // if it's a computer player, press the button/auto confirm.
             this.currentPlayer.pressButton(this.mainButton)
@@ -209,7 +209,7 @@ export class Game {
             this.rolls += 1 
             // this.showRerollToken()
         }
-        console.log(`${this.currentPlayer.name} will move to the ${targetNum}th square.`)
+        // console.log(`${this.currentPlayer.name} will move to the ${targetNum}th square.`)
         // get the current player and move their token to the target square
         this.currentPlayer.movePlayer(this, `sq-${targetNum}`)
     }
@@ -217,7 +217,7 @@ export class Game {
     handleNewPlayerPos() {
         const newPos = this.currentPlayer.currentSquare
         const newSquare = this.board.squares[newPos]
-        console.log(newSquare) // player's target square
+        // console.log(newSquare) // player's target square
  
         // check what kind of square the player landed on
         switch (newSquare.constructor){
@@ -253,7 +253,7 @@ export class Game {
         // if tavern is traversed, give player gold
         if (traversedSquare instanceof TavernSquare && this.turnNum > this.players.length) {
             playerObject.changeGold((100 * playerObject.tavernMod), true)
-            console.log('Gained 100 gold for passing the tavern!')
+            // console.log('Gained 100 gold for passing the tavern!')
         }
     }
 
@@ -277,7 +277,7 @@ export class Game {
 
     playThisCard(card){
         // after clicking a card to play, player can set the target (if applicable) and play card
-        console.log('In game.playThisCard(card)')
+        // console.log('In game.playThisCard(card)')
         const thisCardId = parseInt(card.getAttribute('id').split('-')[1])
         const thisCardObject = this.currentPlayer.hand.find(card => card.id === thisCardId)
         // determine target of card (IF APPLICABLE)
@@ -312,7 +312,7 @@ export class Game {
 
     handleImprisoned(){
         // change main button to "Pay", which costs 50 gold to get out of jail
-        console.log('In handleImprisoned')
+        // console.log('In handleImprisoned')
 
         this.mainButton.children[0].innerText = 'Pay'
 
@@ -359,7 +359,7 @@ export class Game {
         let that = this
         this.mainButton.addEventListener("click", callRoll)
         function callRoll(){
-            console.log(that.rolls)
+            // console.log(that.rolls)
             that.rolls -= 1
             that.hideRerollToken()
             that.showRerollToken()
@@ -368,19 +368,20 @@ export class Game {
             that.mainButton.children[0].innerText  = 'End'
             that.mainButton.removeEventListener("click", callRoll)
             // Continue with the turn if there are no rolls left
-            console.log(that.rolls)
+            // console.log(that.rolls)
             if (that.rolls <= 0) { 
-                console.log('Out of rolls!!!!')
+                // console.log('Out of rolls!!!!')
                 that.postRollTurn(); 
             } else {
-                console.log('More rolls to go!!!!!!!')
+                // console.log('More rolls to go!!!!!!!')
+                // that.allowDiceRoll();
             }
         }
     }
 
     handleDiceRoll(){
         // when Roll button is clicked, calculate dice to roll and roll them
-        console.log(`Rolling dice for ${this.currentPlayer.name}!`) // DEBUG
+        // console.log(`Rolling dice for ${this.currentPlayer.name}!`) // DEBUG
         // hide any previous roll dice
         this.hideDiceRolls()
 
@@ -394,7 +395,7 @@ export class Game {
             diceRoll += thisDieRoll;
         }
 
-        console.log(`The dice roll was a ${diceRoll}!`) // DEBUG
+        // console.log(`The dice roll was a ${diceRoll}!`) // DEBUG
         return diceRoll;
         // return 5; // DEBUG ------------------ RETURN A SPECIFIC VALUE TO GUARANTEE SQUARE HITS
     }
@@ -498,12 +499,12 @@ export class Game {
             gameWon = true;
         }
 
-        console.log(gameWon)
+        // console.log(gameWon)
         return gameWon;
     }
 
     checkWinner(){
-        console.log('In game.checkWinner()')
+        // console.log('In game.checkWinner()')
         if (this.isWon()) {
             let winner = null;
             for (let i = 0; i < this.players.length; i++){
@@ -518,10 +519,10 @@ export class Game {
     gameOver(winner){
         // The game is over! Overlay the entire HTML with a winning screen.
         if (winner === null) {
-            console.log('Everyone lost!')
+            // console.log('Everyone lost!')
             generateGameEndScreen(winner)
         } else {
-            console.log('The game is over!') // DEBUG
+            // console.log('The game is over!') // DEBUG
             generateGameEndScreen(winner)
         }
     }

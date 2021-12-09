@@ -89,12 +89,12 @@ export function generateShop(game){
     const shopCol3 = document.createElement('div')
 
     // PLACEHOLDER: 
-    alert("You've landed on a shop square! Unfortunately, it's under construction...")
+    // alert("You've landed on a shop square! Unfortunately, it's under construction...")
 }
 
 export function generateTome(game){
     // PLACEHOLDER:
-    alert("You've landed on a tome square! Unfortunately, it's under construction...")
+    // alert("You've landed on a tome square! Unfortunately, it's under construction...")
 }
 
 export function generateHistory(game, event, player, object){
@@ -158,7 +158,6 @@ export function generateHistory(game, event, player, object){
 }
 
 export function generateGameEndScreen(winner){
-    console.log('Generating end game cover screen.....')
     const outerWrapper = document.getElementsByClassName('outer-wrapper')[0]
     const gameEndCover = document.createElement('div')
     gameEndCover.classList.add('game-end-cover')
