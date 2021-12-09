@@ -5,9 +5,9 @@ Arcanopoly is a variation on the classic friendship-testing board game Monopoly 
 # Functionality & MVPs
 
 In a game of Arcanopoly, users will be able to:
-* Select a token to use as a character sprite
+* Play as a character sprite on a board
 * Roll dice to traverse a circular board full of properties
-* Buy and sell properties, draw cards, and gain equipment (_very basic cards/equipment for the MVP_)
+* Buy properties, draw cards, and gain equipment (_very basic cards/equipment for the MVP_)
 * Play cards on their turn to benefit themselves or hinder an opponent
 
 The project will also include:
