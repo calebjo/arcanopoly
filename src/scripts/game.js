@@ -9,7 +9,7 @@ import { landOnSquare } from "./landOnSquare";
 import { Howl, Howler } from 'howler';
 import { MoonDeck, SunDeck } from "./deck";
 import { ComputerPlayer } from "./computerPlayer";
-import { generateCardConfirm, generateGameEndScreen } from "./generateUI";
+import { generateCardConfirm, generateGameEndScreen, generateHistory } from "./generateUI";
 
 export class Game {
     constructor(players, startingGold){
@@ -19,7 +19,7 @@ export class Game {
         this.currentPlayer = players[0];
         this.mainButton = document.getElementById('main-button');
         this.diceRoll = 0;
-        this.rolls = 1;
+        this.rolls = 1; // rerolls are added to this, if any
         this.board = new Board();
         this.decks = [];
     }
@@ -35,29 +35,7 @@ export class Game {
         gameStartSound.play();
         // -------------------------------------------------------------------------
         // Create Sun Deck and Moon Deck, placing them in their respective squares
-
-        // Create DOM elements and place them in the deck squares
-        const sunDeckEle = document.createElement('div')
-        sunDeckEle.classList.add('sun-deck')
-        const sunDeckEmbed = document.createElement('embed')
-        sunDeckEmbed.setAttribute('src', './assets/images/deck-sun.png')
-        sunDeckEle.appendChild(sunDeckEmbed)
-        const deckBox1 = document.getElementsByClassName('deck1-empty')[0]
-        deckBox1.appendChild(sunDeckEle)
-
-        const moonDeckEle = document.createElement('div')
-        moonDeckEle.classList.add('moon-deck')
-        const moonDeckEmbed = document.createElement('embed')
-        moonDeckEmbed.setAttribute('src', './assets/images/deck-moon.png')
-        moonDeckEle.appendChild(moonDeckEmbed)
-        const deckBox2 = document.getElementsByClassName('deck2-empty')[0]
-        deckBox2.appendChild(moonDeckEle)
-
-        // Create Deck objects in Node
-        const sunDeck = new SunDeck(0, sunDeckEle);
-        const moonDeck = new MoonDeck(1, moonDeckEle);
-        this.decks.push(sunDeck)
-        this.decks.push(moonDeck)
+        this.generateDeckEles();
         // -------------------------------------------------------------------------
         // Play pop sound on clicking either the add player button or main button
         this.mainButton.addEventListener('click', playButtonClickSound)
@@ -138,7 +116,6 @@ export class Game {
 
     endGameTurn() {
         this.checkWinner(); // if there is a winner, game over
-        this.allowCardPlay();
         this.mainButton.addEventListener("click", endTurn);
         let that = this;
         function endTurn(){
@@ -157,7 +134,6 @@ export class Game {
             let nextPlayer = that.players[nextPlayerIdx]
 
             if (!(nextPlayer.bankrupt)) {
-                // console.log('Next player is not bankrupt.') // DEBUG
                 that.currentPlayer = nextPlayer
             }
             // skip if bankrupt
@@ -165,7 +141,6 @@ export class Game {
                 if (that.players.every(player => player.bankrupt)) { 
                     break;
                 }
-                // console.log(`Skipping the bankrupt player ${nextPlayer.name}`) // DEBUG
                 nextPlayerIdx = (nextPlayerIdx + 1) % playerCount;
                 that.currentPlayer = that.players[nextPlayerIdx];
                 nextPlayer = that.currentPlayer
@@ -183,16 +158,13 @@ export class Game {
                 }
                 that.gameOver(winner);
             }
-
-            // console.log(`The next player will be ${that.currentPlayer.name}.`) // DEBUG
-            // console.log('End of the turn.') // DEBUG
         }
 
         this.handleComputerPress();
     }
 
     // -------------------------------------------------------------------------------
-
+    // NON-GAME LOOP METHODS
     handleComputerPress() {
         // console.log('In handleComputerPress()')
         if (this.currentPlayer instanceof ComputerPlayer) {
@@ -267,6 +239,7 @@ export class Game {
             for (let i = 0; i < cardClickable.length; i++){
                 cardClickable[i].removeEventListener("click", playThis) // remove in case of duplicates
                 cardClickable[i].addEventListener("click", playThis)
+                console.log('Making an event listener for a card!')
                 function playThis(){
                     cardClickable[i].removeEventListener("click", playThis)
                     that.playThisCard(cardClickable[i])
@@ -290,7 +263,6 @@ export class Game {
         function playAndReset(){
             thisCardObject.play();
             confirmButton.removeEventListener("click", playAndReset)
-            // SHOULD NOW ADD AN EVENT LISTENER FOR CANCELING THE CARD PLAY
             confirmButton.remove()
             // deselect all selected players
             let playerTurns = document.getElementsByClassName('player-turns')[0]
@@ -311,9 +283,7 @@ export class Game {
     }
 
     handleImprisoned(){
-        // change main button to "Pay", which costs 50 gold to get out of jail
-        // console.log('In handleImprisoned')
-
+        // change main button to "Pay", which makes the player pay 50 gold to get out of jail
         this.mainButton.children[0].innerText = 'Pay'
 
         let that = this
@@ -398,6 +368,31 @@ export class Game {
         // console.log(`The dice roll was a ${diceRoll}!`) // DEBUG
         return diceRoll;
         // return 5; // DEBUG ------------------ RETURN A SPECIFIC VALUE TO GUARANTEE SQUARE HITS
+    }
+
+    generateDeckEles() {
+        // Create DOM elements and place them in the deck squares
+        const sunDeckEle = document.createElement('div')
+        sunDeckEle.classList.add('sun-deck')
+        const sunDeckEmbed = document.createElement('embed')
+        sunDeckEmbed.setAttribute('src', './assets/images/deck-sun.png')
+        sunDeckEle.appendChild(sunDeckEmbed)
+        const deckBox1 = document.getElementsByClassName('deck1-empty')[0]
+        deckBox1.appendChild(sunDeckEle)
+
+        const moonDeckEle = document.createElement('div')
+        moonDeckEle.classList.add('moon-deck')
+        const moonDeckEmbed = document.createElement('embed')
+        moonDeckEmbed.setAttribute('src', './assets/images/deck-moon.png')
+        moonDeckEle.appendChild(moonDeckEmbed)
+        const deckBox2 = document.getElementsByClassName('deck2-empty')[0]
+        deckBox2.appendChild(moonDeckEle)
+
+        // Create Deck objects in Node
+        const sunDeck = new SunDeck(0, sunDeckEle);
+        const moonDeck = new MoonDeck(1, moonDeckEle);
+        this.decks.push(sunDeck)
+        this.decks.push(moonDeck)
     }
 
     displayDieRoll(rollNum) {
