@@ -472,17 +472,11 @@ export class Game {
     highlightThisPlayer() {
         const thisPlayerBar = document.getElementById(`p${this.currentPlayer.turnId}`)
         thisPlayerBar.classList.add('current-turn')
-        const playerHighlight = document.createElement('div')
-        playerHighlight.classList.add('player-highlight')
-        thisPlayerBar.appendChild(playerHighlight) // DEBUG
-
     }
 
     deHighlightPlayer() {
         const thisPlayerBar = document.getElementById(`p${this.currentPlayer.turnId}`)
         thisPlayerBar.classList.remove('current-turn')
-        const playerHighlight = document.getElementsByClassName('player-highlight')[0]
-        playerHighlight.remove()
     }
 
     isWon(){
