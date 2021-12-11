@@ -239,7 +239,7 @@ export class Game {
             for (let i = 0; i < cardClickable.length; i++){
                 cardClickable[i].removeEventListener("click", playThis) // remove in case of duplicates
                 cardClickable[i].addEventListener("click", playThis)
-                console.log('Making an event listener for a card!')
+                // console.log('Making an event listener for a card!')
                 function playThis(){
                     cardClickable[i].removeEventListener("click", playThis)
                     that.playThisCard(cardClickable[i])
