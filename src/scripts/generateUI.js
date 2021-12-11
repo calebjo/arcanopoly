@@ -163,6 +163,7 @@ export function generateGameEndScreen(winner){
     gameEndCover.classList.add('game-end-cover')
 
     const gameEndText = document.createElement('div')
+    gameEndText.classList.add('game-end-text')
     if (winner){
         gameEndText.innerText = `Game over! ${winner.name} is the winner!`
     } else {
@@ -170,4 +171,21 @@ export function generateGameEndScreen(winner){
     }
     gameEndCover.appendChild(gameEndText)
     outerWrapper.appendChild(gameEndCover)
+
+    // Make a "Play again?" button
+    const playAgain = document.createElement('div')
+    playAgain.classList.add('play-again')
+    const playAgainText = document.createElement('div')
+    playAgainText.classList.add('play-again-text')
+    playAgainText.innerText = 'Play Again?'
+    const playAgainBtn = document.createElement('div')
+    playAgainBtn.classList.add('play-again-btn')
+    const btnImg = document.createElement('img')
+    btnImg.setAttribute('src', './assets/images/play-again.svg')
+    playAgainBtn.appendChild(btnImg)
+    playAgain.appendChild(playAgainText)
+    playAgain.appendChild(playAgainBtn)
+    gameEndCover.appendChild(playAgain)
+
+    // Restart the same game
 }
