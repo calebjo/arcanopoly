@@ -2,10 +2,6 @@
 // A deck is a collection of Card objects. Each deck can have different card numbers and types.
 
 import { MoneyCard } from "./card";
-import { PropertyCard } from "./card";
-import { MovementCard } from "./card";
-import { ModifierCard } from "./card";
-import { Game } from "./game";
 import { animateCardDraw } from "./generateAnimations";
 
 // generateDeck(type) function
@@ -37,8 +33,8 @@ export class Deck {
             let thisCard = this.cards[i];
             player.changeCard(thisCard, true) // give card to player
             this.cards.splice(i, 1) // remove the card from the deck
-            animateCardDraw(this, amount);
         }
+        animateCardDraw(this, amount);
         game.allowCardPlay();
     }
 }

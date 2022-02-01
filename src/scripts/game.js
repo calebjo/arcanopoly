@@ -364,10 +364,9 @@ export class Game {
             this.displayDieRoll(thisDieRoll) // SHOULD APPEND THE DIE TO MIDDLE DOM
             diceRoll += thisDieRoll;
         }
-
-        // console.log(`The dice roll was a ${diceRoll}!`) // DEBUG
-        return diceRoll;
-        // return 5; // DEBUG ------------------ RETURN A SPECIFIC VALUE TO GUARANTEE SQUARE HITS
+        
+        // return diceRoll;
+        return 2; // DEBUG --- RETURN A SPECIFIC VALUE TO GUARANTEE SQUARE HITS
     }
 
     generateDeckEles() {

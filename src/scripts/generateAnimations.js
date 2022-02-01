@@ -47,6 +47,11 @@ export function animateCardDraw(deck, amount){
             }
             setTimeout(drawAnimate, 500, (i + 1))
         }
+        if (i === amount) {
+            while (thisDeck.children.length > 1){
+                thisDeck.lastChild.remove()
+            }
+        }
     }
 }
 

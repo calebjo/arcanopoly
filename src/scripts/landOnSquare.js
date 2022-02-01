@@ -131,9 +131,9 @@ export function landOnSquare(game, squareType, square){
                     let embedded = square.domRef.children[0]
                     let playerColor = game.currentPlayer.sprite.split('-')[1].split('.')[0] // (e.g 'green' or 'cyan')
                     embedded.style.background = playerColor
-                    embedded.style.borderRadius = '3.5rem'
-                    embedded.style.width = '3.5rem';
-                    embedded.style.height = '3.5rem';
+                    embedded.style.borderRadius = '4rem'
+                    embedded.style.width = '4rem';
+                    embedded.style.height = '4rem';
                     embedded.style.boxShadow = '0 0 8px rgba(0,0,0,0.85)'
                     square.domRef.style.background = 'green' // happens AFTER trail ends
                     generateHistory(game, 'propBuy', game.currentPlayer, square)

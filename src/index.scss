@@ -11,7 +11,7 @@ body {
 html, body {
     width: 100%;
     height: 100%;
-    font-size: 15px; // CHANGE AS DEBUG FOR BOARD SIZING
+    font-size: 62.5%; // CHANGE AS DEBUG FOR BOARD SIZING
 }
 
 @font-face {
@@ -132,10 +132,7 @@ html, body {
     justify-content: center;
 }
 
-.player-tokens {
-    z-index: 15;
-}
-
+// Main grid container
 .game-panel {
     display: flex;
     justify-content: space-between;
@@ -151,8 +148,8 @@ html, body {
     flex-direction: column;
     justify-content: space-between;
     width: 16%;
-    margin-top: 24px;
-    margin-right: 24px;
+    margin-top: 2%;
+    margin-right: 2%;
 }
 
 /* PlAYER TURN DIVS ---------------------------------------------- */
@@ -180,7 +177,7 @@ html, body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 7rem;
+    height: 100%;
     background: #2b2d40;
     font-family: beleren;
     font-size: 20px;
@@ -311,6 +308,19 @@ html, body {
 
 .player.selected.on {
     box-shadow: 4px 0 20px rgb(255, 212, 21);
+    animation: glow 2s infinite ease-in-out;
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 4px 0 20px rgba(255, 212, 21, 0.35);
+    }
+    50% {
+        box-shadow: 4px 0 20px rgba(255, 212, 21, 1);
+    }
+    100% {
+        box-shadow: 4px 0 20px rgba(255, 212, 21, 0.35);
+    }
 }
 
 .player.selected.off {
@@ -324,10 +334,10 @@ html, body {
     z-index: 6;
     display: flex;
     aspect-ratio: 1 / 1;
+    height: 100%;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    // overflow: hidden;
     background:rgb(46, 44, 51);
     box-shadow: 0 0 48px rgba(1, 1, 5, 0.5), inset 0 0 80px rgba(2, 2, 10, 0.5);
 }
@@ -408,53 +418,19 @@ html, body {
 
 .top-bar, .bottom-bar {
     display: flex;
-    width: 100%;
-    max-width: 100%;
-    height: 50%;
-    max-height: 50%;
-}
-
-.top-bar {
-    display: flex;
     justify-content: center;
-    margin-top: 3.33rem;
-}
-
-.deck1-empty, .deck2-empty{
-    display: flex;
-    width: 20%;
-    height: 70%;
-    background-color:rgb(16, 16, 26, 0.5);
-    border-radius: 8px;
-}
-
-.sun-deck, .moon-deck {
-    animation: deck-create 1s;
-}
-
-@keyframes deck-create {
-    from {
-        transform: perspective(700px) translate3d(0, 100px, 100px);
-        opacity: 0;
-    }
-
-    to {
-        transform: perspective(0) translate3d(0, 0, 0);
-        opacity: 1;
-    }
-}
-
-.deck1-empty embed, .deck2-empty embed {
-    position: fixed;
+    align-items: center;
+    width: 100%;
+    height: 50%;
 }
 
 // contains dice rolls and button
 .dice-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     width: 14%;
-    margin: 2%;
+    height: 100%;
 }
 
 // contains dice rolls
@@ -463,9 +439,8 @@ html, body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 65%;
-    display: flex;
-    justify-content: space-evenly;
+    height: 40%;
+    width: 100%;
     background: rgb(16, 16, 26, 0.5);
     border-radius: 8px;
 }
@@ -475,9 +450,18 @@ html, body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 4rem;
-    height: 4rem;
+    aspect-ratio: 1/1;
+    width: 60%;
     animation: dice-create 0.4s ease-out;
+}
+
+.dice embed {
+    display: flex;
+    aspect-ratio: 1/1;
+    width: 100%;
+    filter: brightness(1.05);
+    box-shadow: 0 6px 6px rgb(0, 0, 0);
+    border-radius: 8px;
 }
 
 @keyframes dice-create {
@@ -492,22 +476,12 @@ html, body {
     }
 }
 
-.dice embed {
-    display: flex;
-    width: 4rem;
-    height: 4rem;
-    filter: brightness(1.05);
-    box-shadow: 0 6px 6px rgb(0, 0, 0);
-    border-radius: 8px;
-}
-
 .roll-dice {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 20%;
     animation: bounceShake 5s infinite ease-in-out;
-    position: relative;
     background: rgb(16, 16, 26, 0.5); 
     box-shadow: 0 10px 12px rgb(6, 4, 17, 0.55);
     border: 2px solid rgb(250, 214, 116);
@@ -528,7 +502,7 @@ html, body {
 
 .roll-dice p {
     font-family: versatile;
-    font-size: 22px;
+    font-size: 2.5vmin;
     color:rgb(250, 214, 116);
 }
 
@@ -548,26 +522,58 @@ html, body {
     user-select: none;
 }
 
-// Deck styles
+// Deck styles 1 ----------------------------------------
+
+.sun-deck, .moon-deck {
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    animation: deck-create 1s;
+}
+
+@keyframes deck-create {
+    from {
+        transform: perspective(700px) translate3d(0, 100px, 100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: perspective(0) translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+
+.sun-deck embed:first-child, .moon-deck embed:first-child {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+// Deck styles 2 -----------------------------------------
 
 .deck1-empty, .deck2-empty {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 25%;
+    height: 75%;
+    background-color:rgb(16, 16, 26, 0.5);
+    border-radius: 8px;
 }
 
-.deck1-empty div, .deck2-empty div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.deck1-empty embed, .deck2-empty embed {
-    width: 8rem;
-    height: 12rem;
+.deck1-empty > embed, .deck2-empty > embed {
+    position: fixed;
+    aspect-ratio: 1/1;
+    height: 14%;
 }
 
 .new-sun-card, .new-moon-card {
+    display: flex;
+    position: fixed;
+    height: 23.5%;
     z-index: 100;
 }
 
@@ -576,14 +582,13 @@ html, body {
 }
 
 @keyframes sun-card {
-    from {
-        transform: translateX(0);
+    0% {
+        transform: translateY(0) translateX(0);
         opacity: 1;
     }
 
-    to {
-        z-index: 200;
-        transform: translateY(200px) translateX(75px) rotateY(.2turn);
+    100% {
+        transform: translateY(20rem) translateX(8rem);
         opacity: 0;
     }
 }
@@ -594,13 +599,12 @@ html, body {
 
 @keyframes moon-card {
     from {
-        transform: translateX(0);
+        transform: translateY(0) translateX(0);
         opacity: 1;
     }
 
     to {
-        z-index: 200;
-        transform: translateY(200px) translateX(-75px)  rotateY(-.2turn);
+        transform: translateY(20rem) translateX(-8rem);
         opacity: 0;
     }
 }
@@ -612,11 +616,8 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 100%;
     width: 100%;
     height: 90%;
-    min-height: 90%;
-    max-height: 90%;
     margin: 20px;
     background:rgb(39, 39, 49);
     box-shadow: 0 -8px 16px rgb(9, 9, 10, 0.3);
@@ -624,9 +625,10 @@ html, body {
 
 .my-card {
     display: flex;
-    // flex-shrink: 1;
     justify-content: center;
     align-items: center;
+    width: 25%;
+    height: 75%;
     cursor: pointer;
     transition: transform .3s ease-in-out;
     animation: card-fade-in 0.4s ease-in;
@@ -643,19 +645,14 @@ html, body {
 }
 
 .my-card embed{
-    width: 8rem;
-    height: 12rem;
+    width: 100%;
+    height: 100%;
     transform-style: preserve-3d;
 }
 
 .my-card:hover {
     z-index: 31;
     transform: scale(2);
-}
-
-// disable clicking on SVGs to allow for events to target SVG parent element
-svg {
-    pointer-events: none;
 }
 
 /* Individual square styles ----------------------------------------*/
@@ -674,16 +671,18 @@ svg {
 
 .row-horizontal div {
     z-index: 5;
-    width: 11.11%;
+    width: 11.05%;
     height: 75%;
     border-radius: 6px;
+    outline: 3px solid rgba(0, 0, 0, 0.274);
 }
 
 .row-vertical div {
     z-index: 5;
     width: 75%;
-    height: 11.11%;
+    height: 11.05%;
     border-radius: 6px;
+    outline: 3px solid rgba(0, 0, 0, 0.274);
 }
 
 .corner-square { 
@@ -700,29 +699,23 @@ svg {
 
 .corner-square p {
     z-index: 5;
+    position: absolute;
     text-align: center;
-    position: relative;
-    left: 45%;
     color:rgb(236, 208, 128);
     font-family: beleren;
-    font-size: 24px;
+    // font-size: calc(0.9vw + 0.9vh);
+    font-size: 3vmin;
 }
 
 /* Image styling */
 #sq-0 embed, #sq-20 embed {
-    position: relative;
-    right: 2rem;
     width: 85%;
     height: 85%;
-    opacity: 65%;
 }
 
-#sq-10 embed, #sq-30 embed{ // manual overrides because css hates me
-    position: relative;
-    right: 3.2rem;
+#sq-10 embed, #sq-30 embed{
     width: 85%;
     height: 85%;
-    opacity: 65%;
 }
 
 /* Svg sizing */
@@ -874,9 +867,8 @@ svg {
     width: 100%;
     height: 100%;
     margin-left: 12px;
-    // overflow-x: scroll;
-    // overflow-y: hidden;
-    overflow: hidden;
+    overflow-x: scroll;
+    overflow-y: hidden;
 }
 
 // same scroll styles as the properties scroll
@@ -906,17 +898,15 @@ svg {
     margin: 6px;
     border-radius: 10px;
     background-color: rgba(1, 1, 5, 0.5);
-    animation: history-create 0.4s ease-in;
+    animation: history-create 0.4s ease-out;
 }
 
 @keyframes history-create {
     from {
-        border-radius: 7rem;
-        transform: translateX(-200px);
+        transform: translateY(-200px);
         opacity: 0;
     }
     to {
-        border-radius: 10px;
         opacity: 1;
     }
 }
@@ -1116,25 +1106,21 @@ button:hover {
     height: 3rem;
 }
 
-// .coin-container {
-//     position: fixed;
-//     z-index: 99999;
-//     top: 0;
-//     width: 100vw;
-//     height: 100vh;
-//     pointer-events: none;
-// }
+// MEDIA QUERIES
 
-// .coin-end-game {
-//     animation: coin-fall 7s linear;
-// }
+@media (max-width: 900px){
+    .game-panel {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 90%;
+        height: 100%;
+        background-color: #1b1c27;
+        box-shadow: 0px 10px 15px rgba(5, 5, 15), 0px -10px 15px rgba(5, 5, 15);
+    }
 
-// @keyframes coin-fall {
-//     from {
-
-//     }
-
-//     to {
-        
-//     }
-// }
+    .board {
+        width: 100%;
+        aspect-ratio: 1/1;
+    }
+}
