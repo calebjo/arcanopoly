@@ -429,20 +429,21 @@ html, body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 14%;
+    width: 18%;
     height: 100%;
 }
 
 // contains dice rolls
 .my-dice {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: 40%;
+    align-self: center;
     width: 100%;
     background: rgb(16, 16, 26, 0.5);
     border-radius: 8px;
+    margin: 6px;
 }
 
 // individual dice styles
@@ -451,8 +452,9 @@ html, body {
     justify-content: center;
     align-items: center;
     aspect-ratio: 1/1;
-    width: 60%;
+    width: 40%;
     animation: dice-create 0.4s ease-out;
+    margin: 2px;
 }
 
 .dice embed {
@@ -560,6 +562,7 @@ html, body {
     align-items: center;
     width: 25%;
     height: 75%;
+    margin: 1rem;
     background-color:rgb(16, 16, 26, 0.5);
     border-radius: 8px;
 }
@@ -817,8 +820,8 @@ html, body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    width: 9rem;
-    height: 5rem;
+    width: 12rem;
+    height: 7.5rem;
     margin: 8px;
     border-radius: 8px;
     background: rgb(19, 19, 29);
@@ -831,7 +834,7 @@ html, body {
 }
 
 .my-prop-name {
-    font-size: 16px;
+    font-size: 12px;
 }
 
 .my-prop-image embed {
@@ -925,9 +928,12 @@ html, body {
     height: auto;
 }
 
+.history-name {
+    font-size: 12px;
+}
+
 .history-text {
-    font-size: 14px;
-    font-family: versatile;
+    font-size: 10px;
 }
 
 /* CHAT BOX STYLING ----------------------------------------------- */

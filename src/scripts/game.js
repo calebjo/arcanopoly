@@ -365,8 +365,8 @@ export class Game {
             diceRoll += thisDieRoll;
         }
         
-        // return diceRoll;
-        return 2; // DEBUG --- RETURN A SPECIFIC VALUE TO GUARANTEE SQUARE HITS
+        return diceRoll;
+        // return 2; // DEBUG --- RETURN A SPECIFIC VALUE TO GUARANTEE SQUARE HITS
     }
 
     generateDeckEles() {

@@ -12,7 +12,7 @@ export class Player {
         this.name = name;
         this.sprite = sprite;
         this.currentSquare = 0; // Start at the tavern;
-        this.diceNum = 4;
+        this.diceNum = 2;
         this.diceMax = 6;
         this.tavernMod = 1;
         this.rerolls = 0; // Player's rerolls (increased by equipment)

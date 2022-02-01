@@ -84,16 +84,16 @@ export class SunDeck extends Deck {
         ];
 
         const debugArray = [
-            new MoneyCard(1, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
-            new MoneyCard(2, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
-            new MoneyCard(3, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
-            new MoneyCard(4, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
-            new MoneyCard(5, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
-            new MoneyCard(6, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
-            new MoneyCard(7, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
-            new MoneyCard(8, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
-            new MoneyCard(9, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
-            new MoneyCard(10, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
+            new MoneyCard(1, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
+            new MoneyCard(2, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
+            new MoneyCard(3, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
+            new MoneyCard(4, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
+            new MoneyCard(5, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
+            new MoneyCard(6, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
+            new MoneyCard(7, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
+            new MoneyCard(8, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
+            new MoneyCard(9, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
+            new MoneyCard(10, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
             new MoneyCard(11, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
             new MoneyCard(12, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
             new MoneyCard(13, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
@@ -154,7 +154,31 @@ export class MoonDeck extends Deck {
             new MoneyCard(59, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null)
         ];
 
-        this.shuffle(cardsArray);
-        return cardsArray;
+        const debugArray = [
+            new MoneyCard(1, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
+            new MoneyCard(2, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
+            new MoneyCard(3, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
+            new MoneyCard(4, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
+            new MoneyCard(5, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
+            new MoneyCard(6, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
+            new MoneyCard(7, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
+            new MoneyCard(8, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
+            new MoneyCard(9, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
+            new MoneyCard(10, 'Loot', './assets/images/card-loot.png', 'common', null, 25, 50, 1, null),
+            new MoneyCard(11, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
+            new MoneyCard(12, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
+            new MoneyCard(13, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
+            new MoneyCard(14, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
+            new MoneyCard(15, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
+            new MoneyCard(16, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
+            new MoneyCard(17, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
+            new MoneyCard(18, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
+            new MoneyCard(19, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
+            new MoneyCard(20, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null),
+            new MoneyCard(21, 'Annihilation', './assets/images/card-annihilation.png', 'legendary', null, 150, -500, 1, null)
+        ];
+
+        this.shuffle(debugArray);
+        return debugArray;
     }
 }
